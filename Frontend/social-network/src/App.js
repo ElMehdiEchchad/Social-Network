@@ -9,11 +9,13 @@ import Home from "./pages/home";
 function App() {
   return (
     <Router>
-      <div className="container">
+      <div >
         <Navbar />
         <br />
+        <div class="container">
         <Route path="/" exact component={Home} />
         <Route path="/myprofil" component={Profil} />
+        </div>
       </div>
     </Router>
   );
