@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Profilcard  from "../components/profil/profil-card";
 
 
 export default class Profil extends Component {
@@ -7,13 +8,12 @@ export default class Profil extends Component {
       return (
         <div
         style={{
-          display: 'flex',
-          justifyContent: 'Right',
-          alignItems: 'Right',
-          height: '100vh'
+          backgroundColor : "E5E5E5 "
         }}
       >
-        <h1> Profil page </h1>
+        <Profilcard>
+
+        </Profilcard>
       </div>
       );
     }
