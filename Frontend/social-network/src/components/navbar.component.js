@@ -22,7 +22,7 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar py-0 navbar-dark bg-dark ">
+      <nav className="navbar navbar-dark bg-dark ">
         <div class="col-10">
         <Link to="/" className="navbar-brand">Social netwok application </Link> 
         </div>
