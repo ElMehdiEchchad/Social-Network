@@ -5,7 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar.component"
 import Profil from "./pages/profil.js";
 import Home from "./pages/home";
-
+import Login from "./Login-signup/Login";
+import Signup from "./Login-signup/Signup";
 function App() {
   return (
     <Router>
@@ -13,6 +14,8 @@ function App() {
         <div class="container">
         <Route path="/" exact component={Home} />
         <Route path="/myprofil" component={Profil} />
+        <Route path="/Login" component={Login} />
+        <Route path="/Signup" component={Signup} />
         </div>
       </div>
     </Router>
