@@ -1,0 +1,44 @@
+.Home{
+    display: grid;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: #E5E5E5;
+}
+.Main{
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 12px;
+}
+.sideBar{
+    width: 20%;
+    display: grid;
+    height: 40rem;
+}
+.mainArea{
+    width: 50%;
+    display: grid;
+    height: 40rem;
+}
+.leftSideBar{
+    width: 30%;
+    display: grid;
+    height: 40rem;
+}
+.logo{
+    position: relative;
+    left: 8.47%;
+    right: 88.75%;
+    top: 0%;
+    bottom: 100%;
+    padding-top: 0%;
+}
+.InfoBar{
+    position: relative;
+    width: 250px;
+    height: 400px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-top: 0%;
+    padding-top: 0%;
+}
