@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Profil from "./pages/profil.js";
 import Home from "./pages/home";
-import Login from "./Login-signup/Login";
-import Signup from "./Login-signup/Signup";
+import Login from "./pages/Login.js";
 
 function App() {
-  return (
-    <Router>
-      <div>
-        <div >
-        <Route path="/" exact component={Home} />
-        <Route path="/myprofil" component={Profil} />
-        <Route path="/Login" component={Login} />
-        <Route path="/Signup" component={Signup} />
-        </div>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div>
+                <div>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/myprofil" component={Profil} />
+                    <Route path="/login" component={Login} />
+                </div>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
