@@ -17,6 +17,12 @@ const mongoose = require('mongoose');
     },
     password: {
         type:String
+    },
+    posts:{
+        type:Array
+    },
+    friends: {
+        type:Array
     }
  })
  module.exports = User = mongoose.model('user',user);
