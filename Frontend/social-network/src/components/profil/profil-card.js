@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import Divider from '@material-ui/core/Divider';
 import Ava from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
 import Badge from '@material-ui/core/Badge';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "../profil/ava1.png";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {  withStyles } from '@material-ui/core/styles';
 
 
 export default function Profilcard() {
