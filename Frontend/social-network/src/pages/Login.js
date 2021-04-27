@@ -1,5 +1,4 @@
 import styles from "./Login.module.css";
-import illustration from "../assets/illustration.svg";
 import { useState } from "react";
 
 const Login = () => {
@@ -18,13 +17,13 @@ const Login = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.left}>
+            {/* <div className={styles.left}>
                 <img src={illustration} alt="Connected world" />
-            </div>
+            </div> */}
             <div className={styles.right}>
-                <div className={styles.form}>
-                    <h1>This is just a layout skeleton</h1>
-                    <h2>Nothing is working yet</h2>
+                <form className={styles.form} id="login-form">
+                    <h1>Login to PeopleBook now!</h1>
+                    <h2>See what's new in your social circle...</h2>
                     <label>Email</label>
                     <input
                         name="email"
@@ -39,8 +38,11 @@ const Login = () => {
                         placeholder="password"
                         onChange={onChange}
                     ></input>
-                    <div className={styles.button}>Login</div>
-                </div>
+                    <div className={styles.buttonPrimary}>Login</div>
+                    <div className={styles.buttonSecondary}>
+                        Register (not working)
+                    </div>
+                </form>
             </div>
         </div>
     );

@@ -23,12 +23,23 @@
     justify-content: center;
 }
 
-.button {
-    padding: 1em;
+.buttonPrimary {
+    text-align: center;
+    padding: 0.5em 0;
     background-color: #f05945;
     border-radius: 5px;
-    width: 5em;
     font-weight: bold;
+    color: #f7f3e9;
+    margin-bottom: 1em;
+}
+
+.buttonSecondary {
+    text-align: center;
+    padding: 0.5em 0;
+    background-color: #f7f3e9;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #f05945;
 }
 
 * {
@@ -49,9 +60,19 @@ label {
 }
 
 input {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     border: none;
     border-radius: 5px;
     padding: 0.5em;
     font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        padding: 0 1em;
+    }
+
+    .form {
+        padding: 0 1em;
+    }
 }
