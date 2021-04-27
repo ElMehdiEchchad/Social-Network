@@ -2,7 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-const connectDB =  require ('./DB/connection');
+const connectDB =  require ('./Models/connection');
+const AuthentificationRoutes = require ('./Routes/API/Authentification');
+const UserRoutes = require('./Routes/API/User');
 
 
 // set up express app
@@ -12,8 +14,8 @@ connectDB();
 app.use(express.json({extended:false}));
 
 //initialize routes of API
-app.use(require('./Routes/API/User'));
-app.use(require('./Routes/API/Authentification'));
+app.use(UserRoutes);
+app.use('/api/users/',AuthentificationRoutes);
 
 //listen for requests
 app.listen(process.env.port || 3000, function(){
