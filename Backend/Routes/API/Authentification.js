@@ -51,7 +51,6 @@ router.post('/api/users/register', async (req, res) => {
                         profileImage: req.body.profileImage,
                         email: req.body.email,
                         password: hashedPassword,
-                        posts: [],
                         friends: []
                     };
                     let usermodel = new userModel(user);

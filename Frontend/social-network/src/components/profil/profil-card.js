@@ -10,6 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "../profil/ava1.png";
 import {  withStyles } from '@material-ui/core/styles';
 
+import Aboutme from '../profil/aboutme';
+import friends from '../profil/friends';
+import Posts from '../profil/posts';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default function Profilcard() {
    
@@ -51,7 +55,7 @@ export default function Profilcard() {
  
       return (
         <div >
-         <Card style={{ width: '70%'  , height : '40%' , position: 'absolute', left: '50%', top: '50%',
+         <Card style={{ width: '60%'  , height : '40%' , position: 'absolute', left: '50%', top: '40%',
         transform: 'translate(-50%, -90%)', alignItems:"center"}}>
            <StyledBadge overlap="circle" anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }} variant="dot" >
                 <Ava  src={Avatar} style={{ height: '150px', width: '150px' }}/>
@@ -67,23 +71,30 @@ export default function Profilcard() {
 
             <Paper square>
                 <Tabs
-                value={value}
+               
                 indicatorColor="primary"
                 textColor="primary"
                 onChange={handleChange}
                 aria-label="disabled tabs example"
                  >
-                     <Tab label="About me" />
-                     <Tab label="My friends" />
-                     <Tab label="Posts" />
+                   <Card.Link href="/myprofil" >  <Tab label="About me" /></Card.Link>
+                   <Card.Link href="/myprofil/friends" >   <Tab label="My friends" /></Card.Link>
+                   <Card.Link href="/myprofil/posts" >  <Tab label="Posts" /></Card.Link>
                 </Tabs>
             </Paper>
             <br/>
-            <div>
-             
-            </div>
            </Card.Body>
         </Card>
+
+      
+      <Router>
+                <div >
+                    <Route path="/myprofil" exact component={Aboutme} />
+                    <Route path="/myprofil/friends" exact component={friends} />
+                    <Route path="/myprofil/posts" exact component={Posts} />
+                </div>
+        </Router> 
+        
       </div>
       );
     }

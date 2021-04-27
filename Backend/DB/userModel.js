@@ -18,9 +18,6 @@ const mongoose = require('mongoose');
     password: {
         type:String
     },
-    posts:{
-        type:Array
-    },
     friends: {
         type:Array
     }
