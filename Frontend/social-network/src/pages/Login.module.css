@@ -24,6 +24,7 @@
 }
 
 .buttonPrimary {
+    cursor: pointer;
     text-align: center;
     padding: 0.5em 0;
     background-color: #f05945;
@@ -34,6 +35,7 @@
 }
 
 .buttonSecondary {
+    cursor: pointer;
     text-align: center;
     padding: 0.5em 0;
     background-color: #f7f3e9;

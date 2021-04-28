@@ -1,5 +1,6 @@
 import styles from "./Login.module.css";
 import { useState } from "react";
+import Axios from "axios";
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -13,6 +14,14 @@ const Login = () => {
         } else {
             setCredentials({ ...credentials, password: e.target.value });
         }
+    };
+
+    const login = () => {
+        Axios.post("http://localhost:5000/api/users/login", credentials).then(
+            (res) => {
+                console.log(res);
+            }
+        );
     };
 
     return (
@@ -38,7 +47,9 @@ const Login = () => {
                         placeholder="password"
                         onChange={onChange}
                     ></input>
-                    <div className={styles.buttonPrimary}>Login</div>
+                    <div className={styles.buttonPrimary} onClick={login}>
+                        Login
+                    </div>
                     <div className={styles.buttonSecondary}>
                         Register (not working)
                     </div>
