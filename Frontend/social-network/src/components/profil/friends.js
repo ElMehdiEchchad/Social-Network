@@ -1,9 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { Card } from 'react-bootstrap';
-
+import { Card , Button} from 'react-bootstrap';
+import Avatar from "../profil/ava1.png";
+import Ava from '@material-ui/core/Avatar';
+import { Container  } from '@material-ui/core';
+import { BiMessageDots , BiTrash} from "react-icons/bi";
+import {Row} from 'react-bootstrap';
 
 export default function friends() {
  
@@ -12,31 +14,40 @@ export default function friends() {
     return (
       <React.Fragment>
         <Grid item xs={4}>
-          <Paper>
-           <Card style={{ padding : '10%'}}>  
-              <Card.Title>Friend #</Card.Title>
-              <Card.Text>
-               Some quick example text to build on the card title and make up the bulk 
-             </Card.Text>
-             </Card></Paper>
+        <Card style={{ alignItems:"center"}} >
+           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
+           <Card.Body>
+              <Card.Title>Random friend</Card.Title>
+              <Row>
+              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
+              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              </Row>
+           </Card.Body>
+        </Card>
         </Grid>
         <Grid item xs={4}>
-          <Paper>
-              <Card style={{ padding : '10%'}}> 
-              <Card.Title>Friend #</Card.Title>
-              <Card.Text>
-               Some quick example text to build on the card title and make up the bulk 
-             </Card.Text>
-             </Card></Paper>
+        <Card style={{ alignItems:"center"}} >
+           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
+           <Card.Body>
+              <Card.Title>Random friend</Card.Title>
+              <Row>
+              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
+              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              </Row>
+           </Card.Body>
+        </Card>
         </Grid>
         <Grid item xs={4}>
-          <Paper>
-              <Card style={{ padding : '10%'}}> 
-              <Card.Title>Friend #</Card.Title>
-              <Card.Text>
-               Some quick example text to build on the card title and make up the bulk 
-             </Card.Text>
-             </Card></Paper>
+        <Card style={{ alignItems:"center"}} >
+           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
+           <Card.Body>
+              <Card.Title>Random friend</Card.Title>
+              <Row>
+              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
+              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              </Row>
+           </Card.Body>
+        </Card>
         </Grid>
       </React.Fragment>
     );
@@ -44,15 +55,18 @@ export default function friends() {
 
   return (
     <div >
-      <Grid container spacing={1} style={{ width: '60%'  , height : '40%' , position: 'absolute', left: '51%', top: '85%',
-        transform: 'translate(-50%, -90%)', alignItems:"center"}}>
-        <Grid container item xs={12} spacing={3}>
-          <FormRow />
+      <Container style={{overflowY:"scroll", width: '50%'  , height : '47%' , position: 'absolute', left: '48%', top: '90%',
+        transform: 'translate(-50%, -90%)', alignItems:"center"}} >
+        
+      <Grid container spacing={1}  >
+        <Grid container item xs={12} spacing={4}>
+          <FormRow  />
         </Grid>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={4}>
           <FormRow />
         </Grid>
       </Grid>
+      </Container>
     </div>
   );
 }
