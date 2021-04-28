@@ -14,7 +14,7 @@ export default function friends() {
     return (
       <React.Fragment>
         <Grid item xs={4}>
-        <Card style={{ alignItems:"center"}} >
+        <Card style={{ alignItems:"center" }} >
            <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
            <Card.Body>
               <Card.Title>Random friend</Card.Title>
@@ -55,8 +55,8 @@ export default function friends() {
 
   return (
     <div >
-      <Container style={{overflowY:"scroll", width: '50%'  , height : '47%' , position: 'absolute', left: '48%', top: '90%',
-        transform: 'translate(-50%, -90%)', alignItems:"center"}} >
+      <Container style={{overflowY:"scroll", width: '60%'  , height : '45%' , position: 'absolute', left: '50%', top: '90%',
+        transform: 'translate(-50%, -90%)', alignItems:"center" , backgroundColor:"white" , padding :"2%"}} >
         
       <Grid container spacing={1}  >
         <Grid container item xs={12} spacing={4}>
@@ -66,6 +66,8 @@ export default function friends() {
           <FormRow />
         </Grid>
       </Grid>
+
+      <Button style={{marginTop:"5%" , marginLeft :"40%" ,color: "white" , backgroundColor :"#F05945"}}>Add new friends</Button>
       </Container>
     </div>
   );

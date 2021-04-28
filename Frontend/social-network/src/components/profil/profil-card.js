@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
-import Divider from '@material-ui/core/Divider';
 import Ava from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import Tabs from '@material-ui/core/Tabs';
@@ -62,18 +61,15 @@ export default function Profilcard() {
            </StyledBadge>
 
            <Card.Body>
-            <div style={{ textAlign :'center'}}>
+            <div style={{ textAlign :'center' , marginBottom :"7%"}}>
               <Card.Title>Salma Chana</Card.Title>
               <Card.Text> salma@gmail.com</Card.Text>
-            </div>
-            <br/>
-            <Divider/>
-
-            <Paper square>
+            </div>  
+              
+            <Paper square >
                 <Tabs
-               
-                indicatorColor="primary"
-                textColor="primary"
+                indicatorColor="#5EAAA8"
+                textColor="#5EAAA8"
                 onChange={handleChange}
                 aria-label="disabled tabs example"
                  >
