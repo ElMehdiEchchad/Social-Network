@@ -1,0 +1,56 @@
+.addPost{
+    position: absolute;
+    width: 45%;
+    height: 209px;
+    left: 25%;
+    top: 10%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+.NewPost{
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    left: 5%;
+    top: 5%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 29px;
+    color: #F05945;
+}
+.Profile{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 3%;
+    top:25%;
+    margin-right: 2%;
+
+}
+input{
+    position: absolute;
+    width: 85%;
+    height: 60px;
+    left: 10%;
+    top: 25%;
+    background: #E5E5E5;
+    border-radius: 10px;
+    margin-left: 2%;
+}
+.icons{
+    display: flex;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 14%;
+    top: 68%;
+}
+.Btn{
+    position: absolute;
+    width: 123px;
+    height: 42px;
+    left: 80%;
+    top: 70%;
+}

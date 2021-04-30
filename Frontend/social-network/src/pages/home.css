@@ -1,7 +1,39 @@
-.Home{
+.html{
+    font-size: 92.5%;
+    box-sizing: border-box;
+}
+.body{
+    margin: 0%;
+    font: 1rem Montserrat;
+    height: 100vh;
+    background-color: #E5E5E5;
+}
+.App{
     display: grid;
     width: 100%;
     flex-wrap: wrap;
     background-color: #E5E5E5;
+}
+.Main{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    width: 100%;
+}
+
+.SideBarArea{
+    width: 20%;
+    display: grid;
+    height: 100vh;
+}
+.MainArea{
+    width: 50%;
+    display: grid;
+    height: 100vh;
+    margin-left: 80px;
+}
+.RightArea{
+    width: 30%;
+    display: grid;
     height: 100vh;
 }
