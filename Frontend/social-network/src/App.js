@@ -5,8 +5,12 @@ import Profil from "./pages/profil.js";
 import Home from "./pages/home";
 import Login from "./pages/Login.js";
 
+import {Provider} from 'react-redux';
+import store from './store/index'
+
 function App() {
     return (
+        <Provider store={store}>
         <Router>
             <div>
                 <div>
@@ -16,6 +20,7 @@ function App() {
                 </div>
             </div>
         </Router>
+        </Provider>
     );
 }
 
