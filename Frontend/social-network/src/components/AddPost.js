@@ -14,7 +14,7 @@ const AddPost = () => {
             <div className="Profile">
             <Avatar src="/broken-image.jpg" />
             </div>
-            <input type="Post" placeholder="What's on your mind.."/>
+            <input type="Post" placeholder="What's on your mind.." className="PostInput"/>
             <div className="icons">
                 <AiOutlineSmile style={{color:"#5EAAA8", fontSize:"1.5rem", marginInline: "5px"}}/>
                 <AiOutlinePicture style={{color:"#5EAAA8", fontSize:"1.5rem", marginInline: "5px"}} />

@@ -29,7 +29,7 @@
     margin-right: 2%;
 
 }
-input{
+.PostInput{
     position: absolute;
     width: 85%;
     height: 60px;
