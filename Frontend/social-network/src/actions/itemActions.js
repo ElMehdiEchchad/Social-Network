@@ -3,7 +3,7 @@ import axios from 'axios';
 import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
 
 export const getUsers = () => async dispatch => {
-    
+	dispatch(setItemsLoading());
     try{
         const res = await axios.get('http://localhost:5000/api/user/608b5f75364b4861c006aa72')
         dispatch( {

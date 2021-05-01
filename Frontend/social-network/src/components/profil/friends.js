@@ -3,10 +3,9 @@ import React from 'react';
 import { Card , Button} from 'react-bootstrap';
 import Avatar from "../profil/ava1.png";
 import Ava from '@material-ui/core/Avatar';
-import { Container  } from '@material-ui/core';
 import { BiMessageDots , BiTrash} from "react-icons/bi";
 import {Row} from 'react-bootstrap';
-import { Grid, Image, Segment } from 'semantic-ui-react'
+import { Grid} from 'semantic-ui-react'
 export default function friends() {
  
 

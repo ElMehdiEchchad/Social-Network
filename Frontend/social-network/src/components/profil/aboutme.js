@@ -4,10 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { Form, Input,  Button} from 'semantic-ui-react';
+import { Form, Input,  Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import {connect} from 'react-redux' ;
 import {getUsers } from '../../actions/itemActions';
+
+
 
 
  class Aboutme extends React.Component{
@@ -19,31 +21,26 @@ import {getUsers } from '../../actions/itemActions';
     this.onChangeLastname = this.onChangeLastname.bind(this);
     this.onChangeBirthday = this.onChangeBirthday.bind(this);
     this.onChangeEmail  = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       Firstname: '',
       Lastname: '',
       Birthday: new Date(),
-      Email : '',
-      Password :''
+      Email :''
     }
 
   }
 
   componentDidMount() {
       this.props.getUsers();
-      const {users} = this.props.users;
-     // users.map(user =>  console.log ( 'Salma 2 :' , user))
-      console.log ( 'Salma :' , this.props)
-      this.setState({
-        Firstname: users[0].firstName ,
-        Lastname: users[0].lastName ,
-        Email : users[0].email ,
-        Password :users[0].password
-      });
-
+    
+      /* this.setState({
+       Firstname: users[0].firstName ,
+       Lastname: users[0].lastName ,
+       Email : users[0].email ,
+       Password :users[0].password
+     });*/
   }
 
 
@@ -71,11 +68,7 @@ import {getUsers } from '../../actions/itemActions';
     });
   }
 
-  onChangePassword(e) {
-    this.setState({
-      Password: e.target.value
-    });
-  }
+ 
 
   onSubmit(e) {
     e.preventDefault();
@@ -85,15 +78,18 @@ import {getUsers } from '../../actions/itemActions';
       Lastname: this.state.Lastname,
       Birthday: this.state.Birthday,
       Email : this.state.Email,
-      Password :this.state.Password
     };
   
     
     window.location = '/myprofil';
   }
-  render(){
 
   
+  render(){
+   
+    const {users} = this.props.users;
+    
+
       return (
     
  <Form onSubmit={this.onSubmit} style={{ width: '60%'  , height :"45%" ,overflowY:"scroll", position: 'absolute', left: '50%', top: '90%',
@@ -104,7 +100,7 @@ import {getUsers } from '../../actions/itemActions';
         control={Input}
         label='First name'
         placeholder='First name'
-        value={this.state.Firstname}
+        value={users[0].firstName}
         onChange={this.onChangeFirstname}
       />
       <Form.Field
@@ -112,7 +108,7 @@ import {getUsers } from '../../actions/itemActions';
         control={Input}
         label='Last name'
         placeholder='Last name'
-        value={this.state.Lastname}
+        value={users[0].lastName}
         onChange={this.onChangeLastname}
       />
       <Form.Field
@@ -125,22 +121,21 @@ import {getUsers } from '../../actions/itemActions';
       </Form.Field>
      
     </Form.Group>
+
+  
     <Form.Field
       id='form-input-control-error-email'
       control={Input}
       label='Email'
       placeholder='joe@gmail.com'
-      value={this.state.Email}
+      value={users[0].email}
       onChange={this.onChangeEmail}
     />
      <Form.Field
-      id='form-input-control-error-password'
+      id='form-input-control-error-email'
       control={Input}
-      label='Enter Password'
-      type='password'
-      placeholder='password'
-      value={this.state.Password}
-      onChange={this.onChangePassword}
+      label='Profil photo'
+      placeholder='Profil photos'
     />
     <Form.Field
       id='form-button-control-public'

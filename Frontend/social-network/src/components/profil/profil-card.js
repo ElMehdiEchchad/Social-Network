@@ -14,13 +14,23 @@ import friends from '../profil/friends';
 import Posts from '../profil/posts';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-export default function Profilcard() {
-   
-  const [value, setValue] = useState(0);
+import {connect} from 'react-redux' ;
+import {getUsers } from '../../actions/itemActions';
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
+class Profilcard extends React.Component{
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.getUsers();
+}
+   
+  render() {
+
+   const {users} = this.props.users;
 
   const   StyledBadge = withStyles((theme) => ({
     badge: {
@@ -51,7 +61,7 @@ export default function Profilcard() {
     },
   }))(Badge);
   
- 
+   
       return (
         <div >
          <Card style={{ width: '60%'  , height : '40%' , position: 'absolute', left: '50%', top: '40%',
@@ -62,16 +72,14 @@ export default function Profilcard() {
 
            <Card.Body>
             <div style={{ textAlign :'center' , marginBottom :"7%"}}>
-              <Card.Title>Salma Chana</Card.Title>
-              <Card.Text> salma@gmail.com</Card.Text>
+              <Card.Title>{users[0].firstName +' '+ users[0].lastName}</Card.Title>
+              <Card.Text>{users[0].email}</Card.Text>
             </div>  
               
             <Paper square >
                 <Tabs
                 indicatorColor="#5EAAA8"
                 textColor="#5EAAA8"
-                onChange={handleChange}
-                aria-label="disabled tabs example"
                  >
                    <Card.Link href="/myprofil" >  <Tab label="About me" /></Card.Link>
                    <Card.Link href="/myprofil/friends" >   <Tab label="My friends" /></Card.Link>
@@ -90,10 +98,17 @@ export default function Profilcard() {
                     <Route path="/myprofil/posts" exact component={Posts} />
                 </div>
         </Router> 
+
         
       </div>
       );
     }
-  
+}
+
+const mapStateToProps = (state) => ({
+  users : state.users
+});
+
+export default connect(mapStateToProps, {getUsers})(Profilcard) ;
 
  

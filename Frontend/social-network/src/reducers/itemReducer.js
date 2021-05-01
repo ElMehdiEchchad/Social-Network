@@ -1,4 +1,4 @@
-import {GET_USERS, ADD_USER, UPDATE_USER } from '../actions/types'
+import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
 
 const initialState = {
     users : [ {
@@ -22,7 +22,11 @@ export default function(state=initialState ,action){
              ...state,
             users: [action.payload, ...state.users]
                         }
-                
+        case ITEMS_LOADING : 
+            return {
+             ...state,
+             loading : true
+                        }        
                 
         default: return state;
     }
