@@ -2,14 +2,12 @@
     position: absolute;
     width: 45%;
     height: 209px;
-    left: 25%;
-    top: 10%;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
 }
 .NewPost{
     position: absolute;
-    width: 100px;
+    width: 90%;
     height: 20px;
     left: 5%;
     top: 5%;
@@ -20,7 +18,7 @@
     line-height: 29px;
     color: #F05945;
 }
-.Profile{
+.addPostProfile{
     position: absolute;
     width: 40px;
     height: 40px;
@@ -51,6 +49,6 @@
     position: absolute;
     width: 123px;
     height: 42px;
-    left: 80%;
+    left: 85%;
     top: 70%;
 }

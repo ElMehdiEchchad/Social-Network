@@ -3,15 +3,16 @@ import { AiOutlineGif, AiOutlinePicture, AiOutlineSmile } from 'react-icons/ai';
 import { Avatar } from '@material-ui/core';
 import './AddPost.css';
 import {Button} from '@material-ui/core';
+import {Container} from 'reactstrap';
 
 
-const AddPost = () => {
+function AddPost() {
     return(
-        <div className="addPost">
+        <Container className="addPost">
             <div className="NewPost">
                 New Post
             </div>
-            <div className="Profile">
+            <div className="addPostProfile">
             <Avatar src="/broken-image.jpg" />
             </div>
             <input type="Post" placeholder="What's on your mind.." className="PostInput"/>
@@ -23,11 +24,8 @@ const AddPost = () => {
             <div className="Btn">
                 <Button as="input" type="submit" value="Submit" style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold"}}>Post</Button>
             </div>
-          
-           
-            
-           
-        </div>
+        </Container>
+        
     );
 }
 
