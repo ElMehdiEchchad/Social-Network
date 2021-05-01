@@ -8,7 +8,7 @@ import { Form, Input,  Button} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import {connect} from 'react-redux' ;
 import {getUsers } from '../../actions/itemActions';
-import PropTypes from 'prop-types';
+
 
  class Aboutme extends React.Component{
    
