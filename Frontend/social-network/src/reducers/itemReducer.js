@@ -1,25 +1,26 @@
-import {GET_USER, ADD_USER, UPDATE_USER } from '../actions/types'
+import {GET_USERS, ADD_USER, UPDATE_USER } from '../actions/types'
 
 const initialState = {
-    items : [ ]
+    users : [ {
+      } ]
 }
 
 export default function(state=initialState ,action){
     switch(action.type){
-        case GET_USER : return {
+        case GET_USERS : return {
             ...state,
-            items : state.items.filter(item=>item._id ===action.payload)
+            users : [action.payload, ...state.users]
         }
         case ADD_USER:
             return{
             ...state,
-            items : [action.payload, ...state.items]
+            users : [action.payload, ...state.users]
             }
 
          case UPDATE_USER :
              return{
              ...state,
-            items : [action.payload, ...state.items]
+            users: [action.payload, ...state.users]
                         }
                 
                 

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'semantic-ui-css/semantic.min.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { Form, Input,  Button} from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import {connect} from 'react-redux' ;
+import {getUsers } from '../../actions/itemActions';
+import PropTypes from 'prop-types';
 
-
-export default class Aboutme extends React.Component{
+ class Aboutme extends React.Component{
    
-  //const [startDate, setStartDate] = useState(new Date());
-  
   constructor(props) {
     super(props);
 
@@ -32,11 +32,19 @@ export default class Aboutme extends React.Component{
 
   }
 
-  /*componentDidMount() {
-    this.setState({ 
-      Firstname: 'test user'
-    });
-  }*/
+  componentDidMount() {
+      this.props.getUsers();
+      const {users} = this.props.users;
+     // users.map(user =>  console.log ( 'Salma 2 :' , user))
+      console.log ( 'Salma :' , this.props)
+      this.setState({
+        Firstname: users[0].firstName ,
+        Lastname: users[0].lastName ,
+        Email : users[0].email ,
+        Password :users[0].password
+      });
+
+  }
 
 
   onChangeFirstname(e) {
@@ -80,11 +88,12 @@ export default class Aboutme extends React.Component{
       Password :this.state.Password
     };
   
-    console.log(infos);
     
     window.location = '/myprofil';
   }
   render(){
+
+  
       return (
     
  <Form onSubmit={this.onSubmit} style={{ width: '60%'  , height :"45%" ,overflowY:"scroll", position: 'absolute', left: '50%', top: '90%',
@@ -145,6 +154,11 @@ export default class Aboutme extends React.Component{
   }
     }
 
+  const mapStateToProps = (state) => ({
+      users : state.users
+  });
+
+  export default connect(mapStateToProps, {getUsers})(Aboutme) ;
   
 
  
