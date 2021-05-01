@@ -1,0 +1,63 @@
+.sidebar {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1em;
+    padding: 3em 0;
+    position: sticky;
+    top: 5em;
+}
+
+.navWrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.navLink {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #5eaaa8;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.navLink:not(:last-child) {
+    margin-bottom: 2em;
+}
+
+.linkLogout {
+    color: #f05945;
+}
+
+.link {
+    margin-left: 1em;
+}
+
+.profileHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3em;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 1.125em;
+}
+
+.email {
+    font-weight: lighter;
+    font-size: 0.875em;
+}
+
+@media only screen and (max-width: 700px) {
+    .sidebar {
+        display: none;
+    }
+}

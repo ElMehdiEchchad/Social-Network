@@ -47,20 +47,15 @@
     font-family: "Montserrat", sans-serif;
 }
 
-h1 {
+.h1 {
     font-size: 1.5em;
 }
 
-h2 {
-    font-size: 0.875em;
-    margin-bottom: 2em;
-}
-
-label {
+.label {
     font-weight: bold;
 }
 
-input {
+.input {
     margin-bottom: 1em;
     border: none;
     border-radius: 5px;

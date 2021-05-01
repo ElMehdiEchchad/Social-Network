@@ -29,10 +29,10 @@ const Login = () => {
     const LoginForm = () => {
         return (
             <form className={styles.form} id="login-form">
-                <h1>Login to PeopleBook now!</h1>
-                <h2>See what's new in your social circle...</h2>
-                <label>Email</label>
+                <h1 className={styles.h1}>Login to PeopleBook now!</h1>
+                <label className={styles.label}>Email</label>
                 <input
+                    className={styles.input}
                     name="email"
                     type="email"
                     placeholder="email"
@@ -40,8 +40,9 @@ const Login = () => {
                     defaultValue="test@gmail.com"
                     required
                 ></input>
-                <label>Password</label>
+                <label className={styles.label}>Password</label>
                 <input
+                    className={styles.input}
                     name="password"
                     type="password"
                     placeholder="password"
@@ -65,10 +66,10 @@ const Login = () => {
     const RegisterForm = () => {
         return (
             <form className={styles.form} id="login-form">
-                <h1>Login to PeopleBook now!</h1>
-                <h2>See what's new in your social circle...</h2>
-                <label>Email</label>
+                <h1 className={styles.label}>Login to PeopleBook now!</h1>
+                <label className={styles.label}>Email</label>
                 <input
+                    className={styles.input}
                     name="email"
                     type="email"
                     placeholder="email"
@@ -76,8 +77,9 @@ const Login = () => {
                     defaultValue="test@gmail.com"
                     required
                 ></input>
-                <label>Password</label>
+                <label className={styles.label}>Password</label>
                 <input
+                    className={styles.input}
                     name="password"
                     type="password"
                     placeholder="password"
@@ -85,10 +87,20 @@ const Login = () => {
                     defaultValue="test"
                     required
                 ></input>
-                <label>First Name</label>
-                <input name="firstname" type="text" required></input>
-                <label>Last Name</label>
-                <input name="lastname" type="text" required></input>
+                <label className={styles.label}>First Name</label>
+                <input
+                    className={styles.input}
+                    name="firstname"
+                    type="text"
+                    required
+                ></input>
+                <label className={styles.label}>Last Name</label>
+                <input
+                    className={styles.input}
+                    name="lastname"
+                    type="text"
+                    required
+                ></input>
                 <div className={styles.buttonPrimary} onClick={login}>
                     Register
                 </div>
