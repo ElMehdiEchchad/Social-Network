@@ -1,0 +1,6 @@
+.Home {
+    display: grid;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: #E5E5E5;
+}
