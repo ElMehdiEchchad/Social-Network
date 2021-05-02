@@ -8,6 +8,7 @@
     padding: 3em 0;
     position: sticky;
     top: 5em;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
 }
 
 .navWrapper {
@@ -44,6 +45,15 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 3em;
+}
+
+.avatar {
+    background-image: url("https://lh6.ggpht.com/HlgucZ0ylJAfZgusynnUwxNIgIp5htNhShF559x3dRXiuy_UdP3UQVLYW6c=s1200");
+    width: 5em;
+    height: 5em;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
 }
 
 .name {

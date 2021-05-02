@@ -45,6 +45,15 @@
     margin-bottom: 2em;
 }
 
+.avatar {
+    background-image: url("https://lh6.ggpht.com/HlgucZ0ylJAfZgusynnUwxNIgIp5htNhShF559x3dRXiuy_UdP3UQVLYW6c=s1200");
+    width: 3em;
+    height: 3em;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+}
+
 .info {
     display: flex;
     flex-direction: column;

@@ -5,6 +5,7 @@ import { GrFormClose } from "react-icons/gr";
 import Sidebar from "../components/main/Sidebar";
 import MobileMenu from "../components/main/MobileMenu";
 import { useState, useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -27,6 +28,13 @@ export function useMediaQuery(query) {
 const Main = () => {
     let mobile = useMediaQuery("(min-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(
+        (mobile) => {
+            if (!mobile) setIsOpen(false);
+        },
+        [mobile]
+    );
 
     return (
         <div className={styles.wrapper}>
@@ -71,7 +79,17 @@ const Main = () => {
                         <Sidebar />
                     </div>
                     <div className={styles.main}>
-                        <div className={styles.content}></div>
+                        <div className={styles.content}>
+                            <Switch>
+                                <Route path="/" exact>
+                                    The content of each page will be rendered
+                                    here
+                                </Route>
+                                <Route path="friends" exact>
+                                    friends
+                                </Route>
+                            </Switch>
+                        </div>
                     </div>
                 </div>
             </div>

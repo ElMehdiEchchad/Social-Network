@@ -12,7 +12,7 @@ const MobileMenu = () => {
     return (
         <div className={styles.sidebar}>
             <div className={styles.profileHeader}>
-                <div className={styles.avatar}>image</div>
+                <div className={styles.avatar}></div>
                 <div className={styles.info}>
                     <div className={styles.name}>Abderrahim Tantaoui</div>
                     <div className={styles.email}>abdoutanta@gmail.com</div>
