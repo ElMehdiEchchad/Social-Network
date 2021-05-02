@@ -10,7 +10,7 @@ import Avatar from "../profil/ava1.png";
 import {  withStyles } from '@material-ui/core/styles';
 
 import Aboutme from '../profil/aboutme';
-import friends from '../profil/friends';
+import Friends from '../profil/friends';
 import Posts from '../profil/posts';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -26,7 +26,7 @@ class Profilcard extends React.Component{
 
   componentDidMount() {
     this.props.getUsers();
-}
+  }
    
   render() {
 
@@ -91,13 +91,7 @@ class Profilcard extends React.Component{
         </Card>
 
       
-      <Router>
-                <div >
-                    <Route path="/myprofil" exact component={Aboutme} />
-                    <Route path="/myprofil/friends" exact component={friends} />
-                    <Route path="/myprofil/posts" exact component={Posts} />
-                </div>
-        </Router> 
+       
 
         
       </div>

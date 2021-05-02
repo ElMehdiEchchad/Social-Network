@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Profilcard  from "../components/profil/profil-card";
 import SideNav from '../components/SideNav';
 import '../pages/profil.css'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Aboutme from '../components/profil/aboutme';
+import Friends from '../components/profil/friends';
+import Posts from '../components/profil/posts';
 
 export default class Profil extends Component {
 
@@ -9,8 +13,14 @@ export default class Profil extends Component {
       return (
         <div className="Home">
         <SideNav />
-        <Profilcard/>
-        
+        <Router>
+                <div >
+                    <Route path="/myprofil" component={Profilcard} />
+                    <Route path="/myprofil" exact component={Aboutme} />
+                    <Route path="/myprofil/friends" exact component={Friends} />
+                    <Route path="/myprofil/posts" exact component={Posts} />
+                </div>
+        </Router>
       </div>
       );
     }
