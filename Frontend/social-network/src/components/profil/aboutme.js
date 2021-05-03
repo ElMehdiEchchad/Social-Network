@@ -21,19 +21,22 @@ import {getUsers , updateUser} from '../../actions/itemActions';
     this.onChangeBirthday = this.onChangeBirthday.bind(this);
     this.onChangeEmail  = this.onChangeEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
+ 
+    this.props.getUsers();
+    const {users} = this.props.users;
     this.state = {
-      Firstname: 'salma upadte',
-      Lastname: '',
+      Firstname: users[0].firstName ,
+      Lastname: users[0].lastName,
       Birthday: new Date(),
-      Email :''
+      Email :users[0].email
     }
 
   }
 
   componentDidMount() {
       this.props.getUsers();
-    
+      
+
       /* this.setState({
        Firstname: users[0].firstName ,
        Lastname: users[0].lastName ,
@@ -73,10 +76,10 @@ import {getUsers , updateUser} from '../../actions/itemActions';
     e.preventDefault();
   
     const userupdated = {
-      Firstname: this.state.Firstname,
-      Lastname: this.state.Lastname,
-      Birthday: this.state.Birthday,
-      Email : this.state.Email,
+      firstName: this.state.Firstname,
+      lastName: this.state.Lastname,
+      birthDay: this.state.Birthday,
+      email : this.state.Email,
     };
     this.props.updateUser(userupdated);
   }
@@ -104,7 +107,7 @@ import {getUsers , updateUser} from '../../actions/itemActions';
         control={Input}
         label='Last name'
         placeholder='Last name'
-        value={users[0].lastName}
+        value={this.state.Lastname}
         onChange={this.onChangeLastname}
       />
       
@@ -117,7 +120,7 @@ import {getUsers , updateUser} from '../../actions/itemActions';
       control={Input}
       label='Email'
       placeholder='joe@gmail.com'
-      value={users[0].email}
+      value={this.state.Email}
       onChange={this.onChangeEmail}
     />
     <Form.Field
