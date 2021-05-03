@@ -27,10 +27,6 @@ const Sidebar = (props) => {
                     <div className={styles.link}>Friends</div>
                 </Link>
                 <Link className={styles.navLink}>
-                    <FaStar />
-                    <div className={styles.link}>Notifications</div>
-                </Link>
-                <Link className={styles.navLink}>
                     <FaFacebookMessenger />
                     <div className={styles.link}>Messages</div>
                 </Link>

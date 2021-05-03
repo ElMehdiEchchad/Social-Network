@@ -3,27 +3,33 @@ import { useState } from "react";
 import Axios from "axios";
 
 const Login = () => {
-    const [credentials, setCredentials] = useState({
-        email: null,
-        password: null,
-    });
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
 
     const [hasAccount, setHasAccount] = useState(true);
 
-    const onChange = (e) => {
-        if (e.target.name === "email") {
-            setCredentials({ ...credentials, email: e.target.value });
-        } else {
-            setCredentials({ ...credentials, password: e.target.value });
-        }
+    const login = () => {
+        console.log({ email, password });
+        Axios.post("http://localhost:5000/api/login", {
+            email,
+            password,
+        }).then((res) => {
+            console.log(res);
+        });
     };
 
-    const login = () => {
-        Axios.post("http://localhost:5000/api/users/login", credentials).then(
-            (res) => {
-                console.log(res);
-            }
-        );
+    const register = () => {
+        console.log({ email, password, firstName, lastName });
+        Axios.post("http://localhost:5000/api/register", {
+            email,
+            password,
+            firstName,
+            lastName,
+        }).then((res) => {
+            console.log(res);
+        });
     };
 
     const LoginForm = () => {
@@ -36,8 +42,11 @@ const Login = () => {
                     name="email"
                     type="email"
                     placeholder="email"
-                    onChange={onChange}
-                    defaultValue="test@gmail.com"
+                    value={email}
+                    onChange={(e) => {
+                        e.preventDefault();
+                        setEmail(e.target.value);
+                    }}
                     required
                 ></input>
                 <label className={styles.label}>Password</label>
@@ -46,8 +55,10 @@ const Login = () => {
                     name="password"
                     type="password"
                     placeholder="password"
-                    onChange={onChange}
-                    defaultValue="test"
+                    value={password}
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                    }}
                     required
                 ></input>
                 <div className={styles.buttonPrimary} onClick={login}>
@@ -73,8 +84,10 @@ const Login = () => {
                     name="email"
                     type="email"
                     placeholder="email"
-                    onChange={onChange}
-                    defaultValue="test@gmail.com"
+                    value={email}
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                    }}
                     required
                 ></input>
                 <label className={styles.label}>Password</label>
@@ -83,8 +96,10 @@ const Login = () => {
                     name="password"
                     type="password"
                     placeholder="password"
-                    onChange={onChange}
-                    defaultValue="test"
+                    value={password}
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                    }}
                     required
                 ></input>
                 <label className={styles.label}>First Name</label>
@@ -92,6 +107,10 @@ const Login = () => {
                     className={styles.input}
                     name="firstname"
                     type="text"
+                    value={firstName}
+                    onChange={(e) => {
+                        setFirstName(e.target.value);
+                    }}
                     required
                 ></input>
                 <label className={styles.label}>Last Name</label>
@@ -99,9 +118,13 @@ const Login = () => {
                     className={styles.input}
                     name="lastname"
                     type="text"
+                    value={lastName}
+                    onChange={(e) => {
+                        setLastName(e.target.value);
+                    }}
                     required
                 ></input>
-                <div className={styles.buttonPrimary} onClick={login}>
+                <div className={styles.buttonPrimary} onClick={register}>
                     Register
                 </div>
                 <div
@@ -120,7 +143,7 @@ const Login = () => {
                 <img src={illustration} alt="Connected world" />
             </div> */}
             <div className={styles.right}>
-                {hasAccount ? <LoginForm /> : <RegisterForm />}
+                {hasAccount ? LoginForm() : RegisterForm()}
             </div>
         </div>
     );

@@ -28,10 +28,6 @@ const MobileMenu = () => {
                     <div className={styles.link}>Friends</div>
                 </div>
                 <div className={styles.navLink}>
-                    <FaStar />
-                    <div className={styles.link}>Notifications</div>
-                </div>
-                <div className={styles.navLink}>
                     <FaFacebookMessenger />
                     <div className={styles.link}>Messages</div>
                 </div>

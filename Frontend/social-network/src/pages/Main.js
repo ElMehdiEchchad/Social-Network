@@ -1,7 +1,6 @@
 import styles from "./Main.module.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { GrFormClose } from "react-icons/gr";
 import Sidebar from "../components/main/Sidebar";
 import MobileMenu from "../components/main/MobileMenu";
 import { useState, useEffect } from "react";
@@ -85,7 +84,7 @@ const Main = () => {
                                 <Route path="/" exact>
                                     <AddPost />
                                 </Route>
-                                <Route path="friends" exact>
+                                <Route path="/friends" exact>
                                     friends
                                 </Route>
                             </Switch>
