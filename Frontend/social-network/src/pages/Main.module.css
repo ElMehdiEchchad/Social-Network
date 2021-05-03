@@ -114,4 +114,7 @@
         font-weight: bold;
         color: #5eaaa8;
     }
+    .content{
+        max-width: 100%;
+    }
 }

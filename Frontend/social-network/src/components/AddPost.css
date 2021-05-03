@@ -1,54 +1,70 @@
-.addPost{
-    position: absolute;
-    width: 45%;
-    height: 209px;
-    background: rgba(255, 255, 255, 0.8);
+.grid-container {
+    display: grid;
+    grid-gap: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-}
-.NewPost{
-    position: absolute;
-    width: 90%;
-    height: 20px;
-    left: 5%;
-    top: 5%;
+  }
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    padding: 10px;
+    padding-right: 0%;
+    font-size: 30px;
+  }
+  
+  .NewPost {
+    padding: 10px;
+    grid-column: 1 / span 3;
+    grid-row: 1;
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
     line-height: 29px;
     color: #F05945;
-}
-.addPostProfile{
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    left: 3%;
-    top:25%;
-    margin-right: 2%;
-
-}
+  }
+  
+  .item2 {
+    grid-column: 2 / span 2;
+    grid-row: 2 ;
+  }
+  .item4 {
+    grid-column: 3;
+    grid-row: 3 ;
+  }
+  .item5 {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
 .PostInput{
-    position: absolute;
-    width: 85%;
-    height: 60px;
-    left: 10%;
-    top: 25%;
     background: #E5E5E5;
     border-radius: 10px;
-    margin-left: 2%;
+   
+}
+.PostInput::placeholder{
+    font-size: 18px;
 }
 .icons{
-    display: flex;
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    left: 14%;
-    top: 68%;
+    margin-left: 17%;
 }
-.Btn{
-    position: absolute;
-    width: 123px;
-    height: 42px;
-    left: 85%;
-    top: 70%;
+@media only screen and (max-width: 500px) {
+    .NewPost{
+      width: 190px;
+    }
+    .PostInput{
+      width: 170px;
+    }
+    .PostInput::placeholder{
+      font-size: 14px;
+    }
+    .item5{
+      width: 150px;
+    }
+    .icons{
+      margin-left: 0%;
+    }
+    .grid-container{
+      width: 190px;
+    }
 }

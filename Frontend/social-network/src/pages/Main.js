@@ -6,6 +6,7 @@ import Sidebar from "../components/main/Sidebar";
 import MobileMenu from "../components/main/MobileMenu";
 import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import AddPost from "../components/AddPost";
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -82,8 +83,7 @@ const Main = () => {
                         <div className={styles.content}>
                             <Switch>
                                 <Route path="/" exact>
-                                    The content of each page will be rendered
-                                    here
+                                    <AddPost />
                                 </Route>
                                 <Route path="friends" exact>
                                     friends
