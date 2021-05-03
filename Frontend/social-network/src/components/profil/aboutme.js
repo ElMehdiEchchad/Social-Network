@@ -24,26 +24,28 @@ import {getUsers , updateUser} from '../../actions/itemActions';
  
     this.props.getUsers();
     const {users} = this.props.users;
+
     this.state = {
       Firstname: users[0].firstName ,
       Lastname: users[0].lastName,
       Birthday: new Date(),
-      Email :users[0].email
+      Email :users[0].email 
     }
 
   }
 
-  componentDidMount() {
-      this.props.getUsers();
-      
 
-      /* this.setState({
-       Firstname: users[0].firstName ,
+
+  /*componentDidMount() {
+    this.props.getUsers();
+      
+    const {users} = this.props.users;
+      this.setState({
+     //  Firstname: users[0].firstName ,
        Lastname: users[0].lastName ,
        Email : users[0].email ,
-       Password :users[0].password
-     });*/
-  }
+     });
+  }*/
 
 
   onChangeFirstname(e) {
@@ -93,6 +95,15 @@ import {getUsers , updateUser} from '../../actions/itemActions';
       return (
     
  <Form onSubmit={this.onSubmit}>
+    <Form.Field
+      id='form-input-control-error-email'
+      control={Input}
+      label='Email'
+      placeholder='joe@gmail.com'
+      value={users[0].email}
+      onChange={this.onChangeEmail}
+    />
+
     <Form.Group widths='equal'>
       <Form.Field
         id='form-input-control-first-name'
@@ -115,14 +126,14 @@ import {getUsers , updateUser} from '../../actions/itemActions';
     </Form.Group>
 
     <Form.Group widths='equal'>
+    
     <Form.Field
       id='form-input-control-error-email'
       control={Input}
-      label='Email'
-      placeholder='joe@gmail.com'
-      value={this.state.Email}
-      onChange={this.onChangeEmail}
+      label='Profil photo'
+      placeholder='Profil photos'
     />
+
     <Form.Field
         id='form-input-control-Birthday-Date'
         control={Input}
@@ -133,12 +144,7 @@ import {getUsers , updateUser} from '../../actions/itemActions';
       </Form.Field>
 
       </Form.Group>
-     <Form.Field
-      id='form-input-control-error-email'
-      control={Input}
-      label='Profil photo'
-      placeholder='Profil photos'
-    />
+    
    <Form.Field
       id='form-button-control-public'
       control={Button}

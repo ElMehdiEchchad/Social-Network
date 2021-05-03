@@ -32,7 +32,7 @@ export const getUsers = () => async dispatch => {
 
 export const updateUser  = user => async dispatch => {
     try{
-        const res = await  axios.put('http://localhost:5000/api/user/608b5f75364b4861c006aa72',user , { headers: {"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDhiNWY3NTM2NGI0ODYxYzAwNmFhNzIiLCJlbWFpbCI6InNhbG1hQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA1NDQ1MSwiZXhwIjoxNjIwMDU4MDUxfQ.1__HW-xzZuH20DNHFb9lwv5nMMS1daEcJN5CTfaBUZ0"}})
+        const res = await  axios.put('http://localhost:5000/api/user/608b5f75364b4861c006aa72',user , { headers: {"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDhiNWY3NTM2NGI0ODYxYzAwNmFhNzIiLCJlbWFpbCI6InNhbG1hQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA2MDM4MiwiZXhwIjoxNjIwMDYzOTgyfQ.BaXKxTWKAoODhWtuefAAlWTQA8cc1WvZ7fMY4fuL1K0"}})
         dispatch( {
             type: UPDATE_USER,
             payload: res.data
