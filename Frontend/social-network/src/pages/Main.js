@@ -3,9 +3,10 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Sidebar from "../components/main/Sidebar";
 import MobileMenu from "../components/main/MobileMenu";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import AddPost from "../components/AddPost";
+import AuthContext from "../contexts/AuthContext";
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -26,6 +27,7 @@ export function useMediaQuery(query) {
 }
 
 const Main = () => {
+    const { auth, setAuth } = useContext(AuthContext);
     let mobile = useMediaQuery("(min-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
 
@@ -48,7 +50,12 @@ const Main = () => {
                         className={styles.search}
                     />
                     {mobile ? (
-                        <div className={styles.logout}>
+                        <div
+                            className={styles.logout}
+                            onClick={() => {
+                                setAuth({ ...auth, loggedIn: false });
+                            }}
+                        >
                             <FaSignOutAlt className={styles.iconLogout} />
                             <div>Logout</div>
                         </div>

@@ -21,7 +21,7 @@
     background-color: #f7f3e9;
     z-index: 1000;
 }
-.Home{
+.Home {
     display: grid;
     width: 100%;
     flex-wrap: wrap;
@@ -39,6 +39,7 @@
     align-items: center;
     color: #f05945;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .iconLogout {
@@ -121,7 +122,7 @@
         font-weight: bold;
         color: #5eaaa8;
     }
-    .content{
+    .content {
         max-width: 100%;
     }
 }

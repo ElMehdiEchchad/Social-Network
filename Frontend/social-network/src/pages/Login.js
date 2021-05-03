@@ -1,8 +1,11 @@
 import styles from "./Login.module.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 import Axios from "axios";
 
 const Login = () => {
+    const { auth, setAuth } = useContext(AuthContext);
+
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [firstName, setFirstName] = useState(null);
@@ -12,6 +15,7 @@ const Login = () => {
 
     const login = () => {
         console.log({ email, password });
+        setAuth({ ...auth, loggedIn: true });
         Axios.post("http://localhost:5000/api/login", {
             email,
             password,
@@ -22,6 +26,7 @@ const Login = () => {
 
     const register = () => {
         console.log({ email, password, firstName, lastName });
+        setAuth({ ...auth, loggedIn: true });
         Axios.post("http://localhost:5000/api/register", {
             email,
             password,
@@ -29,6 +34,7 @@ const Login = () => {
             lastName,
         }).then((res) => {
             console.log(res);
+            setHasAccount(true);
         });
     };
 
