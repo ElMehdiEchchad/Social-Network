@@ -12,8 +12,7 @@ export default function Posts() {
  
       return (
          
-      <Container style={{ overflowY:"scroll" , width: '60%'  , height : '45%' , position: 'absolute', left: '50%', top: '92%',
-      transform: 'translate(-50%, -90%)',  backgroundColor :"white" }}>
+      <Container >
       <Feed style={{ width :'70%'}}/>
       </Container>
 

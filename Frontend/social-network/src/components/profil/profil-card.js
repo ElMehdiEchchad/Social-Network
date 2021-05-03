@@ -2,21 +2,17 @@ import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import Ava from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Paper from '@material-ui/core/Paper';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "../profil/ava1.png";
 import {  withStyles } from '@material-ui/core/styles';
-
+import {connect} from 'react-redux' ;
+import {getUsers } from '../../actions/itemActions';
 import Aboutme from '../profil/aboutme';
 import Friends from '../profil/friends';
 import Posts from '../profil/posts';
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import {connect} from 'react-redux' ;
-import {getUsers } from '../../actions/itemActions';
-
+import { Label, Menu, Tab } from 'semantic-ui-react'
 
 class Profilcard extends React.Component{
 
@@ -61,11 +57,26 @@ class Profilcard extends React.Component{
     },
   }))(Badge);
   
+  const panes = [
+    {
+      menuItem: { key: 'users',  content: 'About me' },
+      render: () => <Tab.Pane><Aboutme></Aboutme></Tab.Pane>,
+    },
+    {
+      menuItem: { key: 'friends', icon: 'users' , content :'friends' },
+      render: () => <Tab.Pane><Friends/></Tab.Pane>,
+    },
+    {
+      menuItem: { key: 'posts', content :'Posts' },
+      render: () => <Tab.Pane><Posts/></Tab.Pane>,
+    },
+  ]
+  
    
       return (
         <div >
-         <Card style={{ width: '60%'  , height : '40%' , position: 'absolute', left: '50%', top: '40%',
-        transform: 'translate(-50%, -90%)', alignItems:"center"}}>
+         <Card style={{ width: '80%'  , height : '35%' , position: 'absolute', left: '50%', top: '40%',
+        transform: 'translate(-50%, -90%)', alignItems:"center" }}>
            <StyledBadge overlap="circle" anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }} variant="dot" >
                 <Ava  src={Avatar} style={{ height: '150px', width: '150px' }}/>
            </StyledBadge>
@@ -76,21 +87,14 @@ class Profilcard extends React.Component{
               <Card.Text>{users[0].email}</Card.Text>
             </div>  
               
-            <Paper square >
-                <Tabs
-                indicatorColor="#5EAAA8"
-                textColor="#5EAAA8"
-                 >
-                   <Card.Link href="/myprofil" >  <Tab label="About me" /></Card.Link>
-                   <Card.Link href="/myprofil/friends" >   <Tab label="My friends" /></Card.Link>
-                   <Card.Link href="/myprofil/posts" >  <Tab label="Posts" /></Card.Link>
-                </Tabs>
-            </Paper>
+           
             <br/>
            </Card.Body>
         </Card>
 
       
+        <Tab panes={panes}  style={{ width: '80%'  , height :"55%" ,overflowY:"scroll", position: 'absolute', left: '50%', top: '95%',
+        transform: 'translate(-50%, -90%)', backgroundColor :"white" , padding: "2%" }}/>
        
 
         

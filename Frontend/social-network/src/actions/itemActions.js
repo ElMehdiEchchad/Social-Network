@@ -13,7 +13,7 @@ export const getUsers = () => async dispatch => {
     }
     catch(e){
         dispatch( {
-            payload: console.log(e),
+            payload: console.log("salma" + e),
         })
     }
 
@@ -30,16 +30,32 @@ export const getUsers = () => async dispatch => {
 	})
 }; */
 
-export const addUser = item => dispatch =>{
+export const updateUser  = user => async dispatch => {
+    try{
+        const res = await  axios.put('http://localhost:5000/api/user/608b5f75364b4861c006aa72',user)
+        dispatch( {
+            type: UPDATE_USER,
+            payload: res.data
+        })
+    }
+    catch(e){
+        dispatch( {
+            payload: console.log(e),
+        })
+    }
+
+}
+
+/*export const updateUser =  user  => dispatch =>{
 	axios
-    .post('http://localhost:5000/api/register',item)
+    .put('http://localhost:5000/api/user/608b5f75364b4861c006aa72',user)
 	.then(res=>{
 	   dispatch({
  		type: UPDATE_USER,
 		payload : res.data
 	   })
 	})
-};
+};*/
 
 export const setItemsLoading = () => {
 	return{

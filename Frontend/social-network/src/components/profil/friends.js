@@ -19,8 +19,7 @@ export default function Friends() {
   
  
   return (
-  <Grid stackable columns={3} style={{overflowY:"scroll", width: '60%'  , height : '45%' , position: 'absolute', left: '51%', top: '90%',
-  transform: 'translate(-50%, -90%)', alignItems:"center" , backgroundColor:"white" , padding :"2%"}} >
+  <Grid stackable columns={3}  >
   <Grid.Column>
   <Link to="/friendprofil">
   <Card style={{ alignItems:"center"}} >
@@ -106,11 +105,11 @@ export default function Friends() {
               </Row>
            </Card.Body>
         </Card>
+   
   </Grid.Column>
-  <div style ={{marginTop:"35%" , marginLeft :"10%"}}>
-  <ScrollDialog >Add new friends</ScrollDialog>
- 
-  </div>
+  <div style ={{marginTop:"20%" , marginLeft :"10%"}}>  
+    <ScrollDialog >Add new friends</ScrollDialog>
+   </div>
 </Grid>
 
 

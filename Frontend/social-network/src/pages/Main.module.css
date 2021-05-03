@@ -21,7 +21,14 @@
     background-color: #f7f3e9;
     z-index: 1000;
 }
-
+.Home{
+    display: grid;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: #f7f3e9;
+    height: 100vh;
+    overflow: auto;
+}
 .logo {
     font-weight: bold;
 }
