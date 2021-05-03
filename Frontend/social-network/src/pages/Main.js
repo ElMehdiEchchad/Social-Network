@@ -27,6 +27,10 @@ export function useMediaQuery(query) {
 }
 
 const Main = () => {
+    useEffect(() => {
+        console.log(auth);
+    }, []);
+
     const { auth, setAuth } = useContext(AuthContext);
     let mobile = useMediaQuery("(min-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);

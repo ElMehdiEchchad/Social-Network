@@ -5,16 +5,19 @@ const path = require("path");
 const connectDB = require("./Models/connection");
 const AuthentificationRoutes = require("./Routes/API/Authentification");
 const UserRoutes = require("./Routes/API/User");
+var cookieParser = require("cookie-parser");
 
 // set up express app
 const app = express();
+app.use(cookieParser());
 //use connection to mongodb server
 connectDB();
 app.use(express.json({ extended: false }));
 
 //Adding CORS
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Credentials", "true");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept, Authorization"
