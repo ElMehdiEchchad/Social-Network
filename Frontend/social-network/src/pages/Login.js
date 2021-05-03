@@ -15,12 +15,12 @@ const Login = () => {
 
     const login = () => {
         console.log({ email, password });
-        setAuth({ ...auth, loggedIn: true });
         Axios.post("http://localhost:5000/api/login", {
             email,
             password,
         }).then((res) => {
             console.log(res);
+            setAuth({ token: res.data.Token, loggedIn: true });
         });
     };
 

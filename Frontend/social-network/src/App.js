@@ -14,7 +14,7 @@ function App() {
 
     const [auth, setAuth] = useState({
         loggedIn: false,
-        userId: null,
+        token: null,
     });
 
     return (
