@@ -39,7 +39,8 @@ router.post('/login', async (req, res) => {
 
                         res.status(200).json({
                             message: "Auth successful",
-                            Token: token
+                            Token: token,
+                            id:user[0]._id
                         });
                     } else {
                         res.status(401).json({
