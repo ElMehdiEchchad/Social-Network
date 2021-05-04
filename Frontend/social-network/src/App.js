@@ -23,7 +23,7 @@ function App() {
                 <Router>
                     <div>
                         <div>
-                            <Route path="/" exact>
+                            <Route path="/">
                                 {auth.loggedIn ? <Main /> : <Login />}
                             </Route>
                             <Route path="/myprofil" component={Profil} />
