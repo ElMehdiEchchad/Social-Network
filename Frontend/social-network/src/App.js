@@ -16,13 +16,21 @@ function App() {
     useEffect(() => {
         Axios.get("http://localhost:5000/api/users/auth", {
             withCredentials: true,
-        }).then((res) => {
-            setAuth({ loggedIn: true, userData: res.userData });
-        });
+        })
+            .then((res) => {
+                setAuth({ loggedIn: true, userData: res.userData });
+                setLoading(false);
+            })
+            .catch(() => {
+                setAuth({ ...auth, loggedIn: false });
+                setLoading(false);
+            });
     }, []);
 
+    const [loading, setLoading] = useState(true);
+
     const [auth, setAuth] = useState({
-        loggedIn: false,
+        loading: true,
         userData: {},
     });
 
@@ -33,7 +41,13 @@ function App() {
                     <div>
                         <div>
                             <Route path="/">
-                                {auth.loggedIn ? <Main /> : <Login />}
+                                {loading ? (
+                                    <div className="loading">Loading...</div>
+                                ) : auth.loggedIn ? (
+                                    <Main />
+                                ) : (
+                                    <Login />
+                                )}
                             </Route>
                             <Route path="/myprofil" component={Profil} />
                             <Route path="/login" component={Login} />
