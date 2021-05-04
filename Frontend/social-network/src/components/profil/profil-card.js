@@ -21,10 +21,11 @@ import AuthContext from '../../contexts/AuthContext'
 
 class Profilcard extends React.Component{
  
-
+  static  contextType = AuthContext;
 
   componentDidMount() {
   this.props.getUsers();
+  console.log("salmaa" + this.context.userData.id)
 
   }
    

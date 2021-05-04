@@ -18,11 +18,10 @@ import { Divider } from '@material-ui/core';
 
 export default function Friends() {
 
-   const {auth } = useContext(AuthContext) ;
-   const token = auth.userData.Token ;
-   const id = auth.id ; 
+   const {auth} = useContext(AuthContext) ;
+   const id = auth.userData.id ; 
    
-   console.log("Hi"+token) ;
+   console.log("Hi"+id) ;
  
   return (
   <div>
