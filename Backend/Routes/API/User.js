@@ -8,7 +8,7 @@ const checkAuth = require("../../Middleware/check-auth");
 //@desc get all users
 //@access Public
 
-router.use(checkAuth);
+//router.use(checkAuth);
 
 router.get("/api/users/auth", async (req, res) => {
     res.status(200).json({
@@ -30,7 +30,7 @@ router.get("/api/users", async (req, res) => {
 //@route GET api/user/:id
 //@desc get user by ID
 //@access Public
-router.get("/api/user/:id", async (req, res) => {
+router.get("/api/user/:id",checkAuth, async (req, res) => {
     userModel.findById({ _id: req.params.id }, async (err, data) => {
         if (err) {
             await res
