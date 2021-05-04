@@ -25,7 +25,7 @@ export default function Friends() {
  
   return (
   <div>
-  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends </h1>
+  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + ${id} </h1>
   <Grid stackable columns={3} style={{marginTop :"4%"}} >
   <Grid.Column>
   <Link to="/friendprofil">

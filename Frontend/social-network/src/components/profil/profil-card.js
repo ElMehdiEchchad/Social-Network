@@ -17,26 +17,20 @@ import { Divider, Tab } from 'semantic-ui-react'
 
 
 import AuthContext from '../../contexts/AuthContext'
+import {useContext} from 'react' ;
 
 
-class Profilcard extends React.Component{
- 
-  static  contextType = AuthContext;
-
-  componentDidMount() {
-  this.props.getUsers();
-  console.log("salmaa" + this.context.userData.id)
-
-  }
-   
-  render() {
-   
-    const {users} = this.props.users;
+export default function Profilcard(){
+    
+   const {auth} = useContext(AuthContext) ;
+   const id = auth.userData.id ; 
+  
+   console.log("Hi"+id) ;
 
     const panes = [
     {
       menuItem: { key: 'users',  content: 'About' },
-      render: () => <Tab.Pane><Aboutme></Aboutme></Tab.Pane>,
+      render: () => <Tab.Pane><Aboutme id={id}></Aboutme></Tab.Pane>,
     },
    /* {
       menuItem: { key: 'friends', icon: 'users' , content :'friends' },
@@ -54,9 +48,9 @@ class Profilcard extends React.Component{
          <Card >
            <Ava  src={Avatar} style={{ height: '140px', width: '140px'  , position: 'absolute', left: '50%', top: '70%',
         transform: 'translate(-50%, -90%)', alignItems:"center" , marginBottom :"10%"}}/>
-           <Card.Body style={{  marginTop :"20%" , transform: 'translate(40%, 50%)' }}>
-              <Card.Title>{users[0].firstName +' '+ users[0].lastName}</Card.Title>
-              <Card.Text>{users[0].email}</Card.Text>
+           <Card.Body style={{  marginTop :"20%" , transform: 'translate(40%, 50%)' , color :"white" }}>
+              <Card.Title>firstname  and lastname</Card.Title>
+              <Card.Text>user email</Card.Text>
               <br></br> 
            </Card.Body>
         </Card>
@@ -68,13 +62,8 @@ class Profilcard extends React.Component{
         
       </div>
       );
-    }
+    
 }
 
-const mapStateToProps = (state) => ({
-  users : state.users
-});
-
-export default connect(mapStateToProps, {getUsers})(Profilcard) ;
 
  
