@@ -49,7 +49,6 @@ function App() {
                                     <Login />
                                 )}
                             </Route>
-                            <Route path="/myprofil" component={Profil} />
                             <Route path="/login" component={Login} />
                         </div>
                     </div>

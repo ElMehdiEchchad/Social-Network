@@ -9,6 +9,10 @@ import AddPost from "../components/AddPost";
 import AuthContext from "../contexts/AuthContext";
 import Axios from "axios";
 
+import  Profilcard from "../components/profil/profil-card";
+import  Aboutme from "../components/profil/aboutme";
+import  Friends from "../components/profil/friends";
+
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
 
@@ -100,7 +104,10 @@ const Main = () => {
                                     <AddPost />
                                 </Route>
                                 <Route path="/friends" exact>
-                                    friends
+                                    <Friends/>
+                                </Route>
+                                <Route path="/myprofil" exact>
+                                    <Profilcard/>
                                 </Route>
                             </Switch>
                         </div>

@@ -12,13 +12,14 @@ import { Link } from "react-router-dom";
 const Sidebar = (props) => {
     return (
         <div className={styles.sidebar}>
+            
             <div className={styles.profileHeader}>
                 <div className={styles.avatar}></div>
                 <div className={styles.name}>Abderrahim Tantaoui</div>
                 <div className={styles.email}>abdoutanta@gmail.com</div>
             </div>
             <div className={styles.navWrapper}>
-                <Link className={styles.navLink}>
+                <Link to='/' className={styles.navLink}>
                     <FaHome />
                     <div className={styles.link}>Home</div>
                 </Link>
@@ -30,9 +31,9 @@ const Sidebar = (props) => {
                     <FaFacebookMessenger />
                     <div className={styles.link}>Messages</div>
                 </Link>
-                <Link className={styles.navLink}>
+                <Link  to="myprofil" className={styles.navLink}>
                     <FaBookmark />
-                    <div className={styles.link}>Bookmarks</div>
+                    <div className={styles.link}>Profil</div>
                 </Link>
             </div>
         </div>

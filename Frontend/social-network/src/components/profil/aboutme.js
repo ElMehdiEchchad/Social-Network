@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Form, Input,  Button } from 'semantic-ui-react';
+import { Form, Input,  Button , Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import {connect} from 'react-redux' ;
 import {getUsers , updateUser} from '../../actions/itemActions';
 
-
+import { ImagePicker } from 'react-file-picker'
 
 
  class Aboutme extends React.Component{
@@ -36,16 +36,16 @@ import {getUsers , updateUser} from '../../actions/itemActions';
 
 
 
-  /*componentDidMount() {
+  componentDidMount() {
     this.props.getUsers();
       
     const {users} = this.props.users;
       this.setState({
-     //  Firstname: users[0].firstName ,
+       Firstname: users[0].firstName ,
        Lastname: users[0].lastName ,
        Email : users[0].email ,
      });
-  }*/
+  }
 
 
   onChangeFirstname(e) {
@@ -84,6 +84,7 @@ import {getUsers , updateUser} from '../../actions/itemActions';
       email : this.state.Email,
     };
     this.props.updateUser(userupdated);
+    
   }
 
   
@@ -129,10 +130,13 @@ import {getUsers , updateUser} from '../../actions/itemActions';
     
     <Form.Field
       id='form-input-control-error-email'
-      control={Input}
       label='Profil photo'
-      placeholder='Profil photos'
-    />
+      placeholder='Profil photos'>
+   <Input
+    icon={{ name: 'search',label:'Profil photo', circular: true, link: true }}
+    placeholder='Search...'
+  />
+    </Form.Field>
 
     <Form.Field
         id='form-input-control-Birthday-Date'
@@ -142,7 +146,7 @@ import {getUsers , updateUser} from '../../actions/itemActions';
       >
        <DatePicker selected={this.state.Birthday} onChange={this.onChangeBirthday} />
       </Form.Field>
-
+    
       </Form.Group>
     
    <Form.Field
@@ -152,6 +156,8 @@ import {getUsers , updateUser} from '../../actions/itemActions';
       style={{ marginLeft:"1%" , color: "white" , backgroundColor :"#F05945"}}
     />
   </Form>
+
+  
       
       );
   }

@@ -5,7 +5,7 @@ import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types
 export const getUsers = () => async dispatch => {
 	dispatch(setItemsLoading());
     try{
-        const res = await axios.get('http://localhost:5000/api/user/608b5f75364b4861c006aa72')
+        const res = await axios.get('http://localhost:5000/api/user/608b5f75364b4861c006aa72', {withCredentials :true})
         dispatch( {
             type: GET_USERS,
             payload: res.data
@@ -19,20 +19,10 @@ export const getUsers = () => async dispatch => {
 
 }
 
-/*export const updateUser = id => dispatch => {
-	axios
-	.delete(`/api/items/${id}`)
-	.then(res=>{
-	   dispatch({
- 		type: DELETE_ITEM,
-		payload : id
-	   })
-	})
-}; */
 
 export const updateUser  = user => async dispatch => {
     try{
-        const res = await  axios.put('http://localhost:5000/api/user/608b5f75364b4861c006aa72',user , { headers: {"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDhiNWY3NTM2NGI0ODYxYzAwNmFhNzIiLCJlbWFpbCI6InNhbG1hQGdtYWlsLmNvbSIsImlhdCI6MTYyMDA2MDM4MiwiZXhwIjoxNjIwMDYzOTgyfQ.BaXKxTWKAoODhWtuefAAlWTQA8cc1WvZ7fMY4fuL1K0"}})
+        const res = await  axios.put('http://localhost:5000/api/user/608b5f75364b4861c006aa72',user , {withCredentials :true} )
         dispatch( {
             type: UPDATE_USER,
             payload: res.data
