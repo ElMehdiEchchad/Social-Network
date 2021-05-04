@@ -32,8 +32,8 @@ app.use((req, res, next) => {
     next();
 });
 //initialize routes of API
-app.use(UserRoutes);
 app.use("/api/", AuthentificationRoutes);
+app.use(UserRoutes);
 
 //listen for requests
 app.listen(process.env.port || 5000, function () {

@@ -9,6 +9,11 @@ const { response } = require("express");
 //@route POST api/users/login
 //@desc login user
 //@access Public
+
+router.get("/logout", async (req, res) => {
+    res.clearCookie("token").status(200).json();
+});
+
 router.post("/login", async (req, res) => {
     userModel.find({ email: req.body.email }, async (err, user) => {
         if (err) {
@@ -39,12 +44,15 @@ router.post("/login", async (req, res) => {
                             }
                         );
 
+                        console.log(req.cookies.token);
+
                         res.cookie("token", token, { httpOnly: true })
                             .status(200)
                             .json({
                                 message: "Auth successful",
                                 Token: token,
                                 id: user[0]._id,
+                                data: req.userData,
                             });
                     } else {
                         res.status(401).json({

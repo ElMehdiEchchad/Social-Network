@@ -24,7 +24,8 @@ const Login = () => {
             { withCredentials: true }
         ).then((res) => {
             console.log(res);
-            setAuth({ loggedIn: true, token: res.data.Token });
+            setAuth({ loggedIn: true, userData: res.data });
+            console.log(auth);
         });
     };
 

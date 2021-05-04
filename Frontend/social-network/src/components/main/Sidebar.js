@@ -34,13 +34,6 @@ const Sidebar = (props) => {
                     <FaBookmark />
                     <div className={styles.link}>Bookmarks</div>
                 </Link>
-                <Link
-                    to="/login"
-                    className={`${styles.linkLogout} ${styles.navLink}`}
-                >
-                    <FaSignOutAlt />
-                    <div className={styles.link}>Logout</div>
-                </Link>
             </div>
         </div>
     );

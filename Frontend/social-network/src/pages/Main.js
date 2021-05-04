@@ -7,6 +7,7 @@ import { useState, useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import AddPost from "../components/AddPost";
 import AuthContext from "../contexts/AuthContext";
+import Axios from "axios";
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -32,7 +33,7 @@ const Main = () => {
     }, []);
 
     const { auth, setAuth } = useContext(AuthContext);
-    let mobile = useMediaQuery("(min-width: 700px)");
+    let mobile = useMediaQuery("(max-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(
@@ -41,6 +42,14 @@ const Main = () => {
         },
         [mobile]
     );
+
+    const logout = () => {
+        Axios.get("http://localhost:5000/api/logout", {
+            withCredentials: true,
+        }).then(() => {
+            setAuth({ ...auth, loggedIn: false });
+        });
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -53,13 +62,8 @@ const Main = () => {
                         placeholder="search"
                         className={styles.search}
                     />
-                    {mobile ? (
-                        <div
-                            className={styles.logout}
-                            onClick={() => {
-                                setAuth({ ...auth, loggedIn: false });
-                            }}
-                        >
+                    {!mobile ? (
+                        <div className={styles.logout} onClick={logout}>
                             <FaSignOutAlt className={styles.iconLogout} />
                             <div>Logout</div>
                         </div>
