@@ -10,6 +10,13 @@ const checkAuth = require("../../Middleware/check-auth");
 
 router.use(checkAuth);
 
+router.get("/api/users/auth", async (req, res) => {
+    res.status(200).json({
+        message: "Auth successful",
+        data: req.userData,
+    });
+});
+
 router.get("/api/users", async (req, res) => {
     userModel.find({}, async (err, data) => {
         if (err) {
