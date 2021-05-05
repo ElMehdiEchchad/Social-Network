@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
+import {GET_USER, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
 
 
 
@@ -9,7 +9,7 @@ export const getUsers = id => async dispatch => {
     try{
         const res = await axios.get("http://localhost:5000/api/user/"+id, {withCredentials :true})
         dispatch( {
-            type: GET_USERS,
+            type: GET_USER,
             payload: res.data
         })
     }

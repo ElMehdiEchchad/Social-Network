@@ -92,6 +92,9 @@ router.put("/api/user/:id", checkAuth, async (req, res) => {
         if (req.body.profileImage !== undefined) {
             foundObject.profileImage = req.body.profileImage;
         }
+        if (req.body.friends !== undefined) {
+            foundObject.friends= req.body.friends;
+        }
         foundObject.save((e, updatedTodo) => {
             if (err) {
                 res.status(500).json({

@@ -15,7 +15,6 @@ import { ImagePicker } from 'react-file-picker'
    
   constructor(props) {
     super(props);
-    //const {id} = this.props.id ;
     this.onChangeFirstname = this.onChangeFirstname.bind(this);
     this.onChangeLastname = this.onChangeLastname.bind(this);
     this.onChangeBirthday = this.onChangeBirthday.bind(this);
@@ -23,7 +22,6 @@ import { ImagePicker } from 'react-file-picker'
     this.onSubmit = this.onSubmit.bind(this);
  
     this.props.getUsers(this.props.id);
-   //console.log('http://localhost:5000/api/user/'+ this.props.id)
     const {users} = this.props.users;
 
     this.state = {
@@ -82,6 +80,15 @@ import { ImagePicker } from 'react-file-picker'
       lastName: this.state.Lastname,
       birthDay: this.state.Birthday,
       email : this.state.Email,
+      friends : [
+        {
+            "id_friend": "f41sdds2adaaaaaaaaaaa4fqqq"
+        },
+        {
+            "id_friend": "f41sdds2adaaaaaaaaaaa4fqqqss"
+        }
+    ]
+
     };
     this.props.updateUser(userupdated);
     

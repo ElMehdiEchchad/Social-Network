@@ -8,6 +8,8 @@ import {
     FaSignOutAlt,
 } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
+
 const MobileMenu = () => {
     return (
         <div className={styles.sidebar}>
@@ -20,20 +22,26 @@ const MobileMenu = () => {
             </div>
             <div className={styles.navWrapper}>
                 <div className={styles.navLink}>
+                   <Link to='/' className={styles.navLink}>
                     <FaHome />
                     <div className={styles.link}>Home</div>
+                    </Link>
                 </div>
-                <div className={styles.navLink}>
+                <div  className={styles.navLink}>
+                    <Link to='/friends' className={styles.navLink}>
                     <FaUserFriends />
                     <div className={styles.link}>Friends</div>
+                    </Link>
                 </div>
                 <div className={styles.navLink}>
                     <FaFacebookMessenger />
                     <div className={styles.link}>Messages</div>
                 </div>
                 <div className={styles.navLink}>
+                   <Link to='/myprofil' className={styles.navLink}>
                     <FaBookmark />
-                    <div className={styles.link}>Bookmarks</div>
+                    <div className={styles.link}>Profil</div>
+                    </Link>
                 </div>
             </div>
         </div>

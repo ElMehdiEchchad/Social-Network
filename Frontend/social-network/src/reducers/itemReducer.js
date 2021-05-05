@@ -1,4 +1,4 @@
-import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
+import {GET_USER, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
 
 const initialState = {
     users : [ {
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function(state=initialState ,action){
     switch(action.type){
-        case GET_USERS : return {
+        case GET_USER : return {
             ...state,
             users : [action.payload, ...state.users]
         }
