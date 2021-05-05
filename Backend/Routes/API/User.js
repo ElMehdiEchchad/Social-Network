@@ -30,8 +30,8 @@ router.get("/api/users", async (req, res) => {
 //@route GET api/user/:id
 //@desc get user by ID
 //@access Public
-router.get("/api/user/:id",checkAuth, async (req, res) => {
-    userModel.findById({ _id: req.params.id }, async (err, data) => {
+router.get("/api/user/:id", checkAuth, async (req, res) => {
+    userModel.findById({ _id: req.params.id },'_id firstName lastName email profileImage friends', async (err, data) => {
         if (err) {
             await res
                 .status(500)
@@ -58,8 +58,8 @@ router.delete("/api/user/:id", checkAuth, async (req, res) => {
         }
     });
 });
-//@route DELETE api/user/:id
-//@desc delete ALL users user by ID this is just for testing
+//@route DELETE api/user/
+//@desc delete ALL users this is just for testing
 //@access Public
 router.delete("/api/users", async (req, res) => {
     userModel.remove({}, async (err, data) => {
@@ -93,7 +93,7 @@ router.put("/api/user/:id", checkAuth, async (req, res) => {
             foundObject.profileImage = req.body.profileImage;
         }
         if (req.body.friends !== undefined) {
-            foundObject.friends= req.body.friends;
+            foundObject.friends = req.body.friends;
         }
         foundObject.save((e, updatedTodo) => {
             if (err) {
@@ -150,5 +150,59 @@ router.delete(
         );
     }
 );
+
+//@route GET api/user/:id/friends
+//@desc get all friends of a sprecific user
+//@access Public
+router.get("/api/user/:id/friends", checkAuth, async (req, res) => {
+    userModel.findById({ _id: req.params.id }, async (err, data) => {
+
+        if (err) {
+            await res
+                .status(500)
+                .json({
+                    message: "error",
+                    err: `Cannot find user with this ID : ${req.params.id}`
+                })
+        } else {
+            if (data.friends.length == 0) {
+                res.status(200).json({
+                    message: "there is no friend"
+                });
+            } else {
+                var listOfFriends = [];
+                const itteration = data.friends.map(async (idFriendObject) => {
+                    const idFriend = idFriendObject.id_friend;
+                    return userModel.findById({ _id: idFriend },'_id firstName lastName email profileImage friends',async (err, data) => {
+                        if (err) {
+                            await res
+                                .status(500)
+                                .json({
+                                    message: "error",
+                                    err: `Cannot find user with this ID : ${req.params.id}`
+                                })
+                        } else {
+                            await listOfFriends.push(data);
+
+
+                        }
+                    });
+                })
+
+                return Promise.all(itteration).then(() => {
+                    console.log(res.status(200).json({
+                        message: "list of friends finded",
+                        friends: listOfFriends
+                    }))
+                }
+                )
+
+             
+            }
+            
+        }
+    });
+});
+
 
 module.exports = router;
