@@ -6,3 +6,16 @@ body {
 html {
     font-family: "Montserrat", sans-serif;
 }
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    color: #f05945;
+    background-color: #f7f3e9;
+    font-weight: bold;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

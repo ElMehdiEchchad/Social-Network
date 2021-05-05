@@ -5,21 +5,28 @@ import Avatar from "../profil/ava1.png";
 import Ava from '@material-ui/core/Avatar';
 import { BiMessageDots , BiTrash} from "react-icons/bi";
 import {Row} from 'react-bootstrap';
-import { Grid} from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 import ScrollDialog from '../profil/Dialog'
 // dialog section
 
+import {useContext} from 'react' ;
+import AuthContext from '../../contexts/AuthContext'
+import { Divider } from '@material-ui/core';
 
 
 export default function Friends() {
 
-
-  
+   const {auth} = useContext(AuthContext) ;
+   const id = auth.userData.id ; 
+   
+   console.log("Hi"+id) ;
  
   return (
-  <Grid stackable columns={3}  >
+  <div>
+  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + ${id} </h1>
+  <Grid stackable columns={3} style={{marginTop :"4%"}} >
   <Grid.Column>
   <Link to="/friendprofil">
   <Card style={{ alignItems:"center"}} >
@@ -107,11 +114,12 @@ export default function Friends() {
         </Card>
    
   </Grid.Column>
-  <div style ={{marginTop:"20%" , marginLeft :"10%"}}>  
-    <ScrollDialog >Add new friends</ScrollDialog>
-   </div>
 </Grid>
 
+<div style ={{marginTop:"5%" , marginLeft :"50%"}}>  
+    <ScrollDialog >Add new friends</ScrollDialog>
+   </div>
+</div>
 
   );
 }

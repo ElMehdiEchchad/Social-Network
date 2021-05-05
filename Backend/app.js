@@ -6,7 +6,7 @@ const connectDB = require("./Models/connection");
 const AuthentificationRoutes = require("./Routes/API/Authentification");
 const UserRoutes = require("./Routes/API/User");
 var cookieParser = require("cookie-parser");
-
+const chatRoutes = require('./Routes/API/Chat')
 // set up express app
 const app = express();
 app.use(cookieParser());
@@ -32,8 +32,9 @@ app.use((req, res, next) => {
     next();
 });
 //initialize routes of API
-app.use(UserRoutes);
 app.use("/api/", AuthentificationRoutes);
+app.use(UserRoutes);
+app.use(chatRoutes)
 
 //listen for requests
 app.listen(process.env.port || 5000, function () {

@@ -24,19 +24,23 @@ const Login = () => {
             { withCredentials: true }
         ).then((res) => {
             console.log(res);
-            setAuth({ loggedIn: true, token: res.data.Token });
+            setAuth({ loggedIn: true, userData: res.data });
+            console.log(auth);
         });
     };
 
     const register = () => {
         console.log({ email, password, firstName, lastName });
-        setAuth({ ...auth, loggedIn: true });
-        Axios.post("http://localhost:5000/api/register", {
-            email,
-            password,
-            firstName,
-            lastName,
-        }).then((res) => {
+        Axios.post(
+            "http://localhost:5000/api/register",
+            {
+                email,
+                password,
+                firstName,
+                lastName,
+            },
+            { withCredentials: true }
+        ).then((res) => {
             console.log(res);
             setHasAccount(true);
         });

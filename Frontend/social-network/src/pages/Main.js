@@ -7,7 +7,15 @@ import { useState, useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import AddPost from "../components/main/AddPost";
 import AuthContext from "../contexts/AuthContext";
+<<<<<<< HEAD
 import Post from "../components/main/post";
+=======
+import Axios from "axios";
+
+import  Profilcard from "../components/profil/profil-card";
+import  Aboutme from "../components/profil/aboutme";
+import  Friends from "../components/profil/friends";
+>>>>>>> 64f3416adeb0b98fbf00013ddd974e6e213cccb8
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -33,7 +41,7 @@ const Main = () => {
     }, []);
 
     const { auth, setAuth } = useContext(AuthContext);
-    let mobile = useMediaQuery("(min-width: 700px)");
+    let mobile = useMediaQuery("(max-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(
@@ -42,6 +50,14 @@ const Main = () => {
         },
         [mobile]
     );
+
+    const logout = () => {
+        Axios.get("http://localhost:5000/api/logout", {
+            withCredentials: true,
+        }).then(() => {
+            setAuth({ ...auth, loggedIn: false });
+        });
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -54,13 +70,8 @@ const Main = () => {
                         placeholder="search"
                         className={styles.search}
                     />
-                    {mobile ? (
-                        <div
-                            className={styles.logout}
-                            onClick={() => {
-                                setAuth({ ...auth, loggedIn: false });
-                            }}
-                        >
+                    {!mobile ? (
+                        <div className={styles.logout} onClick={logout}>
                             <FaSignOutAlt className={styles.iconLogout} />
                             <div>Logout</div>
                         </div>
@@ -98,7 +109,10 @@ const Main = () => {
                                     <Post />
                                 </Route>
                                 <Route path="/friends" exact>
-                                    friends
+                                    <Friends/>
+                                </Route>
+                                <Route path="/myprofil" exact>
+                                    <Profilcard/>
                                 </Route>
                             </Switch>
                         </div>

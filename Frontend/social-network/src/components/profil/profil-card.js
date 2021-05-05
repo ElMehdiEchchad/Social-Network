@@ -11,61 +11,31 @@ import {getUsers } from '../../actions/itemActions';
 import Aboutme from '../profil/aboutme';
 import Friends from '../profil/friends';
 import Posts from '../profil/posts';
+import {Row } from 'react-bootstrap';
+import { Divider, Tab } from 'semantic-ui-react'
 
-import { Label, Menu, Tab } from 'semantic-ui-react'
 
-class Profilcard extends React.Component{
 
-  constructor(props) {
-    super(props);
-  }
+import AuthContext from '../../contexts/AuthContext'
+import {useContext} from 'react' ;
 
-  componentDidMount() {
-    this.props.getUsers();
-  }
-   
-  render() {
 
-   const {users} = this.props.users;
-
-  const   StyledBadge = withStyles((theme) => ({
-    badge: {
-      backgroundColor: '#44b700',
-      color: '#44b700',
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      '&::after': {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        borderRadius: '50%',
-        animation: '$ripple 1.2s infinite ease-in-out',
-        border: '1px solid currentColor',
-        content: '""',
-      },
-    },
-    '@keyframes ripple': {
-      '0%': {
-        transform: 'scale(.9)',
-        opacity: 1,
-      },
-      '100%': {
-        transform: 'scale(4)',
-        opacity: 0,
-      },
-    },
-  }))(Badge);
+export default function Profilcard(){
+    
+   const {auth} = useContext(AuthContext) ;
+   const id = auth.userData.id ; 
   
-  const panes = [
+   console.log("Hi"+id) ;
+
+    const panes = [
     {
-      menuItem: { key: 'users',  content: 'About me' },
-      render: () => <Tab.Pane><Aboutme></Aboutme></Tab.Pane>,
+      menuItem: { key: 'users',  content: 'About' },
+      render: () => <Tab.Pane><Aboutme id={id}></Aboutme></Tab.Pane>,
     },
-    {
+   /* {
       menuItem: { key: 'friends', icon: 'users' , content :'friends' },
       render: () => <Tab.Pane><Friends/></Tab.Pane>,
-    },
+    },*/
     {
       menuItem: { key: 'posts', content :'Posts' },
       render: () => <Tab.Pane><Posts/></Tab.Pane>,
@@ -75,38 +45,25 @@ class Profilcard extends React.Component{
    
       return (
         <div >
-         <Card style={{ width: '80%'  , height : '35%' , position: 'absolute', left: '50%', top: '40%',
-        transform: 'translate(-50%, -90%)', alignItems:"center" }}>
-           <StyledBadge overlap="circle" anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }} variant="dot" >
-                <Ava  src={Avatar} style={{ height: '150px', width: '150px' }}/>
-           </StyledBadge>
-
-           <Card.Body>
-            <div style={{ textAlign :'center' , marginBottom :"7%"}}>
-              <Card.Title>{users[0].firstName +' '+ users[0].lastName}</Card.Title>
-              <Card.Text>{users[0].email}</Card.Text>
-            </div>  
-              
-           
-            <br/>
+         <Card >
+           <Ava  src={Avatar} style={{ height: '140px', width: '140px'  , position: 'absolute', left: '50%', top: '70%',
+        transform: 'translate(-50%, -90%)', alignItems:"center" , marginBottom :"10%"}}/>
+           <Card.Body style={{  marginTop :"20%" , transform: 'translate(40%, 50%)' , color :"white" }}>
+              <Card.Title>firstname  and lastname</Card.Title>
+              <Card.Text>user email</Card.Text>
+              <br></br> 
            </Card.Body>
         </Card>
 
       
-        <Tab panes={panes}  style={{ width: '80%'  , height :"55%" ,overflowY:"scroll", position: 'absolute', left: '50%', top: '95%',
-        transform: 'translate(-50%, -90%)', backgroundColor :"white" , padding: "2%" }}/>
+        <Tab panes={panes} style={{marginTop :"5%"}} />
        
 
         
       </div>
       );
-    }
+    
 }
 
-const mapStateToProps = (state) => ({
-  users : state.users
-});
-
-export default connect(mapStateToProps, {getUsers})(Profilcard) ;
 
  
