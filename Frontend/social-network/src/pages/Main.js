@@ -5,8 +5,9 @@ import Sidebar from "../components/main/Sidebar";
 import MobileMenu from "../components/main/MobileMenu";
 import { useState, useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
-import AddPost from "../components/AddPost";
+import AddPost from "../components/main/AddPost";
 import AuthContext from "../contexts/AuthContext";
+import Post from "../components/main/post";
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -94,6 +95,7 @@ const Main = () => {
                             <Switch>
                                 <Route path="/" exact>
                                     <AddPost />
+                                    <Post />
                                 </Route>
                                 <Route path="/friends" exact>
                                     friends

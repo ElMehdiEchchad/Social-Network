@@ -6,14 +6,14 @@ import 'semantic-ui-css/semantic.min.css';
 import { Container , Divider  } from '@material-ui/core';
 import { Button, Icon, Label } from 'semantic-ui-react'
 
-import Feed from '../../components/Feed' ;
+import Post from '../../components/main/post' ;
 export default function Posts() {
    
  
       return (
          
       <Container >
-      <Feed style={{ width :'70%'}}/>
+      <Post style={{ width :'70%'}}/>
       </Container>
 
 
