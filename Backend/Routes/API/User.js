@@ -92,9 +92,6 @@ router.put("/api/user/:id", checkAuth, async (req, res) => {
         if (req.body.profileImage !== undefined) {
             foundObject.profileImage = req.body.profileImage;
         }
-        if (req.body.friends !== undefined) {
-            foundObject.friends = req.body.friends;
-        }
         foundObject.save((e, updatedTodo) => {
             if (err) {
                 res.status(500).json({
@@ -162,7 +159,7 @@ router.get("/api/user/:id/friends", async (req, res) => {
                 .status(500)
                 .json({
                     message: "error",
-                    err: `Cannot find user with this ID : ${req.params.id}`
+                    err: err
                 })
         } else {
             if (data.friends.length == 0) {
@@ -179,7 +176,7 @@ router.get("/api/user/:id/friends", async (req, res) => {
                                 .status(500)
                                 .json({
                                     message: "error",
-                                    err: `Cannot find user with this ID : ${req.params.id}`
+                                    err: err
                                 })
                         } else {
                             await listOfFriends.push(data);
