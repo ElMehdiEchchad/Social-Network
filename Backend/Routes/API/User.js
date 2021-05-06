@@ -31,7 +31,7 @@ router.get("/api/users", async (req, res) => {
 //@desc get user by ID
 //@access Public
 router.get("/api/user/:id", checkAuth, async (req, res) => {
-    userModel.findById({ _id: req.params.id },'_id firstName lastName email profileImage friends', async (err, data) => {
+    userModel.findById({ _id: req.params.id }, '_id firstName lastName email profileImage friends', async (err, data) => {
         if (err) {
             await res
                 .status(500)
@@ -118,7 +118,25 @@ router.put("/api/user/:id/friends", checkAuth, async (req, res) => {
                     .status(500)
                     .send(`Cannot find user with this ID : ${req.params.id}`);
             } else {
-                res.status(200).send(data);
+                res.status(201).json({
+                    message:"friend added to the list of friends"
+                });
+            }
+        }
+    );
+    userModel.findByIdAndUpdate(
+        { _id: req.body.id_friend },
+        { $push: { friends: { id_friend: req.params.id } } },
+        { new: true },
+        async (err, data) => {
+            if (err) {
+                await res
+                    .status(500)
+                    .send(`Cannot find user with this ID : ${req.params.id}`);
+            } else {
+                res.status(201).json({
+                    message:"friend added to the list of friends"
+                });
             }
         }
     );
@@ -170,7 +188,7 @@ router.get("/api/user/:id/friends", async (req, res) => {
                 var listOfFriends = [];
                 const itteration = data.friends.map(async (idFriendObject) => {
                     const idFriend = idFriendObject.id_friend;
-                    return userModel.findById({ _id: idFriend },'_id firstName lastName email profileImage friends',async (err, data) => {
+                    return userModel.findById({ _id: idFriend }, '_id firstName lastName email profileImage friends', async (err, data) => {
                         if (err) {
                             await res
                                 .status(500)
@@ -194,9 +212,9 @@ router.get("/api/user/:id/friends", async (req, res) => {
                 }
                 )
 
-             
+
             }
-            
+
         }
     });
 });
