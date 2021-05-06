@@ -39,10 +39,11 @@ export function useMediaQuery(query) {
 const Main = () => {
     useEffect(() => {
         console.log("in main auth: ")
-        console.log(auth);
+        console.log(auth.userData.id);
     }, []);
 
     const { auth, setAuth } = useContext(AuthContext);
+    const id = auth.userData.id ;
     let mobile = useMediaQuery("(max-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
 
@@ -113,7 +114,7 @@ const Main = () => {
                                     <Post />
                                 </Route>
                                 <Route path="/friends" exact>
-                                    <Friends />
+                                    <Friends id={id}/>
                                 </Route>
                                 <Route path="/myprofil" exact>
                                     <Profilcard />
