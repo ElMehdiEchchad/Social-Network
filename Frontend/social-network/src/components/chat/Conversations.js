@@ -7,8 +7,7 @@ export default function Conversations({ id }) {
   const { selectedConversationId, selectConversationId ,listOfMyFriends,GetAllMyFriend} = useConversations();
 
   useEffect(() => {
-    GetAllMyFriend();
-
+    GetAllMyFriend(id);
   }, []);
 
   return (

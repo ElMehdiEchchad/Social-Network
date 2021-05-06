@@ -25,9 +25,9 @@ export function ConversationsProvider({ id, children }) {
 
 //------------- get all my friends conversations--------------------//
 const [listOfMyFriends, setListOfMyFriends] = useState([]);
-  function GetAllMyFriend() {
+  function GetAllMyFriend(idUser) {
     axios
-      .get("http://localhost:5000/api/user/6092aae9c178f330fcbb3b81/friends",{withCredentials: true})
+      .get(`http://localhost:5000/api/user/${idUser}/friends`,{withCredentials: true})
       .then((response) => {
         setListOfMyFriends(response.data.friends);
       })

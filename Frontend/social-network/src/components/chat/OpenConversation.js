@@ -32,7 +32,7 @@ export default function OpenConversation({id}) {
       <div className="flex-grow-1 overflow-auto">
         <div className=" d-flex flex-column  justify-content-end px-3">
         
-         
+ 
           {conversationlist.map((message, index) => {
             return (
               <div className="div">
