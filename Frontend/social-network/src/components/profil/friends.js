@@ -11,24 +11,26 @@ import ScrollDialog from '../profil/Dialog'
 import {connect} from 'react-redux' ;
 import { Divider } from '@material-ui/core';
 
+
 import {getfriends} from '../../actions/itemActions';
 import { GiKlingon } from 'react-icons/gi';
+import aboutme from './aboutme';
 
  class Friends extends Component{
 
    constructor(props) {
       super(props);
+      this.props.getfriends(this.props.id);
+      const {users} =this.props.users
+    
     
     }
-   componentDidMount() {
-      this.props.getfriends(this.props.id);
 
-     }
    render() {
-    
-      const {users} = this.props.users;
+   const {users} =this.props.users
    
-
+  
+if (users[0].friends ) {
   return (
   <div>
   <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + {this.props.id}</h1>
@@ -49,6 +51,7 @@ import { GiKlingon } from 'react-icons/gi';
   </Grid.Column>
   )
   )}
+
   
 </Grid>
 <div style ={{marginTop:"5%" , marginLeft :"50%"}}>  
@@ -58,6 +61,16 @@ import { GiKlingon } from 'react-icons/gi';
 
   );
 }
+else{
+   return (
+      <div >  
+       <h2>Loading </h2>
+   </div>
+   )  ;
+
+}
+}
+   
 }
 
 const mapStateToProps = (state) => ({
