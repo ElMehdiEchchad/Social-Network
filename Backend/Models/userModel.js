@@ -8,7 +8,8 @@ const user = new mongoose.Schema({
         type: String
     },
     birthDay: {
-        type: String
+        type: Date,
+        default:Date.now
     },
     profileImage: {
         type: String

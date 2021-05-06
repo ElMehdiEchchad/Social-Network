@@ -8,7 +8,7 @@ const checkAuth = require("../../Middleware/check-auth");
 //@desc get all users
 //@access Public
 
-//router.use(checkAuth);
+router.use(checkAuth);
 
 router.get("/api/users/auth", async (req, res) => {
     res.status(200).json({
@@ -154,7 +154,7 @@ router.delete(
 //@route GET api/user/:id/friends
 //@desc get all friends of a sprecific user
 //@access Public
-router.get("/api/user/:id/friends", checkAuth, async (req, res) => {
+router.get("/api/user/:id/friends", async (req, res) => {
     userModel.findById({ _id: req.params.id }, async (err, data) => {
 
         if (err) {
