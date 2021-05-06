@@ -10,9 +10,13 @@ import AuthContext from "../contexts/AuthContext";
 import Post from "../components/main/post";
 import Axios from "axios";
 
-import  Profilcard from "../components/profil/profil-card";
-import  Aboutme from "../components/profil/aboutme";
-import  Friends from "../components/profil/friends";
+import Profilcard from "../components/profil/profil-card";
+import Aboutme from "../components/profil/aboutme";
+import Friends from "../components/profil/friends";
+
+import Chat from "../components/chat/chat"
+
+
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -34,6 +38,7 @@ export function useMediaQuery(query) {
 
 const Main = () => {
     useEffect(() => {
+        console.log("in main auth: ")
         console.log(auth);
     }, []);
 
@@ -42,6 +47,7 @@ const Main = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(
+        
         (mobile) => {
             if (!mobile) setIsOpen(false);
         },
@@ -55,6 +61,7 @@ const Main = () => {
             setAuth({ ...auth, loggedIn: false });
         });
     };
+
 
     return (
         <div className={styles.wrapper}>
@@ -106,10 +113,15 @@ const Main = () => {
                                     <Post />
                                 </Route>
                                 <Route path="/friends" exact>
-                                    <Friends/>
+                                    <Friends />
                                 </Route>
                                 <Route path="/myprofil" exact>
-                                    <Profilcard/>
+                                    <Profilcard />
+                                </Route>
+                                <Route path="/chat" exact>
+                                  {console.log("i'm in main")}
+                                        <Chat />
+                                   
                                 </Route>
                             </Switch>
                         </div>

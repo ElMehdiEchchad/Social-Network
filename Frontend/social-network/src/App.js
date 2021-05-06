@@ -18,7 +18,7 @@ function App() {
             withCredentials: true,
         })
             .then((res) => {
-                setAuth({ loggedIn: true, userData: res.data });
+                setAuth({ loggedIn: true, userData: res.data.data });
                 setLoading(false);
             })
             .catch(() => {
