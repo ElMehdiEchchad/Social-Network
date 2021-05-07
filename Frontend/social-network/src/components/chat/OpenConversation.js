@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef,useCallback } from "react";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { useConversations } from "../../contexts/ConversationsProvider";
+import "./chat.css"
 
 export default function OpenConversation({ id }) {
   const [text, setText] = useState("");
@@ -57,16 +58,16 @@ export default function OpenConversation({ id }) {
                   //ref={lastMessage ? setRef : null}
                   key={index}
                   className={`my-1 d-flex flex-column ${message.sender == id
-                    ? "align-self-end align-items-end"
-                    : "align-items-start"
+                    ? "align-self-end align-items-end "
+                    : "align-items-start "
                     }`}
                 >
-                  <div style={{ fontSize: 12 }}>{message.createdAt.substr(11, 5)}</div>
+                  <div className="createdAt" >{message.createdAt.substr(11, 5)}</div>
 
                   <div
                     className={`rounded px-2 py-1 ${message.sender == id
-                      ? "bg-primary text-white"
-                      : "border"
+                      ? "bg-primary text-white messageFrameEnd"
+                      : "border messageFrameStart"
                       }`}
                   >
                     {message.message}
@@ -92,6 +93,7 @@ export default function OpenConversation({ id }) {
         <Form.Group className="m-2">
           <InputGroup>
             <Form.Control
+            className="messageInput"
               as="textarea"
               required
               value={text}
@@ -99,7 +101,7 @@ export default function OpenConversation({ id }) {
               style={{ height: "75px", resize: "none" }}
             />
             <InputGroup.Append>
-              <Button type="submit">Send</Button>
+              <Button className="btn-send" type="submit">Send</Button>
             </InputGroup.Append>
           </InputGroup>
         </Form.Group>
@@ -107,3 +109,5 @@ export default function OpenConversation({ id }) {
     </div>
   );
 }
+
+

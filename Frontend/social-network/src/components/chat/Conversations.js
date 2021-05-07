@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem, Row, Col, Image } from "react-bootstrap";
 import { useConversations } from "../../contexts/ConversationsProvider";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import "./chat.css"
 
 export default function Conversations({ id }) {
-  const { selectedConversationId, selectConversationId ,listOfMyFriends,GetAllMyFriend} = useConversations();
+  const { selectedConversationId, selectConversationId, listOfMyFriends, GetAllMyFriend } = useConversations();
 
   useEffect(() => {
     GetAllMyFriend(id);
@@ -15,6 +16,7 @@ export default function Conversations({ id }) {
       <ListGroup variant="flush">
         {listOfMyFriends.map((user) => (
           <ListGroup.Item
+            className="listOfFriends"
             key={user._id}
             action
             active={user._id == selectedConversationId ? true : false}

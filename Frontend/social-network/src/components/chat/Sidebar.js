@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Tab, Nav, Button, Modal } from "react-bootstrap";
 import Conversations from "./Conversations";
+import "./chat.css"
 
 const CONVERSATIONS_KEY = "conversations";
 

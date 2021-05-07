@@ -1,0 +1,71 @@
+:root {
+  --orange: #f05945;
+  --vert: #5eaaa8;
+  --vert-light: #aae2e065;
+  --beige: #f7f3e9;
+  --white: #ffffff;
+  --black:#000000;
+}
+.btn-send {
+  background-color: var(--orange) !important;
+  border: none;
+  border-radius: 10px;
+}
+.messageInput{
+    border-radius: 10px;
+}
+.messageInput:focus {
+  box-shadow:0 0 5px var(--orange) ;
+  border: none;
+}
+
+
+.messageFrameStart{
+    border-radius: 15px !important;
+    border: 1px solid var(--vert) !important;
+    border-radius: 0px 15px  15px 15px  !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+.messageFrameEnd{
+    background-color: var(--vert) !important;
+    border-radius: 15px 0px 15px 15px  !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.createdAt{
+    font-weight: 100;
+    font-size: 12px !important;
+}
+
+.text-muted{
+    color:var(--black) 50% !important;
+    font-weight: 100;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+    opacity:0.7
+}
+
+
+
+
+.listOfFriends{
+    background-color: var(--white);
+    border-radius: 0px 50px 50px 0px !important;
+    border: 0.02em solid var(--vert) !important;
+    width: 90%;
+    align-self: flex-start;
+}
+.listOfFriends:hover{
+    background-color: var(--vert-light);
+    border-radius: 0px 50px 50px 0px !important;
+    border: 1px solid var(--vert) !important;
+    width: 100%;    
+}
+
+.listOfFriends:active ,  .list-group-item.active ,.listOfFriends:focus {
+    background-color: var(--vert) !important ;
+    border-radius: 0px 50px 50px 0px !important;
+    border: 1px solid var(--vert) !important;
+    width: 100%;  
+} 
