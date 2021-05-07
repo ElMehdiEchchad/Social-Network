@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Form, Input,  Button , Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import {connect} from 'react-redux' ;
-import {getUsers , updateUser} from '../../actions/itemActions';
+import {getUser , updateUser} from '../../actions/itemActions';
 
 import { ImagePicker } from 'react-file-picker'
 
@@ -21,14 +21,14 @@ import { ImagePicker } from 'react-file-picker'
     this.onChangeEmail  = this.onChangeEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
  
-    this.props.getUsers(this.props.id);
-    const {users} = this.props.users;
+    this.props.getUser(this.props.id);
+    const {user} = this.props.users;
 
     this.state = {
-      Firstname: users[0].firstName ,
-      Lastname: users[0].lastName,
-      Birthday: users[0].birthDay,
-      Email :users[0].email 
+      Firstname: user[0].firstName ,
+      Lastname: user[0].lastName,
+      Birthday: user[0].birthDay,
+      Email :user[0].email 
     }
 
   }
@@ -36,11 +36,11 @@ import { ImagePicker } from 'react-file-picker'
 
 
   componentDidMount() {
-    const {users} = this.props.users;
+    const {user} = this.props.users;
       this.setState({
-       Firstname: users[0].firstName ,
-       Lastname: users[0].lastName ,
-       Email : users[0].email ,
+       Firstname: user[0].firstName ,
+       Lastname: user[0].lastName ,
+       Email : user[0].email ,
      });
   }
 
@@ -88,7 +88,7 @@ import { ImagePicker } from 'react-file-picker'
   
   render(){
    
-    const {users} = this.props.users;
+    const {user} = this.props.users;
     
     const {id} = this.props.id ;
 
@@ -101,7 +101,7 @@ import { ImagePicker } from 'react-file-picker'
       control={Input}
       label='Email'
       placeholder='joe@gmail.com'
-      value={users[0].email}
+      value={user[0].email}
       onChange={this.onChangeEmail}
     />
 
@@ -167,7 +167,7 @@ import { ImagePicker } from 'react-file-picker'
       users : state.users
   });
 
-  export default connect(mapStateToProps, {getUsers ,updateUser})(Aboutme) ;
+  export default connect(mapStateToProps, {getUser ,updateUser})(Aboutme) ;
   
 
  

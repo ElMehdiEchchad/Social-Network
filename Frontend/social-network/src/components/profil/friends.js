@@ -12,7 +12,7 @@ import {connect} from 'react-redux' ;
 import { Divider } from '@material-ui/core';
 
 
-import {getfriends , getAllUsers} from '../../actions/itemActions';
+import {getfriends , getAllUsers , getUser} from '../../actions/itemActions';
 import { GiKlingon } from 'react-icons/gi';
 import aboutme from './aboutme';
 
@@ -22,16 +22,28 @@ import aboutme from './aboutme';
       super(props);
       this.props.getfriends(this.props.id);
       this.props.getAllUsers () ;
+      this.props.getUser (this.props.id) ;
       const {friends} =this.props.users
       const {users} =this.props.users 
-      console.log (users[0])
+      const {user} =this.props.users 
+      console.log (user[0])
     
     }
 
    render() {
    const {users} =this.props.users 
    const {friends} =this.props.users
-   
+   const {user} =this.props.users 
+   var listfriends =[]
+   if(friends[0].friends) {
+      friends[0].friends.map( ({ _id}) => (
+       listfriends.push(_id)
+      ));
+   }
+   console.log(listfriends)
+
+   //for(i in )
+
   
 if (friends[0].friends && !users[0].firstName) {
   return (
@@ -59,7 +71,7 @@ if (friends[0].friends && !users[0].firstName) {
 </Grid>
 <h1 style={{ color :"#F05945" , padding:"3%"}}> ALL users</h1>
   <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { users[0].filter(user =>user._id!==this.props.id && user._id!=="60940bd647d20a4ab01cf865").map( ({firstName , lastName , email ,_id , friends}) => (
+  { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email ,_id , friends}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
            <ScrollDialog />
@@ -101,5 +113,5 @@ const mapStateToProps = (state) => ({
    users : state.users
 });
 
-export default connect(mapStateToProps, {getfriends , getAllUsers})(Friends) ;
+export default connect(mapStateToProps, {getfriends , getAllUsers ,getUser})(Friends) ;
 

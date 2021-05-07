@@ -1,16 +1,16 @@
 import {GET_USER, ADD_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING} from '../actions/types'
 
 const initialState = {
-    users : [ {
-      } ] ,
-      friends :[{}]
+    users : [{}] ,
+    friends :[{}] ,
+    user :[{}]
 }
 
 export default function(state=initialState ,action){
     switch(action.type){
         case GET_USER : return {
             ...state,
-            users : [action.payload, ...state.users]
+            user : [action.payload, ...state.user]
         }
         case ADD_USER:
             return{
