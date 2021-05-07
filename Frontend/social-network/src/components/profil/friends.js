@@ -12,7 +12,7 @@ import {connect} from 'react-redux' ;
 import { Divider } from '@material-ui/core';
 
 
-import {getfriends , getAllUsers , getUser} from '../../actions/itemActions';
+import {getfriends , getAllUsers , getUser , addfriend , removefriend} from '../../actions/itemActions';
 import { GiKlingon } from 'react-icons/gi';
 import aboutme from './aboutme';
 
@@ -30,6 +30,8 @@ import aboutme from './aboutme';
     
     }
 
+
+
    render() {
    const {users} =this.props.users 
    const {friends} =this.props.users
@@ -42,7 +44,6 @@ import aboutme from './aboutme';
    }
    console.log(listfriends)
 
-   //for(i in )
 
   
 if (friends[0].friends && !users[0].firstName) {
@@ -50,7 +51,7 @@ if (friends[0].friends && !users[0].firstName) {
   <div>
   <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + {this.props.id}</h1>
   <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { users[0].filter(item =>item._id!==this.props.id && listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay }) => (
+  { users[0].filter(item =>item._id!==this.props.id && listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay ,_id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
            <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay ={birthDay}/>
@@ -59,7 +60,7 @@ if (friends[0].friends && !users[0].firstName) {
               <Card.Text> <h5>{email}</h5> </Card.Text>
               <Row style={{padding:"3%"}}>
               <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{  backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              <Button  style={{  backgroundColor :"#F05945"}} onClick={() => {  this.props.removefriend(this.props.id , _id) ; window.location.reload() }} ><BiTrash/> </Button>
               </Row>
            </Card.Body>
         </Card>
@@ -71,7 +72,7 @@ if (friends[0].friends && !users[0].firstName) {
 </Grid>
 <h1 style={{ color :"#F05945" , padding:"3%"}}> ALL users</h1>
   <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay }) => (
+  { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
            <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay}/>
@@ -79,7 +80,7 @@ if (friends[0].friends && !users[0].firstName) {
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
               <Row style={{marginLeft :"10%"}} >
-              <Button  style={{ backgroundColor :"#5EAAA8" }}><BiUserPlus/> </Button>
+              <Button  style={{ backgroundColor :"#5EAAA8" }} onClick={() => { const friend = {id_friend : _id  }; this.props.addfriend(this.props.id ,friend ); window.location.reload()}} ><BiUserPlus/> </Button>
               </Row>
            </Card.Body>
         </Card>
@@ -112,5 +113,5 @@ const mapStateToProps = (state) => ({
    users : state.users
 });
 
-export default connect(mapStateToProps, {getfriends , getAllUsers ,getUser})(Friends) ;
+export default connect(mapStateToProps, {getfriends , getAllUsers ,getUser , addfriend , removefriend})(Friends) ;
 
