@@ -5,7 +5,6 @@ import imgPosted from './imgPosted.png';
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
 import Collapse from 'react-bootstrap/Collapse';
-import {Container, Row, Col} from 'reactstrap';
 import {IoSend} from 'react-icons/io5';
 
 function Post(){

@@ -1,8 +1,8 @@
-import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING} from '../actions/types'
+import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING, GET_POSTS, ADD_POST} from '../actions/types'
 
 const initialState = {
     users : [ {
-      } ]
+      } ],
 }
 
 export default function(state=initialState ,action){
@@ -26,8 +26,7 @@ export default function(state=initialState ,action){
             return {
              ...state,
              loading : true
-                        }        
-                
+                        }
         default: return state;
     }
 }

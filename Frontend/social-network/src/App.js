@@ -40,14 +40,14 @@ function App() {
                 <Router>
                     <div>
                         <div>
-                            <Route path="/">
-                                {loading ? (
+                            <Route path="/" exact component={Main}>
+                                {/*loading ? (
                                     <div className="loading">Loading...</div>
                                 ) : auth.loggedIn ? (
                                     <Main />
                                 ) : (
                                     <Login />
-                                )}
+                                )*/}
                             </Route>
                             <Route path="/login" component={Login} />
                         </div>

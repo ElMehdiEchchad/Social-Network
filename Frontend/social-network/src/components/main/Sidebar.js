@@ -2,11 +2,9 @@ import styles from "./Sidebar.module.css";
 import {
     FaHome,
     FaUserFriends,
-    FaBookmark,
     FaFacebookMessenger,
-    FaStar,
-    FaSignOutAlt,
 } from "react-icons/fa";
+import {MdAccountCircle} from 'react-icons/md';
 import { Link } from "react-router-dom";
 
 const Sidebar = (props) => {
@@ -32,8 +30,8 @@ const Sidebar = (props) => {
                     <div className={styles.link}>Messages</div>
                 </Link>
                 <Link  to="myprofil" className={styles.navLink}>
-                    <FaBookmark />
-                    <div className={styles.link}>Profil</div>
+                    <MdAccountCircle />
+                    <div className={styles.link}>Profile</div>
                 </Link>
             </div>
         </div>
