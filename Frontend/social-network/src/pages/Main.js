@@ -10,9 +10,18 @@ import AuthContext from "../contexts/AuthContext";
 import Post from "../components/main/post";
 import Axios from "axios";
 
+<<<<<<< HEAD
 import  Profilcard from "../components/profil/profil-card";
 import  Aboutme from "../components/profil/aboutme";
 import  Friends from "../components/profil/friends";
+=======
+import Profilcard from "../components/profil/profil-card";
+import Aboutme from "../components/profil/aboutme";
+import Friends from "../components/profil/friends";
+
+import Chat from "../components/chat/chat"
+
+>>>>>>> bc955904ab02bb13600314a8137a14356839980b
 
 
 export function useMediaQuery(query) {
@@ -35,14 +44,17 @@ export function useMediaQuery(query) {
 
 const Main = () => {
     useEffect(() => {
-        console.log(auth);
+        console.log("in main auth: ")
+        console.log(auth.userData.id);
     }, []);
 
     const { auth, setAuth } = useContext(AuthContext);
+    const id = auth.userData.id ;
     let mobile = useMediaQuery("(max-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(
+        
         (mobile) => {
             if (!mobile) setIsOpen(false);
         },
@@ -56,6 +68,7 @@ const Main = () => {
             setAuth({ ...auth, loggedIn: false });
         });
     };
+
 
     return (
         <div className={styles.wrapper}>
@@ -107,10 +120,15 @@ const Main = () => {
                                     <Post />
                                 </Route>
                                 <Route path="/friends" exact>
-                                    <Friends/>
+                                    <Friends id={id}/>
                                 </Route>
                                 <Route path="/myprofil" exact>
-                                    <Profilcard/>
+                                    <Profilcard />
+                                </Route>
+                                <Route path="/chat" exact>
+                                  {console.log("i'm in main")}
+                                        <Chat />
+                                   
                                 </Route>
                             </Switch>
                         </div>

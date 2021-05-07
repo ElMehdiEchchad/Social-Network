@@ -25,7 +25,7 @@ const Sidebar = (props) => {
                     <FaUserFriends />
                     <div className={styles.link}>Friends</div>
                 </Link>
-                <Link className={styles.navLink}>
+                <Link to="chat" className={styles.navLink}>
                     <FaFacebookMessenger />
                     <div className={styles.link}>Messages</div>
                 </Link>

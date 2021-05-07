@@ -1,125 +1,105 @@
-import {React , useRef , useState , useEffect } from 'react';
+import {React , useRef , useState , Component } from 'react';
 //import Grid from '@material-ui/core/Grid';
-import { Card , Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Avatar from "../profil/ava1.png";
 import Ava from '@material-ui/core/Avatar';
-import { BiMessageDots , BiTrash} from "react-icons/bi";
+import { BiMessageDots , BiTrash , BiUserCircle ,BiUserPlus} from "react-icons/bi";
 import {Row} from 'react-bootstrap';
-import { Grid } from 'semantic-ui-react'
+import { Grid  , Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-
 import ScrollDialog from '../profil/Dialog'
-// dialog section
-
-import {useContext} from 'react' ;
-import AuthContext from '../../contexts/AuthContext'
+import {connect} from 'react-redux' ;
 import { Divider } from '@material-ui/core';
 
 
-export default function Friends() {
+import {getfriends , getAllUsers} from '../../actions/itemActions';
+import { GiKlingon } from 'react-icons/gi';
+import aboutme from './aboutme';
 
-   const {auth} = useContext(AuthContext) ;
-   const id = auth.userData.id ; 
+ class Friends extends Component{
+
+   constructor(props) {
+      super(props);
+      this.props.getfriends(this.props.id);
+      this.props.getAllUsers () ;
+      const {friends} =this.props.users
+      const {users} =this.props.users 
+      console.log (users[0])
+    
+    }
+
+   render() {
+   const {users} =this.props.users 
+   const {friends} =this.props.users
    
-   console.log("Hi"+id) ;
- 
+  
+if (friends[0].friends && !users[0].firstName) {
   return (
   <div>
-  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + ${id} </h1>
-  <Grid stackable columns={3} style={{marginTop :"4%"}} >
-  <Grid.Column>
-  <Link to="/friendprofil">
-  <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
-              </Row>
-           </Card.Body>
-        </Card>
-        </Link>
-  </Grid.Column>
+  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + {this.props.id}</h1>
+  <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
+  { friends[0].friends.map( ({firstName , lastName , email , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
+           <ScrollDialog />
+           <Card.Body>             
+              <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
+              <Card.Text> <h5>{email}</h5> </Card.Text>
+              <Row style={{padding:"3%"}}>
+              <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
+              <Button  style={{  backgroundColor :"#F05945"}}><BiTrash/> </Button>
               </Row>
            </Card.Body>
         </Card>
   </Grid.Column>
-  <Grid.Column>
-  <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
-              </Row>
-           </Card.Body>
-        </Card>
-  </Grid.Column>
-  <Grid.Column>
-  <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
-              </Row>
-           </Card.Body>
-        </Card>
-  </Grid.Column>
-  <Grid.Column>
-  <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
-              </Row>
-           </Card.Body>
-        </Card>
-  </Grid.Column>
-  <Grid.Column>
-  <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
-              </Row>
-           </Card.Body>
-        </Card>
-  </Grid.Column>
-  <Grid.Column>
-  <Card style={{ alignItems:"center"}} >
-           <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/>
-           <Card.Body>
-              <Card.Title>Random friend</Card.Title>
-              <Row>
-              <Button  style={{ marginLeft : "25%" , backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{ marginLeft : "5%" , backgroundColor :"#F05945"}}><BiTrash/> </Button>
-              </Row>
-           </Card.Body>
-        </Card>
-   
-  </Grid.Column>
-</Grid>
 
-<div style ={{marginTop:"5%" , marginLeft :"50%"}}>  
-    <ScrollDialog >Add new friends</ScrollDialog>
-   </div>
+  
+  )
+  )}
+</Grid>
+<h1 style={{ color :"#F05945" , padding:"3%"}}> ALL users</h1>
+  <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
+  { users[0].filter(user =>user._id!==this.props.id && user._id!=="60940bd647d20a4ab01cf865").map( ({firstName , lastName , email ,_id , friends}) => (
+  <Grid.Column>
+  <Card style={{ alignItems:"center"}} >
+           <ScrollDialog />
+           <Card.Body>             
+              <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
+              <Card.Text> <h5>{email}</h5> </Card.Text>
+              <Row style={{padding:"3%"}}>
+              <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
+              <Button  style={{  backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              </Row>
+           </Card.Body>
+        </Card>
+  </Grid.Column>
+
+  
+  )
+  )}
+</Grid>
 </div>
 
   );
 }
+else{
+   return (
+      <div >  
+       <h2>Loading </h2>
+   </div>
+   )  ;
+
+}
+
+  
+
+}
+   
+}
+
+const mapStateToProps = (state) => ({
+   users : state.users
+});
+
+export default connect(mapStateToProps, {getfriends , getAllUsers})(Friends) ;
+

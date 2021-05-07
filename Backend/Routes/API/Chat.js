@@ -41,6 +41,7 @@ router.post('/api/pivatechat/:id', async (req, res) => {
                 console.log("secuss")
                 res.status(201).json({
                     message: "data saved",
+                    data:result
                 })
             })
             .catch(

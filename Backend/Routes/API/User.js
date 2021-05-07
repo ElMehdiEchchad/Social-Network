@@ -8,7 +8,7 @@ const checkAuth = require("../../Middleware/check-auth");
 //@desc get all users
 //@access Public
 
-//router.use(checkAuth);
+router.use(checkAuth);
 
 router.get("/api/users/auth", async (req, res) => {
     res.status(200).json({
@@ -30,8 +30,8 @@ router.get("/api/users", async (req, res) => {
 //@route GET api/user/:id
 //@desc get user by ID
 //@access Public
-router.get("/api/user/:id",checkAuth, async (req, res) => {
-    userModel.findById({ _id: req.params.id }, async (err, data) => {
+router.get("/api/user/:id", checkAuth, async (req, res) => {
+    userModel.findById({ _id: req.params.id }, '_id firstName lastName email profileImage friends', async (err, data) => {
         if (err) {
             await res
                 .status(500)
@@ -58,8 +58,8 @@ router.delete("/api/user/:id", checkAuth, async (req, res) => {
         }
     });
 });
-//@route DELETE api/user/:id
-//@desc delete ALL users user by ID this is just for testing
+//@route DELETE api/user/
+//@desc delete ALL users this is just for testing
 //@access Public
 router.delete("/api/users", async (req, res) => {
     userModel.remove({}, async (err, data) => {
@@ -118,7 +118,25 @@ router.put("/api/user/:id/friends", checkAuth, async (req, res) => {
                     .status(500)
                     .send(`Cannot find user with this ID : ${req.params.id}`);
             } else {
-                res.status(200).send(data);
+                res.status(201).json({
+                    message:"friend added to the list of friends"
+                });
+            }
+        }
+    );
+    userModel.findByIdAndUpdate(
+        { _id: req.body.id_friend },
+        { $push: { friends: { id_friend: req.params.id } } },
+        { new: true },
+        async (err, data) => {
+            if (err) {
+                await res
+                    .status(500)
+                    .send(`Cannot find user with this ID : ${req.params.id}`);
+            } else {
+                res.status(201).json({
+                    message:"friend added to the list of friends"
+                });
             }
         }
     );
@@ -147,5 +165,59 @@ router.delete(
         );
     }
 );
+
+//@route GET api/user/:id/friends
+//@desc get all friends of a sprecific user
+//@access Public
+router.get("/api/user/:id/friends", async (req, res) => {
+    userModel.findById({ _id: req.params.id }, async (err, data) => {
+
+        if (err) {
+            await res
+                .status(500)
+                .json({
+                    message: "error",
+                    err: err
+                })
+        } else {
+            if (data.friends.length == 0) {
+                res.status(200).json({
+                    message: "there is no friend"
+                });
+            } else {
+                var listOfFriends = [];
+                const itteration = data.friends.map(async (idFriendObject) => {
+                    const idFriend = idFriendObject.id_friend;
+                    return userModel.findById({ _id: idFriend }, '_id firstName lastName email profileImage friends', async (err, data) => {
+                        if (err) {
+                            await res
+                                .status(500)
+                                .json({
+                                    message: "error",
+                                    err: err
+                                })
+                        } else {
+                            await listOfFriends.push(data);
+
+
+                        }
+                    });
+                })
+
+                return Promise.all(itteration).then(() => {
+                    console.log(res.status(200).json({
+                        message: "list of friends finded",
+                        friends: listOfFriends
+                    }))
+                }
+                )
+
+
+            }
+
+        }
+    });
+});
+
 
 module.exports = router;

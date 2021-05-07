@@ -18,7 +18,7 @@ function App() {
             withCredentials: true,
         })
             .then((res) => {
-                setAuth({ loggedIn: true, userData: res.data });
+                setAuth({ loggedIn: true, userData: res.data.data });
                 setLoading(false);
             })
             .catch(() => {
@@ -40,14 +40,14 @@ function App() {
                 <Router>
                     <div>
                         <div>
-                            <Route path="/" exact component={Main}>
-                                {/*loading ? (
+                            <Route path="/" exact>
+                                {loading ? (
                                     <div className="loading">Loading...</div>
                                 ) : auth.loggedIn ? (
                                     <Main />
                                 ) : (
                                     <Login />
-                                )*/}
+                                )}
                             </Route>
                             <Route path="/login" component={Login} />
                         </div>
