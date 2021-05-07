@@ -3,7 +3,7 @@ import {React , useRef , useState , Component } from 'react';
 import { Card } from 'react-bootstrap';
 import Avatar from "../profil/ava1.png";
 import Ava from '@material-ui/core/Avatar';
-import { BiMessageDots , BiTrash , BiUserCircle ,BiUserPlus} from "react-icons/bi";
+import { BiMessageDots , BiTrash , BiUserPlus} from "react-icons/bi";
 import {Row} from 'react-bootstrap';
 import { Grid  , Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
@@ -50,10 +50,10 @@ if (friends[0].friends && !users[0].firstName) {
   <div>
   <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + {this.props.id}</h1>
   <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { friends[0].friends.map( ({firstName , lastName , email , _id}) => (
+  { users[0].filter(item =>item._id!==this.props.id && listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay }) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog />
+           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay ={birthDay}/>
            <Card.Body>             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
@@ -71,16 +71,15 @@ if (friends[0].friends && !users[0].firstName) {
 </Grid>
 <h1 style={{ color :"#F05945" , padding:"3%"}}> ALL users</h1>
   <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email ,_id , friends}) => (
+  { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay }) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog />
-           <Card.Body>             
+           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay}/>
+           <Card.Body >             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
-              <Row style={{padding:"3%"}}>
-              <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{  backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              <Row style={{marginLeft :"10%"}} >
+              <Button  style={{ backgroundColor :"#5EAAA8" }}><BiUserPlus/> </Button>
               </Row>
            </Card.Body>
         </Card>

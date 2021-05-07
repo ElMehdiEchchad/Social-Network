@@ -14,7 +14,7 @@ import { List,Button} from 'semantic-ui-react'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
-export default function ScrollDialog() {
+export default function ScrollDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
   const theme = useTheme();
@@ -58,21 +58,21 @@ export default function ScrollDialog() {
              <List.Item>
              <List.Icon name='at' size='large' verticalAlign='middle' />
                  <List.Content>
-                   <List.Header as='a'>mail</List.Header>
+                   <List.Header as='a'>{props.email}</List.Header>
                  </List.Content>
              </List.Item>
 
              <List.Item>
              <List.Icon name='info circle' size='large' verticalAlign='middle' />
                  <List.Content>
-                   <List.Header as='a'> First name + Last name</List.Header>
+                   <List.Header as='a'> {props.firstName} {props.lastName}</List.Header>
                  </List.Content>
              </List.Item>
             
              <List.Item>
              <List.Icon name='birthday cake' size='large' verticalAlign='middle' />
                  <List.Content>
-                   <List.Header as='a'>Birthday</List.Header>
+                   <List.Header as='a'>{props.birthDay}</List.Header>
                  </List.Content>
              </List.Item>
             
