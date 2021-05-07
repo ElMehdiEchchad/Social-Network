@@ -37,8 +37,8 @@ export function ConversationsProvider({ id, children }) {
   useEffect(() => {
     if (socket == null) return;
 
-    socket.on("receive-message", ({ recipient, sender, message }) => {
-      addMessageToConversation(recipient, message,sender);
+    socket.on("receive-message", (messsageData) => {
+      addaddMessageToConversationLocaly(messsageData)
     })
 
     return () => socket.off("receive-message");
@@ -57,9 +57,8 @@ export function ConversationsProvider({ id, children }) {
         { withCredentials: true }
       )
       .then((response) => {
-        setConversationlist((previous) => {
-          return [...previous, response.data.data];
-        });
+        socket.emit('send-message', response.data.data)
+        addaddMessageToConversationLocaly(response.data.data)
 
       })
       .catch((error) => {
@@ -67,11 +66,16 @@ export function ConversationsProvider({ id, children }) {
       });
   }
 
+  function addaddMessageToConversationLocaly(messsageData) {
+    setConversationlist((previous) => {
+      return [...previous, messsageData];
+    });
+  }
+
 
 
   //-------------------------------------------------------------------- SEND MESSAGE ------------------------//
-  function sendMessage(recipient, message, sender = id) {
-    socket.emit('send-message', { recipient, message })
+  async function sendMessage(recipient, message, sender = id) {
     addMessageToConversation(recipient, message, sender)
   }
 

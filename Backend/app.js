@@ -58,18 +58,14 @@ io.on('connection', socket => {
 
     const id = socket.handshake.query.id
     socket.join(id)
+    
+    socket.on('send-message', (messageData) => {
 
-    socket.on('send-message', ({ recipient, message }) => {
-        console.log("sendMessage")
-        console.log(recipient)
-        console.log(id)
-        console.log(message)
-
-        socket.broadcast.to(recipient).emit(
+        socket.broadcast.to(messageData.recipient).emit(
             'receive-message',
-            {
-                recipient: recipient, sender: id, message
-            }
+            
+                messageData
+            
         )
     })
 
