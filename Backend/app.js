@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -7,25 +8,49 @@ const AuthentificationRoutes = require('./Routes/API/Authentification');
 const UserRoutes = require('./Routes/API/User');
 const PostsRoute = require('./Routes/API/posts')
 
+=======
+const express = require("express");
+const bodyParser = require("body-parser");
+const connectDB = require("./Models/connection");
+const AuthentificationRoutes = require("./Routes/API/Authentification");
+const UserRoutes = require("./Routes/API/User");
+var cookieParser = require("cookie-parser");
+const chatRoutes = require('./Routes/API/Chat')
+const socketIo = require('socket.io')
+const cors = require('cors')
+>>>>>>> 2a8da69713d4bbb6f7ee3bad007959fcf17cd953
 
 // set up express app
 const app = express();
+app.use(cookieParser());
 //use connection to mongodb server
 connectDB();
 app.use(express.json({ extended: false }));
 
-//Adding CORS 
+//Adding CORS
+//app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  if (req.method === 'OPTIONS'){
-    res.header('Access-Control-Allow-Methods','PUT, POST , PATCH , DELETE , GET');
-    return res.status(200).json({})
-  }
-  next(); 
-}) 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+        res.header(
+            "Access-Control-Allow-Methods",
+            "PUT, POST , PATCH , DELETE , GET"
+        );
+        return res.status(200).json({});
+    }
+    next();
+});
 //initialize routes of API
+app.use("/api/", AuthentificationRoutes);
 app.use(UserRoutes);
+<<<<<<< HEAD
 app.use('/api/users/', AuthentificationRoutes);
 app.use('/api/posts',PostsRoute);
 
@@ -36,5 +61,41 @@ app.use('/api/posts',PostsRoute);
 let port = process.env.port || 3000;
 app.listen(process.env.port || 3000, function () {
   console.log('now listening for requests'+` on port ${port}`);
+=======
+app.use(chatRoutes)
+
+//listen for requests
+const server = app.listen(process.env.port || 5000, function () {
+    console.log("now listening for requests");
+>>>>>>> 2a8da69713d4bbb6f7ee3bad007959fcf17cd953
 });
 
+
+
+
+//configuration of socket.io
+const io = socketIo(server, {
+    cors: {
+      origin: '*',
+    }
+  });
+io.on('connection', socket => {
+
+    const id = socket.handshake.query.id
+    socket.join(id)
+    
+    socket.on('send-message', (messageData) => {
+
+        socket.broadcast.to(messageData.recipient).emit(
+            'receive-message',
+            
+                messageData
+            
+        )
+    })
+
+    // // disconnect is fired when a client leaves the server
+    // socket.on("disconnect", () => {
+    //     console.log("user disconnected");
+    // });
+});

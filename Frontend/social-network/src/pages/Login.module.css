@@ -19,11 +19,11 @@
     padding: 5em;
     display: flex;
     flex-direction: column;
-    height: 30em;
     justify-content: center;
 }
 
 .buttonPrimary {
+    cursor: pointer;
     text-align: center;
     padding: 0.5em 0;
     background-color: #f05945;
@@ -34,6 +34,7 @@
 }
 
 .buttonSecondary {
+    cursor: pointer;
     text-align: center;
     padding: 0.5em 0;
     background-color: #f7f3e9;
@@ -46,20 +47,15 @@
     font-family: "Montserrat", sans-serif;
 }
 
-h1 {
+.h1 {
     font-size: 1.5em;
 }
 
-h2 {
-    font-size: 0.875em;
-    margin-bottom: 2em;
-}
-
-label {
+.label {
     font-weight: bold;
 }
 
-input {
+.input {
     margin-bottom: 1em;
     border: none;
     border-radius: 5px;
@@ -73,6 +69,6 @@ input {
     }
 
     .form {
-        padding: 0 1em;
+        padding: 3em;
     }
 }

@@ -1,28 +1,173 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Form, Input,  Button , Icon } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import {connect} from 'react-redux' ;
+import {getUsers , updateUser} from '../../actions/itemActions';
+
+import { ImagePicker } from 'react-file-picker'
 
 
-
-export default function Aboutme() {
+ class Aboutme extends React.Component{
    
-  
+  constructor(props) {
+    super(props);
+    this.onChangeFirstname = this.onChangeFirstname.bind(this);
+    this.onChangeLastname = this.onChangeLastname.bind(this);
+    this.onChangeBirthday = this.onChangeBirthday.bind(this);
+    this.onChangeEmail  = this.onChangeEmail.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
  
-      return (
-        <Card style={{ width: '60%'  , height : '40%' , position: 'absolute', left: '50%', top: '85%',
-        transform: 'translate(-50%, -90%)', alignItems:"center"}}>
-        <Card.Body>
-          <Card.Title>About me</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content. Some quick example text to build on the card title and make up the bulk of
-            the card's content. Some quick example text to build on the card title and make up the bulk of
-            the card's content.
-          </Card.Text>
-        </Card.Body>
-      </Card>
-      );
+    this.props.getUsers(this.props.id);
+    const {users} = this.props.users;
+
+    this.state = {
+      Firstname: users[0].firstName ,
+      Lastname: users[0].lastName,
+      Birthday: users[0].birthDay,
+      Email :users[0].email 
     }
+
+  }
+
+
+
+  componentDidMount() {
+    const {users} = this.props.users;
+      this.setState({
+       Firstname: users[0].firstName ,
+       Lastname: users[0].lastName ,
+       Email : users[0].email ,
+     });
+  }
+
+
+  onChangeFirstname(e) {
+    this.setState({
+      Firstname: e.target.value
+    });
+  }
+
+  onChangeLastname(e) {
+    this.setState({
+      Lastname: e.target.value
+    });
+  }
+
+  onChangeBirthday(date) {
+    this.setState({
+      Birthday :date
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      Email :e.target.value
+    });
+  }
+
+ 
+
+  onSubmit(e) {
+    e.preventDefault();
+  
+    const userupdated = {
+      firstName: this.state.Firstname,
+      lastName: this.state.Lastname,
+      birthDay: this.state.Birthday,
+      email : this.state.Email,
+
+    };
+    this.props.updateUser(this.props.id ,userupdated);
+    
+  }
+
+  
+  render(){
+   
+    const {users} = this.props.users;
+    
+    const {id} = this.props.id ;
+
+      return (
+    
+    
+ <Form onSubmit={this.onSubmit}>
+    <Form.Field
+      id='form-input-control-error-email'
+      control={Input}
+      label='Email'
+      placeholder='joe@gmail.com'
+      value={users[0].email}
+      onChange={this.onChangeEmail}
+    />
+
+    <Form.Group widths='equal'>
+      <Form.Field
+        id='form-input-control-first-name'
+        control={Input}
+        label='First name'
+        placeholder='First name'
+        value={this.state.Firstname}
+        onChange={this.onChangeFirstname}
+      />
+      <Form.Field
+        id='form-input-control-last-name'
+        control={Input}
+        label='Last name'
+        placeholder='Last name'
+        value={this.state.Lastname}
+        onChange={this.onChangeLastname}
+      />
+      
+     
+    </Form.Group>
+
+    <Form.Group widths='equal'>
+    
+    <Form.Field
+      id='form-input-control-error-email'
+      label='Profil photo'
+      placeholder='Profil photos'>
+   <Input
+    icon={{ name: 'search',label:'Profil photo', circular: true, link: true }}
+    placeholder='Search...'
+  />
+    </Form.Field>
+
+    <Form.Field
+        id='form-input-control-Birthday-Date'
+        control={Input}
+        label='Birthday Date'
+        placeholder='Birthday Date'
+      >
+       <DatePicker selected={this.state.Birthday} onChange={this.onChangeBirthday} />
+      </Form.Field>
+    
+      </Form.Group>
+    
+   <Form.Field
+      id='form-button-control-public'
+      control={Button}
+      content='Update'
+      style={{ marginLeft:"1%" , color: "white" , backgroundColor :"#F05945"}}
+    />
+  </Form>
+
+  
+      
+      );
+  }
+    }
+
+  const mapStateToProps = (state) => ({
+      users : state.users
+  });
+
+  export default connect(mapStateToProps, {getUsers ,updateUser})(Aboutme) ;
   
 
  

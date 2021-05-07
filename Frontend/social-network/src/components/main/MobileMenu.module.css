@@ -1,0 +1,72 @@
+.sidebar {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1em;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+
+.navWrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.navLink {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #5eaaa8;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.navLink:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.linkLogout {
+    color: #f05945;
+}
+
+.link {
+    margin-left: 1em;
+}
+
+.profileHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.avatar {
+    background-image: url("https://lh6.ggpht.com/HlgucZ0ylJAfZgusynnUwxNIgIp5htNhShF559x3dRXiuy_UdP3UQVLYW6c=s1200");
+    width: 3em;
+    height: 3em;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 2em;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 1.125em;
+}
+
+.email {
+    font-weight: lighter;
+    font-size: 0.875em;
+}
