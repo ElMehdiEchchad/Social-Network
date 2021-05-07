@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
-//import { useSocket } from "./SocketProvider";
+import { useSocket } from "../contexts/SocketProvider";
 import axios from "axios";
 
 const ConversationsContext = React.createContext();
@@ -9,25 +9,20 @@ export function useConversations() {
 }
 
 export function ConversationsProvider({ id, children }) {
-    //const socket = useSocket();
 
-  
+  const [selectedCoversationId, setSelectedCoversationId] = useState(0);
+  const socket = useSocket();
+  const [listOfMyFriends, setListOfMyFriends] = useState([]);
+  const [conversationlist, setConversationlist] = useState([]);
 
-  
 
-  // useEffect(() => {
-  //   if (socket == null) return;
 
-  //   socket.on("receive-message", addMessageToConversation);
 
-  //   return () => socket.off("receive-message");
-  // }, [socket, addMessageToConversation]);
+  //------------- get all my friends conversations--------------------//
 
-//------------- get all my friends conversations--------------------//
-const [listOfMyFriends, setListOfMyFriends] = useState([]);
   function GetAllMyFriend(idUser) {
     axios
-      .get(`http://localhost:5000/api/user/${idUser}/friends`,{withCredentials: true})
+      .get(`http://localhost:5000/api/user/${idUser}/friends`, { withCredentials: true })
       .then((response) => {
         setListOfMyFriends(response.data.friends);
       })
@@ -35,40 +30,59 @@ const [listOfMyFriends, setListOfMyFriends] = useState([]);
         console.log(error);
       });
   }
-  //-------------------------------------------------------------------- SEND MESSAGE ------------------------//
-  function sendMessage(recipient, text) {
-    //socket.emit('send-message', { recipients, text })
-    const sender = id;
+
+
+
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    socket.on("receive-message", ({ recipient, sender, message }) => {
+      addMessageToConversation(recipient, message,sender);
+    })
+
+    return () => socket.off("receive-message");
+  }, [socket]);
+
+
+  //--------------------------Add message to conversation----------------------------------
+  function addMessageToConversation(recipient, message, sender) {
     axios
       .post(
         `http://localhost:5000/api/pivatechat/${sender}`,
         {
-          message: text,
+          message: message,
           recipient: recipient,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         setConversationlist((previous) => {
           return [...previous, response.data.data];
         });
-  
+
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  
-  const [selectedCoversationId, setSelectedCoversationId] = useState(0);
+
+
+  //-------------------------------------------------------------------- SEND MESSAGE ------------------------//
+  function sendMessage(recipient, message, sender = id) {
+    socket.emit('send-message', { recipient, message })
+    addMessageToConversation(recipient, message, sender)
+  }
+
+
 
   // get conversation of two users
-  const [conversationlist, setConversationlist] = useState([]);
   function getConversation(recipient) {
     const sender = id;
     axios
       .get(
-        `http://localhost:5000/api/pivatechat/${sender}/${recipient}`,{withCredentials: true}
+        `http://localhost:5000/api/pivatechat/${sender}/${recipient}`, { withCredentials: true }
       )
       .then((response) => {
         setConversationlist(response.data);
