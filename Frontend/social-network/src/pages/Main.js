@@ -9,14 +9,13 @@ import NewPost from "../components/main/NewPost";
 import AuthContext from "../contexts/AuthContext";
 import Post from "../components/main/post";
 import Axios from "axios";
-
+import logo from "../logo.png";
 
 import Profilcard from "../components/profil/profil-card";
 import Aboutme from "../components/profil/aboutme";
 import Friends from "../components/profil/friends";
 
-import Chat from "../components/chat/chat"
-
+import Chat from "../components/chat/chat";
 
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
@@ -38,17 +37,16 @@ export function useMediaQuery(query) {
 
 const Main = () => {
     useEffect(() => {
-        console.log("in main auth: ")
+        console.log("in main auth: ");
         console.log(auth.userData.id);
     }, []);
 
     const { auth, setAuth } = useContext(AuthContext);
-    const id = auth.userData.id ;
+    const id = auth.userData.id;
     let mobile = useMediaQuery("(max-width: 700px)");
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(
-        
         (mobile) => {
             if (!mobile) setIsOpen(false);
         },
@@ -63,12 +61,11 @@ const Main = () => {
         });
     };
 
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
                 <nav className={styles.nav}>
-                    <div className={styles.logo}>Peoplebook LOGO</div>
+                    <img src={logo} height="25" className={styles.logo}></img>
                     <input
                         type="text"
                         name="search"
@@ -114,15 +111,14 @@ const Main = () => {
                                     <Post />
                                 </Route>
                                 <Route path="/friends" exact>
-                                    <Friends id={id}/>
+                                    <Friends id={id} />
                                 </Route>
                                 <Route path="/myprofil" exact>
                                     <Profilcard />
                                 </Route>
                                 <Route path="/chat" exact>
-                                  {console.log("i'm in main")}
-                                        <Chat />
-                                   
+                                    {console.log("i'm in main")}
+                                    <Chat />
                                 </Route>
                             </Switch>
                         </div>
