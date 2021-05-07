@@ -5,6 +5,7 @@ const path = require('path');
 const connectDB = require('./Models/connection');
 const AuthentificationRoutes = require('./Routes/API/Authentification');
 const UserRoutes = require('./Routes/API/User');
+const PostsRoute = require('./Routes/API/posts')
 
 
 // set up express app
@@ -26,9 +27,14 @@ app.use((req, res, next) => {
 //initialize routes of API
 app.use(UserRoutes);
 app.use('/api/users/', AuthentificationRoutes);
+app.use('/api/posts',PostsRoute);
+
+//app.use('/api/posts/',PostsRoute);
+
 
 //listen for requests
+let port = process.env.port || 3000;
 app.listen(process.env.port || 3000, function () {
-  console.log('now listening for requests');
+  console.log('now listening for requests'+` on port ${port}`);
 });
 
