@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import {GET_USER, UPDATE_USER , GET_FREINDS ,ITEMS_LOADING} from '../actions/types'
+import {GET_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING} from '../actions/types'
 
 
 
@@ -10,6 +10,23 @@ export const getUsers = id => async dispatch => {
         const res = await axios.get("http://localhost:5000/api/user/"+id, {withCredentials :true})
         dispatch( {
             type: GET_USER,
+            payload: res.data
+        })
+    }
+    catch(e){
+        dispatch( {
+            payload: console.log("salma" + e),
+        })
+    }
+
+}
+
+export const getAllUsers = () => async dispatch => {
+	dispatch(setItemsLoading());
+    try{
+        const res = await axios.get("http://localhost:5000/api/users", {withCredentials :true})
+        dispatch( {
+            type: GET_ALLUSERS,
             payload: res.data
         })
     }

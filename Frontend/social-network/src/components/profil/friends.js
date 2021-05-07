@@ -12,7 +12,7 @@ import {connect} from 'react-redux' ;
 import { Divider } from '@material-ui/core';
 
 
-import {getfriends} from '../../actions/itemActions';
+import {getfriends , getAllUsers} from '../../actions/itemActions';
 import { GiKlingon } from 'react-icons/gi';
 import aboutme from './aboutme';
 
@@ -21,27 +21,30 @@ import aboutme from './aboutme';
    constructor(props) {
       super(props);
       this.props.getfriends(this.props.id);
-      const {users} =this.props.users
-    
+      this.props.getAllUsers () ;
+      const {friends} =this.props.users
+      const {users} =this.props.users 
+      console.log (users[0])
     
     }
 
    render() {
-   const {users} =this.props.users
+   const {users} =this.props.users 
+   const {friends} =this.props.users
    
   
-if (users[0].friends ) {
+if (friends[0].friends && !users[0].firstName) {
   return (
   <div>
   <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + {this.props.id}</h1>
   <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { users[0].friends.map( ({firstName , lastName , email}) => (
+  { friends[0].friends.map( ({firstName , lastName , email , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
            <ScrollDialog />
            <Card.Body>             
-              <h4 > {firstName + lastName} </h4>
-              <h5>{email}</h5>
+              <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
+              <Card.Text> <h5>{email}</h5> </Card.Text>
               <Row style={{padding:"3%"}}>
               <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
               <Button  style={{  backgroundColor :"#F05945"}}><BiTrash/> </Button>
@@ -49,14 +52,32 @@ if (users[0].friends ) {
            </Card.Body>
         </Card>
   </Grid.Column>
-  )
-  )}
 
   
+  )
+  )}
 </Grid>
-<div style ={{marginTop:"5%" , marginLeft :"50%"}}>  
-    
-   </div>
+<h1 style={{ color :"#F05945" , padding:"3%"}}> ALL users</h1>
+  <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
+  { users[0].filter(user =>user._id!==this.props.id && user._id!=="60940bd647d20a4ab01cf865").map( ({firstName , lastName , email ,_id , friends}) => (
+  <Grid.Column>
+  <Card style={{ alignItems:"center"}} >
+           <ScrollDialog />
+           <Card.Body>             
+              <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
+              <Card.Text> <h5>{email}</h5> </Card.Text>
+              <Row style={{padding:"3%"}}>
+              <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
+              <Button  style={{  backgroundColor :"#F05945"}}><BiTrash/> </Button>
+              </Row>
+           </Card.Body>
+        </Card>
+  </Grid.Column>
+
+  
+  )
+  )}
+</Grid>
 </div>
 
   );
@@ -69,6 +90,9 @@ else{
    )  ;
 
 }
+
+  
+
 }
    
 }
@@ -77,5 +101,5 @@ const mapStateToProps = (state) => ({
    users : state.users
 });
 
-export default connect(mapStateToProps, {getfriends})(Friends) ;
+export default connect(mapStateToProps, {getfriends , getAllUsers})(Friends) ;
 
