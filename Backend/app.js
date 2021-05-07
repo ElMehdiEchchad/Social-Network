@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
-const connectDB = require('./Models/connection');
-const AuthentificationRoutes = require('./Routes/API/Authentification');
-const UserRoutes = require('./Routes/API/User');
-const PostsRoute = require('./Routes/API/posts')
-
-=======
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./Models/connection");
@@ -18,7 +7,7 @@ var cookieParser = require("cookie-parser");
 const chatRoutes = require('./Routes/API/Chat')
 const socketIo = require('socket.io')
 const cors = require('cors')
->>>>>>> 2a8da69713d4bbb6f7ee3bad007959fcf17cd953
+const PostsRoute = require('./Routes/API/posts')
 
 // set up express app
 const app = express();
@@ -50,24 +39,16 @@ app.use((req, res, next) => {
 //initialize routes of API
 app.use("/api/", AuthentificationRoutes);
 app.use(UserRoutes);
-<<<<<<< HEAD
 app.use('/api/users/', AuthentificationRoutes);
-app.use('/api/posts',PostsRoute);
-
+app.use('/api/posts', PostsRoute);
+app.use(chatRoutes)
 //app.use('/api/posts/',PostsRoute);
 
 
 //listen for requests
-let port = process.env.port || 3000;
-app.listen(process.env.port || 3000, function () {
-  console.log('now listening for requests'+` on port ${port}`);
-=======
-app.use(chatRoutes)
-
-//listen for requests
+let port = process.env.port || 5000;
 const server = app.listen(process.env.port || 5000, function () {
-    console.log("now listening for requests");
->>>>>>> 2a8da69713d4bbb6f7ee3bad007959fcf17cd953
+    console.log('now listening for requests' + ` on port ${port}`);
 });
 
 
@@ -76,21 +57,21 @@ const server = app.listen(process.env.port || 5000, function () {
 //configuration of socket.io
 const io = socketIo(server, {
     cors: {
-      origin: '*',
+        origin: '*',
     }
-  });
+});
 io.on('connection', socket => {
 
     const id = socket.handshake.query.id
     socket.join(id)
-    
+
     socket.on('send-message', (messageData) => {
 
         socket.broadcast.to(messageData.recipient).emit(
             'receive-message',
-            
-                messageData
-            
+
+            messageData
+
         )
     })
 
