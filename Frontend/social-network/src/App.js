@@ -40,7 +40,7 @@ function App() {
                 <Router>
                     <div>
                         <div>
-                            <Route path="/" exact>
+                            <Route path="/">
                                 {loading ? (
                                     <div className="loading">Loading...</div>
                                 ) : auth.loggedIn ? (
