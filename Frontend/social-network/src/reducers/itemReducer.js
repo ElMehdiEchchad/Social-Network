@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import {GET_USERS, ADD_USER, UPDATE_USER , ITEMS_LOADING, GET_POSTS, ADD_POST} from '../actions/types'
-
-const initialState = {
-    users : [ {
-      } ],
-=======
 import {GET_USER, ADD_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING} from '../actions/types'
 
 const initialState = {
     users : [ {
       } ] ,
       friends :[{}]
->>>>>>> bc955904ab02bb13600314a8137a14356839980b
 }
 
 export default function(state=initialState ,action){

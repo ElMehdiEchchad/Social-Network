@@ -10,18 +10,12 @@ import AuthContext from "../contexts/AuthContext";
 import Post from "../components/main/post";
 import Axios from "axios";
 
-<<<<<<< HEAD
-import  Profilcard from "../components/profil/profil-card";
-import  Aboutme from "../components/profil/aboutme";
-import  Friends from "../components/profil/friends";
-=======
+
 import Profilcard from "../components/profil/profil-card";
 import Aboutme from "../components/profil/aboutme";
 import Friends from "../components/profil/friends";
 
 import Chat from "../components/chat/chat"
-
->>>>>>> bc955904ab02bb13600314a8137a14356839980b
 
 
 export function useMediaQuery(query) {
