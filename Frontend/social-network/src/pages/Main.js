@@ -53,6 +53,10 @@ const Main = () => {
         [mobile]
     );
 
+    useEffect(() => {
+        if (isOpen) window.scrollTo(0, 0);
+    }, [isOpen]);
+
     const logout = () => {
         Axios.get("http://localhost:5000/api/logout", {
             withCredentials: true,
@@ -69,7 +73,7 @@ const Main = () => {
                     <input
                         type="text"
                         name="search"
-                        placeholder="search"
+                        placeholder="search for users"
                         className={styles.search}
                     />
                     {!mobile ? (
@@ -93,7 +97,7 @@ const Main = () => {
                     <input
                         type="text"
                         name="search"
-                        placeholder="search"
+                        placeholder="search for users"
                         className={styles.searchMobile}
                     />
                 </nav>
