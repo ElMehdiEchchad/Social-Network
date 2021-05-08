@@ -2,18 +2,23 @@ import React, { Component } from "react";
 import { ListGroup, ListGroupItem, Row, Col, Image } from "react-bootstrap";
 import { useConversations } from "../../contexts/ConversationsProvider";
 import { useEffect } from "react";
-import "./chat.css"
+import "./chat.css";
 
 export default function Conversations({ id }) {
-  const { selectedConversationId, selectConversationId, listOfMyFriends, GetAllMyFriend } = useConversations();
+  const {
+    selectedConversationId,
+    selectConversationId,
+    listOfMyFriends,
+    GetAllMyFriend,
+  } = useConversations();
 
   useEffect(() => {
     GetAllMyFriend(id);
   }, []);
 
-  return (
-    <>
-      <ListGroup variant="flush">
+  function friendsExist(listOfMyFriends, selectedConversationId) {
+    return (
+      <>
         {listOfMyFriends.map((user) => (
           <ListGroup.Item
             className="listOfFriends"
@@ -33,11 +38,33 @@ export default function Conversations({ id }) {
                   }
                   roundedCircle
                 />
+
+                <span
+                  class={user.isOnline ? "onlineDotGreen" : "onlineDotRed"}
+                ></span>
               </Col>
               <Col>{user.lastName + " " + user.firstName}</Col>
             </Row>
           </ListGroup.Item>
         ))}
+      </>
+    );
+  }
+
+  function friendNotExist() {
+    return (
+      <>
+        <div className="">no friends</div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <ListGroup variant="flush">
+        {listOfMyFriends
+          ? friendsExist(listOfMyFriends, selectedConversationId)
+          : friendNotExist()}
       </ListGroup>
     </>
   );

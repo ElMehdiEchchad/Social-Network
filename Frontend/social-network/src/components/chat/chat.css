@@ -5,18 +5,38 @@
   --beige: #f7f3e9;
   --white: #ffffff;
   --black:#000000;
+  --vert-dark:#426160;
 }
 .btn-send {
-  background-color: var(--orange) !important;
-  border: none;
-  border-radius: 10px;
+  background-color: var(--white) !important;
+  border: 1px solid var(--orange) ;
+  border-radius: 25px !important;
+  padding: 15px;
+  margin-left: 5px;
+ 
 }
+.btn-send:hover{
+    background-color: var(--orange) !important;
+    border: 1px solid var(--orange) ;
+    padding: 15px;
+    margin-left: 5px;
+    box-shadow: 1px 1px 10px var(--orange);
+}
+.btn-send:hover .btn-send-icon{
+    color: var(--white);
+}
+.btn-send-icon{
+    size: 70px !important;
+    color: var(--orange);
+}
+
 .messageInput{
-    border-radius: 10px;
+    border-color:var(--orange) !important;
+    border-radius: 25px !important ;
 }
 .messageInput:focus {
   box-shadow:0 0 5px var(--orange) ;
-  border: none;
+  
 }
 
 
@@ -60,12 +80,86 @@
     background-color: var(--vert-light);
     border-radius: 0px 50px 50px 0px !important;
     border: 1px solid var(--vert) !important;
-    width: 100%;    
+    width: 95%;    
 }
 
 .listOfFriends:active ,  .list-group-item.active ,.listOfFriends:focus {
-    background-color: var(--vert) !important ;
+    background-color: var(--vert-light) !important ;
     border-radius: 0px 50px 50px 0px !important;
     border: 1px solid var(--vert) !important;
-    width: 100%;  
+    width: 100%; 
+    color: var(--black); 
 } 
+
+.onlineDotGreen{
+    background-color: green;
+    width: 10px !important;
+    height: 10px !important;
+    position: absolute;
+    border-radius: 50px !important;
+    left: 55%;
+    bottom: 0px;
+}
+.onlineDotRed{
+    background-color: red;
+    width: 10px !important;
+    height: 10px !important;
+    position: absolute;
+    border-radius: 50px !important;
+    left: 55%;
+    bottom: 0px;
+}
+
+/* ---------------------------------------------------------------------*/
+
+.TabContent{
+    /* background-color: aqua; */
+    border-radius: 0px 25px 25px 0px !important;
+}
+.NavTab{
+    border:none;
+}
+.NavLink{
+    margin-left: 10px;
+    border-radius: 10px 10px 0px   0px !important;
+    background-color: var(--vert-dark) !important;
+    color: var(--white) !important;
+    position: relative;
+}
+
+.NavLink:before,
+.NavLink:after {
+    content: "";
+    position: absolute;
+
+    height: 10px;
+    width: 20px;
+  
+
+    bottom: 0;
+}
+.NavLink:after {
+    right: -20px;
+
+    border-radius: 0 0 0 10px;
+    -moz-border-radius: 0 0 0 10px;
+    -webkit-border-radius: 0 0 0 10px;
+
+    -webkit-box-shadow: -10px 0 0 0 var(--vert-dark);
+    box-shadow: -10px 0 0 0 var(--vert-dark);
+}
+
+.NavLink:before {
+    left: -20px;
+
+    border-radius: 0 0 10px 0;
+    -moz-border-radius: 0 0 10px 0;
+    -webkit-border-radius: 0 0 10px 0;
+
+    -webkit-box-shadow: 10px 0 0 0 var(--vert-dark);
+    box-shadow: 10px 0 0 0 var(--vert-dark);
+}
+
+
+
+

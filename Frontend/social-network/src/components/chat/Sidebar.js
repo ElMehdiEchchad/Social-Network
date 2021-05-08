@@ -12,12 +12,12 @@ export default function Sidebar({ id }) {
   return (
     <div style={{ width: "200px" }} className="d-flex flex-column">
       <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
-        <Nav variant="tabs" className="justify-content-start">
-          <Nav.Item>
-            <Nav.Link eventKey={CONVERSATIONS_KEY}>My Friends</Nav.Link>
+        <Nav variant="tabs" className="NavTab justify-content-start">
+          <Nav.Item className="NavItem">
+            <Nav.Link className="NavLink" eventKey={CONVERSATIONS_KEY}>My Friends</Nav.Link>
           </Nav.Item>
         </Nav>
-        <Tab.Content className="border-right overflow-auto flex-grow-1">
+        <Tab.Content className="TabContent border-right overflow-auto flex-grow-1">
           <Tab.Pane eventKey={CONVERSATIONS_KEY}>
             <Conversations id={id} />
           </Tab.Pane>

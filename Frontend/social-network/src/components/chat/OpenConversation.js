@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef,useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { useConversations } from "../../contexts/ConversationsProvider";
 import "./chat.css"
+import { IoSendSharp } from 'react-icons/io5';
+import { Link } from "react-router-dom";
 
 export default function OpenConversation({ id }) {
   const [text, setText] = useState("");
   const [theRecipient, setTheRecipient] = useState({});
   const setRef = useCallback(node => {
-    if(node){
-      node.scrollIntoView({smooth:true})
+    if (node) {
+      node.scrollIntoView({ smooth: true })
     }
   }, []
   )
@@ -55,7 +57,7 @@ export default function OpenConversation({ id }) {
             return (
               <div className="div">
                 <div
-                  //ref={lastMessage ? setRef : null}
+                  ref={lastMessage ? setRef : null}
                   key={index}
                   className={`my-1 d-flex flex-column ${message.sender == id
                     ? "align-self-end align-items-end "
@@ -93,7 +95,7 @@ export default function OpenConversation({ id }) {
         <Form.Group className="m-2">
           <InputGroup>
             <Form.Control
-            className="messageInput"
+              className="messageInput"
               as="textarea"
               required
               value={text}
@@ -101,7 +103,8 @@ export default function OpenConversation({ id }) {
               style={{ height: "75px", resize: "none" }}
             />
             <InputGroup.Append>
-              <Button className="btn-send" type="submit">Send</Button>
+              
+              <Button className="btn-send" type="submit"><IoSendSharp className="btn-send-icon"  size="20"></IoSendSharp></Button>
             </InputGroup.Append>
           </InputGroup>
         </Form.Group>
