@@ -118,7 +118,7 @@ const Main = () => {
                                     <Friends id={id} />
                                 </Route>
                                 <Route path="/myprofil" exact>
-                                    <Profilcard />
+                                    <Profilcard id={id}/>
                                 </Route>
                                 <Route path="/chat" exact>
                                     {console.log("i'm in main")}

@@ -14,6 +14,8 @@ import { List,Button} from 'semantic-ui-react'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
+import Profilcard from "../profil/profil-card";
+
 export default function ScrollDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
@@ -52,32 +54,7 @@ export default function ScrollDialog(props) {
       >
         <DialogTitle id="scroll-dialog-title">Profil </DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
-          <Container style={{width:"400px"}}>
-          <Ava  src={Avatar} style={{ height: '200px', width: '200px' , marginLeft:"20%"}}/>
-          <List divided relaxed>
-             <List.Item>
-             <List.Icon name='at' size='large' verticalAlign='middle' />
-                 <List.Content>
-                   <List.Header as='a'>{props.email}</List.Header>
-                 </List.Content>
-             </List.Item>
-
-             <List.Item>
-             <List.Icon name='info circle' size='large' verticalAlign='middle' />
-                 <List.Content>
-                   <List.Header as='a'> {props.firstName} {props.lastName}</List.Header>
-                 </List.Content>
-             </List.Item>
-            
-             <List.Item>
-             <List.Icon name='birthday cake' size='large' verticalAlign='middle' />
-                 <List.Content>
-                   <List.Header as='a'>{props.birthDay}</List.Header>
-                 </List.Content>
-             </List.Item>
-            
-  </List>
-  </Container>
+          <Profilcard id={props.id}></Profilcard>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

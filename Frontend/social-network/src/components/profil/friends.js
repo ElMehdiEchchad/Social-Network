@@ -80,7 +80,7 @@ if (friends[0].friends && !users[0].firstName) {
   { users[0].filter(item =>item._id!==this.props.id && listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay ,_id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay ={birthDay}/>
+           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay ={birthDay} id={_id}/>
            <Card.Body >             
               <Card.Title style={{marginLeft :"15%"}}><h4 > {firstName +" " + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
@@ -101,7 +101,7 @@ if (friends[0].friends && !users[0].firstName) {
   { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay}/>
+           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay} id={_id}/>
            <Card.Body >             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>

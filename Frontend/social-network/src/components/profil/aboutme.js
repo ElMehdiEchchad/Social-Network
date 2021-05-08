@@ -10,7 +10,6 @@ import {getUser , updateUser} from '../../actions/itemActions';
 
 import { ImagePicker } from 'react-file-picker'
 
-
  class Aboutme extends React.Component{
    
   constructor(props) {
@@ -28,7 +27,7 @@ import { ImagePicker } from 'react-file-picker'
     this.state = {
       Firstname: user[0].firstName ,
       Lastname: user[0].lastName,
-      Birthday: user[0].birthDay,
+      Birthday: new Date(),
       Email :user[0].email ,
       isToggle: true
 
@@ -186,16 +185,6 @@ import { ImagePicker } from 'react-file-picker'
     <Form.Group widths='equal'>
     
     <Form.Field
-      id='profil-photo'
-      label='Profil photo'
-      placeholder='Profil photos'>
-   <Input
-    icon={{ name: 'search',label:'Profil photo', circular: true, link: true }}
-    placeholder='Search...'
-  />
-    </Form.Field>
-
-    <Form.Field
         id='Birthday-Date'
         control={Input}
         label='Birthday Date'
@@ -203,6 +192,13 @@ import { ImagePicker } from 'react-file-picker'
       >
        <DatePicker selected={this.state.Birthday} onChange={this.onChangeBirthday} />
       </Form.Field>
+    
+   <ImagePicker
+    extensions={['jpg', 'jpeg', 'png']}
+    dims={{minWidth: 100, maxWidth: 500, minHeight: 100, maxHeight: 500}} >
+    <Form.Input label='Profil image' type='file' />
+    </ImagePicker>
+  
     
       </Form.Group>
     
