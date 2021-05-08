@@ -23,11 +23,7 @@ import aboutme from './aboutme';
       this.props.getfriends(this.props.id);
       this.props.getAllUsers () ;
       this.props.getUser (this.props.id) ;
-      const {friends} =this.props.users
-      const {users} =this.props.users 
-      const {user} =this.props.users 
-      console.log (user[0])
-    
+       
     }
 
 
@@ -43,24 +39,24 @@ import aboutme from './aboutme';
       ));
    }
    console.log(listfriends)
+   console.log (user[0])
 
 
-  
-if (friends[0].friends && !users[0].firstName) {
-  return (
-  <div>
-  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends + {this.props.id}</h1>
-  <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
-  { users[0].filter(item =>item._id!==this.props.id && listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay ,_id}) => (
+
+if(typeof friends[0].friends === 'undefined' && typeof users[0] !== 'undefined'&& users[0].length > 0 ){
+   return(
+      <div>
+         <h1 style={{ color :"#F05945" , padding:"3%"}}> ADD Friends </h1>
+  <Grid stackable columns={2} style={{marginTop :"4%" , marginBottom:"5%" }} >
+  { users[0].filter(item =>item._id!==this.props.id ).map( ({firstName , lastName , email , birthDay , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay ={birthDay}/>
-           <Card.Body>             
+           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay}/>
+           <Card.Body >             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
-              <Row style={{padding:"3%"}}>
-              <Button  style={{ backgroundColor :"#5EAAA8"}}><BiMessageDots/> </Button>
-              <Button  style={{  backgroundColor :"#F05945"}} onClick={() => {  this.props.removefriend(this.props.id , _id) ; window.location.reload() }} ><BiTrash/> </Button>
+              <Row style={{marginLeft :"15%"}} >
+              <Button  style={{ backgroundColor :"#5EAAA8" }} onClick={() => { const friend = {id_friend : _id  }; this.props.addfriend(this.props.id ,friend ); window.location.reload()}} ><BiUserPlus/> </Button>
               </Row>
            </Card.Body>
         </Card>
@@ -70,8 +66,38 @@ if (friends[0].friends && !users[0].firstName) {
   )
   )}
 </Grid>
-<h1 style={{ color :"#F05945" , padding:"3%"}}> ALL users</h1>
-  <Grid stackable columns={3} style={{marginTop :"4%" , marginBottom:"5%" }} >
+      </div>
+   );
+}
+
+ 
+
+if (friends[0].friends && !users[0].firstName) {
+  return (
+  <div>
+  <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends </h1>
+  <Grid stackable columns={2} style={{marginTop :"4%" , marginBottom:"5%" }} >
+  { users[0].filter(item =>item._id!==this.props.id && listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay ,_id}) => (
+  <Grid.Column>
+  <Card style={{ alignItems:"center"}} >
+           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay ={birthDay}/>
+           <Card.Body >             
+              <Card.Title style={{marginLeft :"15%"}}><h4 > {firstName +" " + lastName} </h4></Card.Title>
+              <Card.Text> <h5>{email}</h5> </Card.Text>
+              <Row >
+              <Button size='mini' style={{ backgroundColor :"#5EAAA8" , marginLeft:"15%"}}><BiMessageDots/> </Button>
+              <Button size='mini'  style={{  backgroundColor :"#F05945"}} onClick={() => {  this.props.removefriend(this.props.id , _id) ; window.location.reload() }} ><BiTrash/> </Button>
+              </Row>
+           </Card.Body>
+        </Card>
+  </Grid.Column>
+
+  
+  )
+  )}
+</Grid>
+<h1 style={{ color :"#F05945" , padding:"3%"}}> ADD Friends </h1>
+  <Grid stackable columns={2} style={{marginTop :"4%" , marginBottom:"5%" }} >
   { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
@@ -79,8 +105,8 @@ if (friends[0].friends && !users[0].firstName) {
            <Card.Body >             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
-              <Row style={{marginLeft :"10%"}} >
-              <Button  style={{ backgroundColor :"#5EAAA8" }} onClick={() => { const friend = {id_friend : _id  }; this.props.addfriend(this.props.id ,friend ); window.location.reload()}} ><BiUserPlus/> </Button>
+              <Row style={{marginLeft :"15%"}} >
+              <Button size='medium' style={{ backgroundColor :"#5EAAA8" }} onClick={() => { const friend = {id_friend : _id  }; this.props.addfriend(this.props.id ,friend ); window.location.reload()}} ><BiUserPlus/> </Button>
               </Row>
            </Card.Body>
         </Card>
@@ -101,7 +127,7 @@ else{
    </div>
    )  ;
 
-}
+} 
 
   
 
