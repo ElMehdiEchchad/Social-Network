@@ -20,6 +20,7 @@ import { ImagePicker } from 'react-file-picker'
     this.onChangeBirthday = this.onChangeBirthday.bind(this);
     this.onChangeEmail  = this.onChangeEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
  
     this.props.getUser(this.props.id);
     const {user} = this.props.users;
@@ -28,14 +29,18 @@ import { ImagePicker } from 'react-file-picker'
       Firstname: user[0].firstName ,
       Lastname: user[0].lastName,
       Birthday: user[0].birthDay,
-      Email :user[0].email 
-    }
+      Email :user[0].email ,
+      isToggle: true
 
   }
 
+  console.log("birthday"+user[0].birthDay)
+
+}
 
 
-  componentDidMount() {
+
+ componentDidMount() {
     const {user} = this.props.users;
       this.setState({
        Firstname: user[0].firstName ,
@@ -69,7 +74,9 @@ import { ImagePicker } from 'react-file-picker'
     });
   }
 
- 
+  handleClick(e) {
+    this.setState({isToggle: !this.state.isToggle});
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -82,6 +89,8 @@ import { ImagePicker } from 'react-file-picker'
 
     };
     this.props.updateUser(this.props.id ,userupdated);
+    this.setState({isToggle: !this.state.isToggle});
+    window.location.reload()
     
   }
 
@@ -93,11 +102,35 @@ import { ImagePicker } from 'react-file-picker'
     const {id} = this.props.id ;
 
       return (
+ <div>
+    
+ <Form onSubmit={this.handleClick} style={{display: this.state.isToggle ? 'block': 'none'}}>
+    
+ <Form.Group widths='equal'>
+      <Form.Field
+        id='first-name'
+        control={Input}
+        label='First name'
+        placeholder='First name'
+        value={user[0].firstName}
+        onChange={this.onChangeFirstname}
+      />
+      <Form.Field
+        id='last-name'
+        control={Input}
+        label='Last name'
+        placeholder='Last name'
+        value={user[0].lastName }
+        onChange={this.onChangeLastname}
+      />
+      
+     
+    </Form.Group>
     
     
- <Form onSubmit={this.onSubmit}>
+    <Form.Group widths='equal'> 
     <Form.Field
-      id='form-input-control-error-email'
+      id='email'
       control={Input}
       label='Email'
       placeholder='joe@gmail.com'
@@ -105,9 +138,32 @@ import { ImagePicker } from 'react-file-picker'
       onChange={this.onChangeEmail}
     />
 
+    <Form.Field
+        id='form-input-control-Birthday-Date'
+        control={Input}
+        label='Birthday Date'
+        placeholder='Birthday Date'
+        value={user[0].Birthday}
+      >
+      </Form.Field>
+    
+      </Form.Group>
+     
+    <Form.Field
+      id='form-button-control-public'
+      control={Button}
+      content='Edit profil'
+      style={{ marginLeft:"1%" , color: "white" , backgroundColor :"#F05945"}}
+    />
+  </Form>
+
+
+  
+
+  <Form onSubmit={this.onSubmit} style={{display: this.state.isToggle ? 'none':'block'}}>
     <Form.Group widths='equal'>
       <Form.Field
-        id='form-input-control-first-name'
+        id='first-name2'
         control={Input}
         label='First name'
         placeholder='First name'
@@ -115,8 +171,9 @@ import { ImagePicker } from 'react-file-picker'
         onChange={this.onChangeFirstname}
       />
       <Form.Field
-        id='form-input-control-last-name'
+        id='last-name2'
         control={Input}
+        focus ='true'
         label='Last name'
         placeholder='Last name'
         value={this.state.Lastname}
@@ -129,7 +186,7 @@ import { ImagePicker } from 'react-file-picker'
     <Form.Group widths='equal'>
     
     <Form.Field
-      id='form-input-control-error-email'
+      id='profil-photo'
       label='Profil photo'
       placeholder='Profil photos'>
    <Input
@@ -139,7 +196,7 @@ import { ImagePicker } from 'react-file-picker'
     </Form.Field>
 
     <Form.Field
-        id='form-input-control-Birthday-Date'
+        id='Birthday-Date'
         control={Input}
         label='Birthday Date'
         placeholder='Birthday Date'
@@ -157,7 +214,7 @@ import { ImagePicker } from 'react-file-picker'
     />
   </Form>
 
-  
+  </div>   
       
       );
   }
