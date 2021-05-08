@@ -1,5 +1,5 @@
 .wrapper {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background-color: #f7f3e9;
     display: flex;
@@ -8,9 +8,36 @@
     padding: 0 20%;
 }
 
-.left img {
-    width: 40em;
+.right {
+    flex: 1;
+}
+
+.left {
+    flex: 2;
+    height: 30em;
+    border-radius: 10px;
+    padding: 5em;
     margin-right: 5em;
+    background-color: #f7f3e9;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.featureList {
+    margin-top: 2em;
+}
+
+.feature {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #5eaaa8;
+}
+
+.feature:not(:last-child) {
+    margin-bottom: 1em;
 }
 
 .form {
@@ -20,6 +47,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 30em;
 }
 
 .buttonPrimary {
@@ -65,10 +93,20 @@
 
 @media only screen and (max-width: 600px) {
     .wrapper {
-        padding: 0 1em;
+        padding: 1em;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    .left {
+        margin: 0 auto;
+        padding: 1em;
+        margin-bottom: 2em;
     }
 
     .form {
         padding: 3em;
+        width: 100%;
+        margin: 0;
     }
 }

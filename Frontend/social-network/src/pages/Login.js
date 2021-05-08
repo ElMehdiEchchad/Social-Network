@@ -1,5 +1,6 @@
 import styles from "./Login.module.css";
 import { useState, useContext } from "react";
+import logo from "../logo.png";
 import AuthContext from "../contexts/AuthContext";
 import Axios from "axios";
 
@@ -153,9 +154,20 @@ const Login = () => {
 
     return (
         <div className={styles.wrapper}>
-            {/* <div className={styles.left}>
-                <img src={illustration} alt="Connected world" />
-            </div> */}
+            <div className={styles.left}>
+                <img src={logo} width="250"></img>
+                <ul className={styles.featureList}>
+                    <li className={styles.feature}>
+                        Connect with friends from all around the world
+                    </li>
+                    <li className={styles.feature}>
+                        Share you thoughts and interact with others
+                    </li>
+                    <li className={styles.feature}>
+                        Instant chat with your friends
+                    </li>
+                </ul>
+            </div>
             <div className={styles.right}>
                 {hasAccount ? LoginForm() : RegisterForm()}
             </div>
