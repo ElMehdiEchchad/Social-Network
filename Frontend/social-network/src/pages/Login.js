@@ -1,5 +1,5 @@
 import styles from "./Login.module.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import logo from "../logo.png";
 import AuthContext from "../contexts/AuthContext";
 import Axios from "axios";
@@ -13,8 +13,14 @@ const Login = () => {
     const [lastName, setLastName] = useState(null);
 
     const [hasAccount, setHasAccount] = useState(true);
+    const [failed, setFailed] = useState(false);
 
-    const login = () => {
+    const loginform = useRef(null);
+    const registerform = useRef(null);
+
+    const login = (e) => {
+        loginform.current[0].reportValidity();
+        e.preventDefault();
         console.log({ email, password });
         Axios.post(
             "http://localhost:5000/api/login",
@@ -23,14 +29,20 @@ const Login = () => {
                 password,
             },
             { withCredentials: true }
-        ).then((res) => {
-            console.log(res);
-            setAuth({ loggedIn: true, userData: res.data });
-            console.log(auth);
-        });
+        )
+            .then((res) => {
+                console.log(res);
+                setAuth({ loggedIn: true, userData: res.data });
+                console.log(auth);
+            })
+            .catch(() => {
+                setFailed(true);
+            });
     };
 
-    const register = () => {
+    const register = (e) => {
+        registerform.current[0].reportValidity();
+        e.preventDefault();
         console.log({ email, password, firstName, lastName });
         Axios.post(
             "http://localhost:5000/api/register",
@@ -41,15 +53,20 @@ const Login = () => {
                 lastName,
             },
             { withCredentials: true }
-        ).then((res) => {
-            console.log(res);
-            setHasAccount(true);
-        });
+        )
+            .then((res) => {
+                console.log(res);
+                setFailed(true);
+                setHasAccount(true);
+            })
+            .catch(() => {
+                setFailed(true);
+            });
     };
 
     const LoginForm = () => {
         return (
-            <form className={styles.form} id="login-form">
+            <form ref={loginform} className={styles.form} id="login-form">
                 <h1 className={styles.h1}>Login to PeopleBook now!</h1>
                 <label className={styles.label}>Email</label>
                 <input
@@ -76,12 +93,20 @@ const Login = () => {
                     }}
                     required
                 ></input>
-                <div className={styles.buttonPrimary} onClick={login}>
+                <button
+                    type="submit"
+                    className={styles.buttonPrimary}
+                    onClick={login}
+                >
                     Login
-                </div>
+                </button>
+                {failed ? <h3>Login failed, try again!</h3> : <></>}
                 <div
                     className={styles.buttonSecondary}
-                    onClick={() => setHasAccount(false)}
+                    onClick={() => {
+                        setHasAccount(false);
+                        setFailed(!failed);
+                    }}
                 >
                     Don't have an account?
                 </div>
@@ -91,7 +116,7 @@ const Login = () => {
 
     const RegisterForm = () => {
         return (
-            <form className={styles.form} id="login-form">
+            <form ref={registerform} className={styles.form} id="login-form">
                 <h1 className={styles.label}>Login to PeopleBook now!</h1>
                 <label className={styles.label}>Email</label>
                 <input
@@ -139,12 +164,20 @@ const Login = () => {
                     }}
                     required
                 ></input>
-                <div className={styles.buttonPrimary} onClick={register}>
+                <button
+                    type="submit"
+                    className={styles.buttonPrimary}
+                    onClick={register}
+                >
                     Register
-                </div>
+                </button>
+                {failed ? <h3>Register failed, try again!</h3> : <></>}
                 <div
                     className={styles.buttonSecondary}
-                    onClick={() => setHasAccount(true)}
+                    onClick={() => {
+                        setHasAccount(true);
+                        setFailed(!failed);
+                    }}
                 >
                     You have an account?
                 </div>
