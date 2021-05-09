@@ -31,7 +31,7 @@ router.get("/api/users", async (req, res) => {
 //@desc get user by ID
 //@access Public
 router.get("/api/user/:id", checkAuth, async (req, res) => {
-    userModel.findById({ _id: req.params.id }, '_id firstName lastName email profileImage friends', async (err, data) => {
+    userModel.findById({ _id: req.params.id }, '_id firstName lastName email profileImage friends isOnline birthDay', async (err, data) => {
         if (err) {
             await res
                 .status(500)
@@ -119,7 +119,7 @@ router.put("/api/user/:id/friends", checkAuth, async (req, res) => {
                     .send(`Cannot find user with this ID : ${req.params.id}`);
             } else {
                 res.status(201).json({
-                    message:"friend added to the list of friends"
+                    message: "friend added to the list of friends"
                 });
             }
         }
@@ -135,7 +135,7 @@ router.put("/api/user/:id/friends", checkAuth, async (req, res) => {
                     .send(`Cannot find user with this ID : ${req.params.id}`);
             } else {
                 res.status(201).json({
-                    message:"friend added to the list of friends"
+                    message: "friend added to the list of friends"
                 });
             }
         }
@@ -188,7 +188,7 @@ router.get("/api/user/:id/friends", async (req, res) => {
                 var listOfFriends = [];
                 const itteration = data.friends.map(async (idFriendObject) => {
                     const idFriend = idFriendObject.id_friend;
-                    return userModel.findById({ _id: idFriend }, '_id firstName lastName email profileImage friends', async (err, data) => {
+                    return userModel.findById({ _id: idFriend }, '_id firstName lastName email profileImage friends isOnline birthDay', async (err, data) => {
                         if (err) {
                             await res
                                 .status(500)
@@ -218,6 +218,29 @@ router.get("/api/user/:id/friends", async (req, res) => {
         }
     });
 });
+
+//@route GET api/user/:id/isOnline
+//@desc make a user Online or offline
+//@access Public
+router.put("/api/user/:id/isOnline", async (req, res) => {
+    userModel.findByIdAndUpdate(
+        { _id : req.params.id },
+        {
+            isOnline: req.body.isOnline
+        }, { new: true },
+        async (err, data) => {
+            if (err) {
+                await res
+                    .status(500)
+                    .send(`Cannot find user with this ID : ${req.params.id}`);
+            } else {
+              
+                res.status(200).json({
+                    message: "isOnline is updated"
+                });
+            }
+        })
+})
 
 
 module.exports = router;

@@ -4,7 +4,7 @@ import {GET_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD
 
 
 export const getUser = id => async dispatch => {
-	dispatch(setItemsLoading());
+	//dispatch(setItemsLoading());
     try{
         const res = await axios.get("http://localhost:5000/api/user/"+id, {withCredentials :true})
         dispatch( {

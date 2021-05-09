@@ -12,7 +12,8 @@ const user = new mongoose.Schema({
         default:Date.now
     },
     profileImage: {
-        type: String
+        type: String,
+        default:""
     },
     email: {
         type: String,
@@ -27,6 +28,10 @@ const user = new mongoose.Schema({
     friends: {
         type: Array,
         
+    },
+    isOnline:{
+        type:Boolean,
+        default:false
     }
 })
 module.exports = User = mongoose.model('user', user);

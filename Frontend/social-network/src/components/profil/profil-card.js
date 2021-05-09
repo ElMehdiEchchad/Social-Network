@@ -20,17 +20,19 @@ import AuthContext from '../../contexts/AuthContext'
 import {useContext} from 'react' ;
 
 
-export default function Profilcard(){
-    
-   const {auth} = useContext(AuthContext) ;
+export default class Profilcard extends React.Component{
+
+   
+  render(){
+  /* const {auth} = useContext(AuthContext) ;
    const id = auth.userData.id ; 
   
-   console.log("Hi"+id) ;
+   console.log("Hi"+id) ;*/
 
     const panes = [
     {
       menuItem: { key: 'users',  content: 'About' },
-      render: () => <Tab.Pane><Aboutme id={id}></Aboutme></Tab.Pane>,
+      render: () => <Tab.Pane><Aboutme id={this.props.id}></Aboutme></Tab.Pane>,
     },
    /* {
       menuItem: { key: 'friends', icon: 'users' , content :'friends' },
@@ -66,4 +68,4 @@ export default function Profilcard(){
 }
 
 
- 
+}
