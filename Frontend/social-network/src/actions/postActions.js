@@ -18,12 +18,12 @@ export const getPosts = () => async (dispatch) => {
 
     dispatch({
       type: GET_POSTS,
-      payload: res.data,
+      payload: res.data.reverse(),
     });
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
@@ -40,13 +40,13 @@ export const getPost = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
 
 // Add likes
-export const addLike = (id) => async (dispatch) => {
+export const addLike = (id, userId) => async (dispatch) => {
   try {
     const res = await axios.put(`http://localhost:5000/api/posts/like/${id}`);
 
@@ -57,7 +57,7 @@ export const addLike = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
@@ -74,7 +74,7 @@ export const removeLike = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
@@ -94,7 +94,7 @@ export const deletePost = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
@@ -113,13 +113,13 @@ export const addPost = post => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
 
 // Add a comment
-export const addComment = (postId, formData) => async (dispatch) => {
+export const addComment = (postId, userId, formData) => async (dispatch) => {
 
   try {
     const res = await axios.post(`http://localhost:5000/api/posts/comment/${postId}`, formData, {withCredentials: true});
@@ -133,7 +133,7 @@ export const addComment = (postId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };
@@ -152,7 +152,7 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: console.log(err),
     });
   }
 };

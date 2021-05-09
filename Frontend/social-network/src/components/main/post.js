@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import './post.css';
 import { Avatar, Button} from '@material-ui/core';
 import imgPosted from './imgPosted.png';
@@ -6,46 +6,70 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
 import Collapse from 'react-bootstrap/Collapse';
 import {IoSend} from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+import Moment from "react-moment";
+import PropTypes from "prop-types";
 
-function Post(){
-    const [open, setOpen] = useState(false);
-    return(
-        <div class="grid-containerPost">
+import {connect} from 'react-redux';
+import {getPosts, addLike, addComment} from '../../actions/postActions';
+import {getfriends, getUser} from '../../actions/itemActions';
+
+
+
+
+class Post extends Component{
+    state1= {
+        posts: this.props.getPosts(),
+    }
+    state2={
+        Comment : '',
+    }
+    handleOnChangeComment = e => {
+        this.setState({
+          [e.target.Comment]: e.target.value,
+    
+      })
+    }
+    render(){
+        const {posts} = this.state1;
+        const postList = posts.length ? (
+            posts.map(post => {
+    <div class="grid-containerPost" key={post._id}>
         <div class="grid-itemPost itemProfileImg">
-            <Avatar src="/broken-image.jpg" />
+            <Link to={'/profil/${user}'}><Avatar src="/broken-image.jpg" /></Link>
             <div class="usernamePost">
-                    <a href="#" style={{textDecoration: "none"}}>Flan Flani</a>
+                    <Link to={'/profil/${user}'}>{this.props.getUser(post.postedBy).firstName+ this.props.getUser(post.postedBy).lastName}</Link>
                 </div>
-                <div class="postDate">05:45am, 12 Feb</div>
+                <div class="postDate"><Moment format="YYYY/MM/DD">{post.created}</Moment></div>
         </div>
         <div class="grid-itemPost itemPost2">
             <div className="textPosted">
-                    Hey..
+                    {post.TextContent}
             </div>
             <div className="imgPosted">
-                <img src={imgPosted} className="ImgResponsive" />
+                <img src={post.ImageContent} className="ImgResponsive" />
             </div>
         </div>
         <div className="grid-itemPost itemPost3">
             <div className="BtnPost">
-                <Button type="submit" value="Submit" size="sm" 
+                <Button type="submit" value="Submit" onClick={(e) => addLike(post._id, this.props.id)} size="sm" 
                         style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
-                            <AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
+                            {post.likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
                 </Button>
-                <Button size="sm" onClick={() => setOpen(!open)}
+                <Button size="sm" /*onClick={() => setOpen(!open)}
                         aria-controls="commentSection"
-                        aria-expanded={open}
+                        aria-expanded={open}*/
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
-                        <FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
+                        {post.commments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
                 </Button>
             </div>
-        <Collapse in={open}>
+        <div /*in={open}*/>
             <div class="grid-containerComment">
                 <div class="grid-itemComment itemComment1">
-                    <input type="Post" placeholder="Type your comment.." className="CommentInput"/>
+                    <input onChange={this.handleOnChangeComment} value={this.state2.Comment} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
                 <div class="grid-itemComment itemComment2">
-                    <Button type="submit" value="Submit" size="sm" 
+                    <Button type="submit" value="Submit" onClick={(e) => addComment(post._id, this.props.id, this.state2)} size="sm" 
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"30px", borderRadius:"5px"}}>
                         Submit<IoSend style={{paddingLeft: "2px", width:"20px"}}/>
                     </Button>
@@ -53,13 +77,37 @@ function Post(){
             
             </div>
        
-        </Collapse>
+        </div>
                 
          
         </div>
         </div>
-    );
+
+            })
+        ) : (
+            <div style={{fontFamily: "Montserrat",
+                fontStyle: "normal",
+                fontWeight: "bold",
+                fontSize: "20px",
+                lineHeight: "29px",
+                padding: "30px",
+                color: "#F05945"}}>No Posts</div>
+        )
+    
+        
+    return(
+        <div>{postList}</div>
+        
+    ); }
 
 }
+Post.propTypes = {
+    addComment: PropTypes.func.isRequired,
+    addLike: PropTypes.func.isRequired,
+    getPosts: PropTypes.func.isRequired,
+    getUser: PropTypes.func.isRequired,
+ }
 
-export default Post;
+export default connect(null, {getPosts, addComment, addLike, getUser}) (Post);
+
+/*const [open, setOpen] = useState(false);*/

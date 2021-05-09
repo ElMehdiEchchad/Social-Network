@@ -97,18 +97,18 @@ const Main = () => {
                         className={styles.searchMobile}
                     />
                 </nav>
-                {isOpen ? <MobileMenu /> : null}
+                {isOpen ? <MobileMenu id={id}/> : null}
 
                 <div className={styles.grid}>
                     <div className={styles.profile}>
-                        <Sidebar />
+                        <Sidebar id={id} />
                     </div>
                     <div className={styles.main}>
                         <div className={styles.content}>
                             <Switch>
                                 <Route path="/" exact>
-                                    <NewPost />
-                                    <Post />
+                                    <NewPost id={id}/>
+                                    <Post id={id}/>
                                 </Route>
                                 <Route path="/friends" exact>
                                     <Friends id={id} />
