@@ -32,7 +32,7 @@ const Login = () => {
         )
             .then((res) => {
                 console.log(res);
-                setAuth({ loggedIn: true, userData: res.data });
+                setAuth({ loggedIn: true, userData: res.data.data });
                 console.log(auth);
             })
             .catch(() => {

@@ -10,10 +10,10 @@ export function useConversations() {
 
 export function ConversationsProvider({ id, children }) {
 
-  const [selectedCoversationId, setSelectedCoversationId] = useState(0);
+  const [selectedCoversationId, setSelectedCoversationId] = useState();
   const socket = useSocket();
   const [listOfMyFriends, setListOfMyFriends] = useState([]);
-  const [conversationlist, setConversationlist] = useState([]);
+  const [conversationlist, setConversationlist] = useState();
 
 
 
@@ -49,7 +49,7 @@ export function ConversationsProvider({ id, children }) {
   function addMessageToConversation(recipient, message, sender) {
     axios
       .post(
-        `http://localhost:5000/api/pivatechat/${sender}`,
+        `http://localhost:5000/api/privatechat/${sender}`,
         {
           message: message,
           recipient: recipient,
@@ -86,7 +86,7 @@ export function ConversationsProvider({ id, children }) {
     const sender = id;
     axios
       .get(
-        `http://localhost:5000/api/pivatechat/${sender}/${recipient}`, { withCredentials: true }
+        `http://localhost:5000/api/privatechat/${sender}/${recipient}`, { withCredentials: true }
       )
       .then((response) => {
         setConversationlist(response.data);

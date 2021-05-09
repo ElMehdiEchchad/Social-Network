@@ -8,15 +8,6 @@ const checkAuth = require("../../Middleware/check-auth");
 //@desc get all users
 //@access Public
 
-router.use(checkAuth);
-
-router.get("/api/users/auth", async (req, res) => {
-    res.status(200).json({
-        message: "Auth successful",
-        data: req.userData,
-    });
-});
-
 router.get("/api/users", async (req, res) => {
     userModel.find({}, async (err, data) => {
         if (err) {
@@ -26,6 +17,42 @@ router.get("/api/users", async (req, res) => {
         }
     });
 });
+
+//@route GET api/user/:id/isOnline
+//@desc make a user Online or offline
+//@access Public
+router.put("/api/user/:id/isOnline", async (req, res) => {
+    userModel.findByIdAndUpdate(
+        { _id : req.params.id },
+        {
+            isOnline: req.body.isOnline
+        }, { new: true },
+        async (err, data) => {
+            if (err) {
+                await res
+                    .status(500)
+                    .send(`Cannot find user with this ID : ${req.params.id}`);
+            } else {
+              
+                res.status(200).json({
+                    message: `isOnline is updated to ${data.isOnline}`
+                });
+            }
+        })
+})
+
+router.use(checkAuth);
+
+router.get("/api/users/auth", async (req, res) => {
+    res.status(200).json({
+        message: "Auth successful",
+        data: req.userData,
+    });
+});
+
+
+
+
 
 //@route GET api/user/:id
 //@desc get user by ID
@@ -57,6 +84,7 @@ router.delete("/api/user/:id", checkAuth, async (req, res) => {
             });
         }
     });
+
 });
 //@route DELETE api/user/
 //@desc delete ALL users this is just for testing
@@ -219,28 +247,7 @@ router.get("/api/user/:id/friends", async (req, res) => {
     });
 });
 
-//@route GET api/user/:id/isOnline
-//@desc make a user Online or offline
-//@access Public
-router.put("/api/user/:id/isOnline", async (req, res) => {
-    userModel.findByIdAndUpdate(
-        { _id : req.params.id },
-        {
-            isOnline: req.body.isOnline
-        }, { new: true },
-        async (err, data) => {
-            if (err) {
-                await res
-                    .status(500)
-                    .send(`Cannot find user with this ID : ${req.params.id}`);
-            } else {
-              
-                res.status(200).json({
-                    message: "isOnline is updated"
-                });
-            }
-        })
-})
+
 
 
 module.exports = router;

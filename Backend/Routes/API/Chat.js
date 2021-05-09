@@ -5,7 +5,7 @@ const Chat = require('../../Models/chatModel');
 // @route post /api/pivatechat/:id
 // @desc het all messages betwwen two users
 // @access Public
-router.get('/api/pivatechat/:idSender/:idRecipient', async (req, res) => {
+router.get('/api/privatechat/:idSender/:idRecipient', async (req, res) => {
     Chat.find({
         $or: [
             { $and: [{ sender: req.params.idSender }, { recipient: req.params.idRecipient }] },
@@ -27,7 +27,7 @@ router.get('/api/pivatechat/:idSender/:idRecipient', async (req, res) => {
 // @route post api/users/
 // @desc het all messages betwwen two users
 // @access Public
-router.post('/api/pivatechat/:id', async (req, res) => {
+router.post('/api/privatechat/:id', async (req, res) => {
     try {
         const chat = {
             message:  req.body.message,
@@ -62,7 +62,7 @@ router.post('/api/pivatechat/:id', async (req, res) => {
 //@route DELETE api/user/:id
 //@desc delete message between two users
 //@access Public
-router.delete('/api/pivatechat/:idMessage', async (req, res) => {
+router.delete('/api/privatechat/:idMessage', async (req, res) => {
     Chat.remove({_id:req.params.idMessage}, async (err, data) => {
         if (err) {
             await res.status(500).json({
@@ -75,5 +75,29 @@ router.delete('/api/pivatechat/:idMessage', async (req, res) => {
         }
     });
 })
+
+// // @route post /api/pivatechat/:id
+// // @desc delete conversation between two users
+// // @access Public
+// router.get('/api/pivatechat/:idSender/:idRecipient', async (req, res) => {
+//     Chat.removeAllListeners({
+//         $or: [
+//             { $and: [{ sender: req.params.idSender }, { recipient: req.params.idRecipient }] },
+//             { $and: [{ sender: req.params.idRecipient }, { recipient: req.params.idSender }] }
+//         ]
+//     }, async (err, data) => {
+//         if (err) {
+//             await res.status(500).json({
+//                 message: "error",
+//                 err: err
+//             })
+//         } else {
+//             res.status(200).json({
+//                 message:"all conversation bitwenn the two users is deleted"
+//             })
+//         }
+//     }).sort({ updatedAt: 1 });
+
+// })
 
 module.exports = router;

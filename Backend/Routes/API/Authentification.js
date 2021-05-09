@@ -44,13 +44,13 @@ router.post("/login", async (req, res) => {
                             }
                         );
 
-                        console.log(req.cookies.token);
+                        //console.log(req.cookies.token);
 
                         res.cookie("token", token, { httpOnly: true })
                             .status(200)
                             .json({
                                 message: "Auth successful",
-                                id: user[0]._id,
+                                data:{id:user[0]._id , email:user[0].email} 
                                 
                             });
                     } else {

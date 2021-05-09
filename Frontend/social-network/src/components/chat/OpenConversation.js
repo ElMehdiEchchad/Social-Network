@@ -38,57 +38,75 @@ export default function OpenConversation({ id }) {
 
   //get all conversation of two users when the user choice the recipient
   useEffect(() => {
-    getConversation(selectedConversationId);
-    listOfMyFriends.map(friend => {
-      if (friend._id == selectedConversationId) {
-        setTheRecipient(friend);
-      }
-    })
-
+    if (selectedConversationId) {
+      getConversation(selectedConversationId);
+      listOfMyFriends.map(friend => {
+        if (friend._id == selectedConversationId) {
+          setTheRecipient(friend);
+        }
+      })
+    }
 
   }, [selectedConversationId]);
+
+
+  function ConversationExist() {
+    return (<>
+      {conversationlist.map((message, index) => {
+        const lastMessage = conversationlist.length - 1 === index;
+        return (
+          <div className="div" key={index}>
+            <div
+              ref={lastMessage ? setRef : null}
+              key={index}
+              className={`my-1 d-flex flex-column ${message.sender == id
+                ? "align-self-end align-items-end "
+                : "align-items-start "
+                }`}
+            >
+              <div className="createdAt" >{message.createdAt.substr(11, 5)}</div>
+
+              <div
+                className={`rounded px-2 py-1 ${message.sender == id
+                  ? "bg-primary text-white messageFrameEnd"
+                  : "border messageFrameStart"
+                  }`}
+              >
+                {message.message}
+              </div>
+
+              <div
+                className={`text-muted  ${message.sender == id
+                  ? "text-right align-self-end"
+                  : "text-left align-self-start"
+                  }`}
+              >
+                {message.sender == id
+                  ? "You"
+                  : theRecipient.firstName}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </>)
+  }
+
+  function ConversationNotExist() {
+    return (
+      <>
+        <div className="">SELECT A FREIND</div>
+      </>
+    )
+  }
+
 
   return (
     <div className="d-flex flex-column flex-grow-1">
       <div className="flex-grow-1 overflow-auto">
         <div className=" d-flex flex-column  justify-content-end px-3">
-          {conversationlist.map((message, index) => {
-            const lastMessage = conversationlist.length - 1 === index;
-            return (
-              <div className="div">
-                <div
-                  ref={lastMessage ? setRef : null}
-                  key={index}
-                  className={`my-1 d-flex flex-column ${message.sender == id
-                    ? "align-self-end align-items-end "
-                    : "align-items-start "
-                    }`}
-                >
-                  <div className="createdAt" >{message.createdAt.substr(11, 5)}</div>
-
-                  <div
-                    className={`rounded px-2 py-1 ${message.sender == id
-                      ? "bg-primary text-white messageFrameEnd"
-                      : "border messageFrameStart"
-                      }`}
-                  >
-                    {message.message}
-                  </div>
-
-                  <div
-                    className={`text-muted  ${message.sender == id
-                      ? "text-right align-self-end"
-                      : "text-left align-self-start"
-                      }`}
-                  >
-                    {message.sender == id
-                      ? "You"
-                      : theRecipient.firstName}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {conversationlist ? ConversationExist() : ConversationNotExist()}
+        
         </div>
       </div>
       <Form onSubmit={handleSubmit}>
@@ -103,8 +121,8 @@ export default function OpenConversation({ id }) {
               style={{ height: "75px", resize: "none" }}
             />
             <InputGroup.Append>
-              
-              <Button className="btn-send" type="submit"><IoSendSharp className="btn-send-icon"  size="20"></IoSendSharp></Button>
+
+              <Button className="btn-send" type="submit"><IoSendSharp className="btn-send-icon" size="20"></IoSendSharp></Button>
             </InputGroup.Append>
           </InputGroup>
         </Form.Group>

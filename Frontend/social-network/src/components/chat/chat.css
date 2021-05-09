@@ -120,14 +120,14 @@
     border:none;
 }
 .NavLink{
-    margin-left: 10px;
+    
     border-radius: 10px 10px 0px   0px !important;
     background-color: var(--vert-dark) !important;
     color: var(--white) !important;
     position: relative;
 }
 
-.NavLink:before,
+
 .NavLink:after {
     content: "";
     position: absolute;
@@ -149,16 +149,7 @@
     box-shadow: -10px 0 0 0 var(--vert-dark);
 }
 
-.NavLink:before {
-    left: -20px;
 
-    border-radius: 0 0 10px 0;
-    -moz-border-radius: 0 0 10px 0;
-    -webkit-border-radius: 0 0 10px 0;
-
-    -webkit-box-shadow: 10px 0 0 0 var(--vert-dark);
-    box-shadow: 10px 0 0 0 var(--vert-dark);
-}
 
 
 

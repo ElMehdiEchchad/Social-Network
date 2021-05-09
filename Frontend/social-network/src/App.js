@@ -9,6 +9,7 @@ import AuthContext from "./contexts/AuthContext";
 import { Provider } from "react-redux";
 import store from "./store/index";
 import Axios from "axios";
+import axios from "axios";
 
 function App() {
     // here we should check if a user is logged in from the cookie
@@ -30,9 +31,11 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     const [auth, setAuth] = useState({
-        loading: true,
-        userData: {},
+        loggedIn:false,
+        userData:{}
     });
+
+    
 
     return (
         <Provider store={store}>

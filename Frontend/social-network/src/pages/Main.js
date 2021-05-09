@@ -36,10 +36,14 @@ export function useMediaQuery(query) {
 }
 
 const Main = () => {
+
+
+
+
     useEffect(() => {
-        console.log("in main auth: ");
-        console.log(auth.userData.id);
+        makeUserOnline(auth.userData.id,true)
     }, []);
+
 
     const { auth, setAuth } = useContext(AuthContext);
     const id = auth.userData.id;
@@ -61,9 +65,28 @@ const Main = () => {
         Axios.get("http://localhost:5000/api/logout", {
             withCredentials: true,
         }).then(() => {
-            setAuth({ ...auth, loggedIn: false });
+            makeUserOnline(auth.userData.id,false)
+            setAuth({ loggedIn: false , userData: {}});
         });
     };
+
+    //change user visbility if online
+
+    function makeUserOnline(id,isOnline) {
+        
+        Axios.put(`http://localhost:5000/api/user/${id}/isOnline`,
+            {
+                isOnline: isOnline,
+            },
+            { withCredentials: true, })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    
+    }
 
     return (
         <div className={styles.wrapper}>

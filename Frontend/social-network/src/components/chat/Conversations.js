@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useState } from "react";
 import { ListGroup, ListGroupItem, Row, Col, Image } from "react-bootstrap";
 import { useConversations } from "../../contexts/ConversationsProvider";
 import { useEffect } from "react";
@@ -11,10 +11,21 @@ export default function Conversations({ id }) {
     listOfMyFriends,
     GetAllMyFriend,
   } = useConversations();
+  
 
   useEffect(() => {
+    //this run at frist time 
     GetAllMyFriend(id);
-  }, []);
+    //this will run every 5 seconds
+    const interval = setInterval(() => {
+      GetAllMyFriend(id);
+    }, 5000);
+    return () => clearInterval(interval);
+
+
+  }, [])
+
+
 
   function friendsExist(listOfMyFriends, selectedConversationId) {
     return (
@@ -40,7 +51,7 @@ export default function Conversations({ id }) {
                 />
 
                 <span
-                  class={user.isOnline ? "onlineDotGreen" : "onlineDotRed"}
+                  className={user.isOnline ? "onlineDotGreen" : "onlineDotRed"}
                 ></span>
               </Col>
               <Col>{user.lastName + " " + user.firstName}</Col>
