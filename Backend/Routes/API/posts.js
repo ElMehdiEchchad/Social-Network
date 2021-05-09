@@ -8,66 +8,74 @@ const Post = require('../../Models/PostModel');
 //@desc get all posts
 //@access public
 router.get("/", (req,res)=>{
-    Post.find({},async(err,data)=>{
-        if(err){
-            await res.status(500).send()
-        }else{
-            res.status(200).json(data)
-        }
-    })
+    Post.find({})
+    .sort({created : -1})
+    .then(data => res.status(200).json(data))
+    .catch(err => res.json(err))
     
-});
+}); //returns all the posts sorted by date=> most recent first
 
-//@route Post api/posts/
-//@desc post an anonym post
+//@route Post api/posts/ with a user id in body
+//@desc post a new post
 //@access public
 router.post("/",(req,res)=>{
     id = new mongoose.Types.ObjectId;
-    const newPost = new Post({ _id: id ,TextContent: req.body.text});
+    const newPost = new Post({ 
+        _id: id ,
+        postedBy : req.body.userId, //this makes a ref to 
+        //user _id which is an object id and would return 
+        //an error if the id parsed is not an object id
+        TextContent: req.body.text,
+        ImageContent : req.body.Image,
+        likes: [] ,
+        Comments: [] });
     newPost.save()
-    .then(posts => res.json(posts)).catch(err => res.json(err))
+    .then(posts => res.json(posts))
+    .catch(err => res.json(err))
     
     
 });  
-
-//@route Post api/posts/:user_id
-//@desc post a post of a certain user
-//@access public 1.0 => then gonna be updated using the user authentification token
-// router.post("/:user_id",(req,res)=>{
-//     user_id = req.params.userId;
-//     _id = new mongoose.Types.ObjectId;
-//     const newPost = new Post({_id:_id, postedBy: user_id, TextContent : req.body.text });
-//     newPost.save()
-//     .then(posts => res.json(posts)).catch(err => res.json(err))
-// });
 
 //@route delete api/posts
 //@desc delete all posts 
 //@access public (to be reviewed)
 router.delete("/",(req,res)=>{
     Post.remove()
-    .then(result =>res.json("all deleted successfully"))
+    .then(result =>res.json({message:"all deleted successfully"}))
     .catch(err => res.json(err))
+});
+
+
+
+//@route /api/posts/
+//@desc find posts by their id
+//@access public
+
+router.get("/:id",(req,res)=>{
+    Post.findById({ _id: req.params.id },
+        '_id TextContent ImageContent postedBy created likes comments '
+        ,(result , err)=>{
+            if(err){ 
+                res.status(500).json(err)
+            }else{
+                res.status(200).send(result)
+            }
+        }
+    );
 });
 
 //@route /api/posts/:user_id
-//@desc find the posts posted by a certain user
-//@access public
-router.get("/:user_id",(req,res)=>{
-    Post.find({PostedBy : req.params.userId})
-    .populate('postedBy','_id name')
+//@desc find the posts posted by a certain user for his porfile
+// @access public
 
+router.get('/user/:userID',(req,res)=>{
+    Post.find({ postedBy : req.params.userID }, '_id TextContent ImageContent postedBy created likes comments ')
+    .sort({created : -1})
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(500).json(err));
 });
 
-//@route /api/posts/:post_id
-//@desc find posts by their id
-//@access public
-router.get("/:post_id",(req,res)=>{
-    Post.findById(req.params.postId)
-    .then(result => res.json(result))
-    .catch(err => res.json(err))
-
-});
+//=========================== what's above works just fine==================================================//
 
 
 
@@ -75,3 +83,8 @@ router.get("/:post_id",(req,res)=>{
 
 
 module.exports = router;
+
+
+//to show posts according to the friends,
+// consider this
+//  https://stackoverflow.com/questions/51693818/how-to-filter-mongoose-collection-by-id-node-js
