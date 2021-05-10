@@ -13,7 +13,7 @@ import PostedBy from './PostedBy';
 
 import {connect} from 'react-redux';
 import {getPosts, addLike, addComment} from '../../actions/postActions';
-import {getUser} from '../../actions/itemActions';
+import {getUser , getfriends} from '../../actions/itemActions';
 
 
 
@@ -24,8 +24,8 @@ class Post extends Component{
     constructor(props) {
         super(props);
         this.props.getPosts();
-       // this.props.getAllUsers () ;
-       // this.props.getUser (this.props.id) ;
+        this.props.getfriends(this.props.id);
+        
          
       }
 
@@ -38,12 +38,21 @@ class Post extends Component{
     render(){
         const {posts} = this.props.posts;
         console.log(posts[0])
+
+        const {friends} =this.props.users
+        var listfriends =[]
+        if(friends[0].friends) {
+           friends[0].friends.map( ({ _id}) => (
+            listfriends.push(_id)
+           ));
+        }
+        listfriends.push(this.props.id)
  
-   if(typeof posts[0] !== 'undefined'&& posts[0].length > 0) {  
+   if(typeof friends[0].friends !== 'undefined ' && typeof posts[0] !== 'undefined'&& posts[0].length > 0) {  
     return(
        
         <div>
-         { posts[0].map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
+         { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
             <PostedBy id={postedBy} />
@@ -107,10 +116,11 @@ class Post extends Component{
 
 
  const mapStateToProps = (state) => ({
-    posts : state.posts
+    posts : state.posts ,
+    users :state.users
  });
  
 
-export default connect(mapStateToProps, {getPosts, addComment, addLike, getUser}) (Post);
+export default connect(mapStateToProps, {getPosts,getfriends , addComment, addLike, getUser}) (Post);
 
 /*const [open, setOpen] = useState(false);*/
