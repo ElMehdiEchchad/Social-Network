@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import { AiOutlineGif, AiOutlineSmile } from 'react-icons/ai';
 import { Avatar, FormGroup } from '@material-ui/core';
 import './NewPost.css';
@@ -15,8 +15,16 @@ import {Form} from 'reactstrap';
 
 
 
-
 class NewPost extends Component{
+
+  constructor(props) {
+    super(props);
+    this.props.getUser(this.props.id);
+    }
+
+    componentDidMount() {
+      const {user} = this.props.users;
+    }
   
   state={
     text: '',
@@ -50,16 +58,17 @@ class NewPost extends Component{
     });
 }
 
-
     render(){
+      const {user} = this.props.users;
     return(
       <Container minWidth="xs">
       <div className="grid-container" >
       <div className="grid-item NewPost">New Post</div>
-      
+
       <div className="grid-item">
-          <a><Avatar src="/broken-image.jpg" /></a>
+          <a><Avatar src={user[0].profileImage} /></a>
       </div> 
+      
       <Form onSubmit={this.handleOnSubmit}>
         
       <div className="grid-item item2">
@@ -96,5 +105,9 @@ NewPost.propTypes = {
   addPost: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  users : state.users
+});
 
-export default connect(null, {addPost}) (NewPost);
+
+export default connect(mapStateToProps, {addPost, getUser}) (NewPost);
