@@ -25,9 +25,9 @@ class NewPost extends Component{
       text: '',
       userId: this.props.id,
       Image: null,
-      firstName:user[0].firstName,
-      lastName : user[0].lastName,
-      profilphoto:user[0].profileImage
+      posterfn:user[0].firstName,
+      posterln : user[0].lastName,
+      profileImage:user[0].profileImage
     }
     }
 
@@ -53,15 +53,16 @@ class NewPost extends Component{
       text: this.state.text,
       userId: this.state.userId,
       Image: this.state.Image,
-      firstName:user[0].firstName,
-      lastName : user[0].lastName,
-      profilphoto:user[0].profileImage
+      posterfn:user[0].firstName,
+      posterln : user[0].lastName,
+      profileImage:user[0].profileImage
     }
     this.props.addPost(newPost);
     this.setState({
         text: '',
         Image: null,
     });
+    window.location.reload();
 }
 
     render(){
@@ -69,7 +70,7 @@ class NewPost extends Component{
     return(
       <Container minWidth="xs">
       <div className="grid-container" >
-      <div className="grid-item NewPost">{user[0].profileImage}</div>
+      <div className="grid-item NewPost">New Post</div>
 
       <div className="grid-item">
           <a><Avatar src={user[0].profileImage} /></a>
