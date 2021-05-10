@@ -38,7 +38,7 @@ class Post extends Component{
         const {posts} = this.props.posts;
         console.log(posts[0])
  
-   if(posts.length >0) {  
+   if(typeof posts[0] !== 'undefined'&& posts[0].length > 0) {  
     return(
        
         <div>
