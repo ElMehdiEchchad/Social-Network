@@ -14,7 +14,7 @@ import {
 // get posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:5000/api/posts");
+    const res = await axios.get("http://localhost:5000/api/posts", {withCredentials :true});
 
     dispatch({
       type: GET_POSTS,

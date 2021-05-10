@@ -5,6 +5,6 @@ import postReducer from './postReducer';
 
 export default combineReducers({
     users:itemReducer,
-    post:postReducer,
+    posts:postReducer,
     alert:alertReducer
 });

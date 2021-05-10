@@ -10,8 +10,8 @@ import {
   } from "../actions/types";
    
   const initialState = {
-    posts: [],
-    post: null,
+    posts: [{}],
+    //post: null,
     loading: true,
     error: {},
   };
@@ -23,8 +23,7 @@ import {
       case GET_POSTS:
         return {
           ...state,
-          posts: payload,
-          loading: false,
+          posts : [action.payload, ...state.posts],
         };
       case GET_POST:
         return {
