@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import './post.css';
-import { Button} from '@material-ui/core';
+import { Avatar, Button} from '@material-ui/core';
 import imgPosted from './imgPosted.png';
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
@@ -9,7 +9,7 @@ import {IoSend} from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import Moment from "react-moment";
 import PropTypes from "prop-types";
-import PostedBy from './PostedBy';
+
 
 import {connect} from 'react-redux';
 import {getPosts, addLike, addComment} from '../../actions/postActions';
@@ -55,7 +55,10 @@ class Post extends Component{
          { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-            
+                <Link to={'/profil/${user}'}><Avatar src="" /></Link>
+                <div class="usernamePost">
+                <Link to={'/profil/${user}'}>username</Link>
+                </div>
             <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
         <div class="grid-itemPost itemPost2">
