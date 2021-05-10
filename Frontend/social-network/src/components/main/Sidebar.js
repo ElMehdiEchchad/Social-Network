@@ -31,7 +31,7 @@ class Sidebar extends Component {
             
             <div className={styles.profileHeader}>
                 <div className={styles.avatar}></div>
-                <div className={styles.name}>{user[0].firstName+user[0].lastName}</div>
+                <div className={styles.name}>{user[0].firstName+" "+user[0].lastName}</div>
                 <div className={styles.email}>{user[0].email}</div>
             </div>
             <div className={styles.navWrapper}>

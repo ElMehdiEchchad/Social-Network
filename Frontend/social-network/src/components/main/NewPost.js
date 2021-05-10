@@ -20,17 +20,19 @@ class NewPost extends Component{
   constructor(props) {
     super(props);
     this.props.getUser(this.props.id);
+    const {user} = this.props.users;
+    this.state={
+      text: '',
+      userId: this.props.id,
+      Image: null,
+      firstName:user[0].firstName,
+      lastName : user[0].lastName,
+      profilphoto:user[0].profileImage
+    }
     }
 
-    componentDidMount() {
-      const {user} = this.props.users;
-    }
-  
-  state={
-    text: '',
-    userId: this.props.id,
-    Image: null,
-  }
+   
+ 
   
   handleOnChangeText = e => {
     this.setState({
@@ -45,11 +47,15 @@ class NewPost extends Component{
   }
 
   handleOnSubmit = e => {
+    const {user} = this.props.users;
     e.preventDefault();
     const newPost= {
       text: this.state.text,
       userId: this.state.userId,
-      Image: this.state.Image
+      Image: this.state.Image,
+      firstName:user[0].firstName,
+      lastName : user[0].lastName,
+      profilphoto:user[0].profileImage
     }
     this.props.addPost(newPost);
     this.setState({
@@ -63,7 +69,7 @@ class NewPost extends Component{
     return(
       <Container minWidth="xs">
       <div className="grid-container" >
-      <div className="grid-item NewPost">New Post</div>
+      <div className="grid-item NewPost">{user[0].profileImage}</div>
 
       <div className="grid-item">
           <a><Avatar src={user[0].profileImage} /></a>

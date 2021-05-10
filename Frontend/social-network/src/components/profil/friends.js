@@ -72,7 +72,7 @@ if(typeof friends[0].friends === 'undefined' && typeof users[0] !== 'undefined'&
 
  
 
-if (friends[0].friends && !users[0].firstName) {
+if (friends[0].friends && typeof users[0] !== 'undefined'&& users[0].length > 0  ) {
   return (
   <div>
   <h1 style={{ color :"#F05945" , padding:"3%"}}> My Friends </h1>

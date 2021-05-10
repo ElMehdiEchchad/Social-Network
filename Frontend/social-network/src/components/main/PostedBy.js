@@ -10,17 +10,14 @@ class PostedBy extends Component{
         this.props.getUser(this.props.id);
         }
     
-        componentDidMount() {
-            const {user} = this.props.users;
-          }
-       
+ 
     render(){
         const {user} = this.props.users;
         return(
             <div>
-                <Link to={'/profil/${user}'}><Avatar src={user[0].profileImage} /></Link>
+               <Avatar src={user[0].profileImage} />
                 <div class="usernamePost">
-                    <Link to={'/profil/${user}'}>{user[0].firstName+' '+ user[0].lastName}</Link>
+                <Link to={'/profil/${user}'}>{user[0].firstName+' '+ user[0].lastName}</Link>
                 </div>
             </div>
         )

@@ -55,7 +55,7 @@ class Post extends Component{
          { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-            <PostedBy id={postedBy} />
+            
             <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
         <div class="grid-itemPost itemPost2">
