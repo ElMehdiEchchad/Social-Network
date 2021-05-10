@@ -18,7 +18,7 @@ export const getPosts = () => async (dispatch) => {
 
     dispatch({
       type: GET_POSTS,
-      payload: res.data.reverse(),
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
@@ -48,7 +48,7 @@ export const getPost = (id) => async (dispatch) => {
 // Add likes
 export const addLike = (id, userId) => async (dispatch) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/posts/like/${id}`);
+    const res = await axios.put(`http://localhost:5000/api/posts/like/${id}`, userId, {withCredentials: true});
 
     dispatch({
       type: UPDATE_LIKES,
@@ -100,7 +100,7 @@ export const deletePost = (id) => async (dispatch) => {
 };
 
 // Add a post
-export const addPost = post => async (dispatch) => {
+export const addPost = (post) => async (dispatch) => {
   try {
     const res = await axios.post(`http://localhost:5000/api/posts/`, post, {withCredentials: true});
 
@@ -122,7 +122,7 @@ export const addPost = post => async (dispatch) => {
 export const addComment = (postId, userId, formData) => async (dispatch) => {
 
   try {
-    const res = await axios.post(`http://localhost:5000/api/posts/comment/${postId}`, formData, {withCredentials: true});
+    const res = await axios.post(`http://localhost:5000/api/posts/comment/${postId}`, (userId, formData), {withCredentials: true});
 
     dispatch({
       type: ADD_COMMENT,

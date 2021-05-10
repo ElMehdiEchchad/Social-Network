@@ -37,7 +37,7 @@ app.use((req, res, next) => {
     next();
 });
 //initialize routes of API
-// app.use("/api/", AuthentificationRoutes);
+app.use("/api/", AuthentificationRoutes);
 app.use(UserRoutes);
 app.use('/api/users/', AuthentificationRoutes);
 app.use('/api/posts/', PostsRoute);

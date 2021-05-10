@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 import {connect} from 'react-redux';
 import {getPosts, addLike, addComment} from '../../actions/postActions';
-import {getfriends, getUser} from '../../actions/itemActions';
+import {getUser} from '../../actions/itemActions';
 
 
 

@@ -12,22 +12,15 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 
 class Sidebar extends Component {
-        state = {
-            Firstname: this.props.getUser(this.props.id).firstName ,
-            Lastname: this.props.getUser(this.props.id).lastName,
-            Email :this.props.getUser(this.props.id).email,
-            ProfileImage: this.props.getUser(this.props.id).profileImage,
-          }
-      
         
     render(){
     return (
         <div className={styles.sidebar}>
             
             <div className={styles.profileHeader}>
-                <div className={styles.avatar}><img src={this.state.ProfileImage} /></div>
-                <div className={styles.name}>{this.state.Firstname + this.state.Lastname}</div>
-                <div className={styles.email}>{this.state.Email}</div>
+                <div className={styles.avatar}></div>
+                <div className={styles.name}></div>
+                <div className={styles.email}></div>
             </div>
             <div className={styles.navWrapper}>
                 <Link to='/' className={styles.navLink}>
