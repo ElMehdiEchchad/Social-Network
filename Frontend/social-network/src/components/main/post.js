@@ -9,6 +9,7 @@ import {IoSend} from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import Moment from "react-moment";
 import PropTypes from "prop-types";
+import PostedBy from './PostedBy';
 
 import {connect} from 'react-redux';
 import {getPosts, addLike, addComment} from '../../actions/postActions';
@@ -45,11 +46,8 @@ class Post extends Component{
          { posts[0].map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-            <Link to={'/profil/${user}'}><Avatar src="/broken-image.jpg" /></Link>
-            <div class="usernamePost">
-                    <Link to={'/profil/${user}'}>username</Link>
-                </div>
-                <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
+            <PostedBy id={postedBy} />
+            <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
         <div class="grid-itemPost itemPost2">
             <div className="textPosted">
