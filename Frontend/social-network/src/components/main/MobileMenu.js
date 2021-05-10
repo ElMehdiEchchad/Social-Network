@@ -15,15 +15,26 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 
 class MobileMenu extends Component {
+
+    constructor(props) {
+        super(props);
+        this.props.getUser(this.props.id);
+        }
+    
+        componentDidMount() {
+            const {user} = this.props.users;
+          }
+        
    
     render(){
+    const {user} = this.props.users;
     return (
         <div className={styles.sidebar}>
             <div className={styles.profileHeader}>
                 <div className={styles.avatar}></div>
                 <div className={styles.info}>
-                    <div className={styles.name}></div>
-                    <div className={styles.email}></div>
+                    <div className={styles.name}>{user[0].firstName+user[0].lastName}</div>
+                    <div className={styles.email}>{user[0].email}</div>
                 </div>
             </div>
             <div className={styles.navWrapper}>
@@ -55,9 +66,9 @@ class MobileMenu extends Component {
         </div>
     );}
 };
-MobileMenu.propTypes = {
-    getUser: PropTypes.func.isRequired,
-}
+const mapStateToProps = (state) => ({
+    users : state.users
+});
 
-export default connect(null, {getUser})(MobileMenu) ;
+export default connect(mapStateToProps, {getUser})(MobileMenu) ;
 
