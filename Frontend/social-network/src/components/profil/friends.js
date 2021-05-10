@@ -8,6 +8,7 @@ import {Row} from 'react-bootstrap';
 import { Grid  , Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import ScrollDialog from '../profil/Dialog'
+import ScrollDialog2 from '../profil/Dialog-non-friend'
 import {connect} from 'react-redux' ;
 import { Divider } from '@material-ui/core';
 
@@ -51,7 +52,7 @@ if(typeof friends[0].friends === 'undefined' && typeof users[0] !== 'undefined'&
   { users[0].filter(item =>item._id!==this.props.id ).map( ({firstName , lastName , email , birthDay , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay}/>
+           <ScrollDialog2 email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay}/>
            <Card.Body >             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
@@ -101,7 +102,7 @@ if (friends[0].friends && typeof users[0] !== 'undefined'&& users[0].length > 0 
   { users[0].filter(item =>item._id!==this.props.id && !listfriends.includes(item._id)).map( ({firstName , lastName , email , birthDay , _id}) => (
   <Grid.Column>
   <Card style={{ alignItems:"center"}} >
-           <ScrollDialog email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay} id={_id}/>
+           <ScrollDialog2 email ={email} firstName={firstName} lastName ={lastName} birthDay={birthDay} id={_id}/>
            <Card.Body >             
               <Card.Title><h4 > {firstName + lastName} </h4></Card.Title>
               <Card.Text> <h5>{email}</h5> </Card.Text>
