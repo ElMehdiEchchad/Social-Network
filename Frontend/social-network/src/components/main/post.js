@@ -37,11 +37,13 @@ class Post extends Component{
     render(){
         const {posts} = this.props.posts;
         console.log(posts[0])
-        
-      const postList = posts[0].length ? (
-        posts[0].map(({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => {
-    
-    <div class="grid-containerPost" key={_id}>
+ 
+   if(posts.length >0) {  
+    return(
+       
+        <div>
+         { posts[0].map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
+                <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
             <Link to={'/profil/${user}'}><Avatar src="/broken-image.jpg" /></Link>
             <div class="usernamePost">
@@ -89,24 +91,19 @@ class Post extends Component{
          
         </div>
         </div>
-
-            })
-        ) : (
-            <div style={{fontFamily: "Montserrat",
-                fontStyle: "normal",
-                fontWeight: "bold",
-                fontSize: "20px",
-                lineHeight: "29px",
-                padding: "30px",
-                color: "#F05945"}}>No Posts</div>
-        )
-    
+         )
+         )}
+        </div>
         
-    return(
-       
-        <div>{postList}</div>
-        
-    ); }
+    );}else{
+        return (<div style={{fontFamily: "Montserrat",
+        fontStyle: "normal",
+        fontWeight: "bold",
+        fontSize: "20px",
+        lineHeight: "29px",
+        padding: "30px",
+        color: "#F05945"}}>No Posts</div>);
+    } }
 
 }
 
