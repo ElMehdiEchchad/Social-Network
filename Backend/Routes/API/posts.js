@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Post = require('../../Models/PostModel');
+const { route } = require('./User');
 
 
 //@route Get api/posts/
@@ -28,7 +29,10 @@ router.post("/",(req,res)=>{
         TextContent: req.body.text,
         ImageContent : req.body.Image,
         likes: [] ,
-        Comments: [] });
+        Comments: [],
+        PosterProfileImage : req.body.profileImage,
+        PosterFirstname : req.body.posterfn,
+        PosterLastname : req.body.posterln });
     newPost.save()
     .then(posts => res.json(posts))
     .catch(err => res.json(err))
@@ -53,7 +57,7 @@ router.delete("/",(req,res)=>{
 
 router.get("/:id",(req,res)=>{
     Post.findById({ _id: req.params.id },
-        '_id TextContent ImageContent postedBy created likes comments '
+        '_id TextContent ImageContent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname   '
         ,(result , err)=>{
             if(err){ 
                 res.status(500).json(err)
@@ -69,15 +73,45 @@ router.get("/:id",(req,res)=>{
 // @access public
 
 router.get('/user/:userID',(req,res)=>{
-    Post.find({ postedBy : req.params.userID }, '_id TextContent ImageContent postedBy created likes comments ')
+    Post.find({ postedBy : req.params.userID }, '_id TextContent ImageContent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname ')
     .sort({created : -1})
     .then(result => res.status(200).json(result))
     .catch(err => res.status(500).json(err));
 });
 
-//=========================== what's above works just fine==================================================//
 
 
+//like a post 
+router.put("/like",(req,res)=>{
+    const Liid = req.body.likedBy;
+    Post.findByIdAndUpdate(
+        { _id : req.body.id },
+        {
+            $push : {  likes : Liid  }
+        }
+    )
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(500).json(err));
+});
+
+
+//comment a post
+router.put("/Comment",(req,res)=>{
+    const CommenterId = req.body.commentBy;
+    const commentText = req.body.commentText;
+    const postId = req.body.id;
+    Post.findByIdAndUpdate(
+        { _id : postId },
+        {
+            $push : {  comments : {
+                "text" : commentText ,
+                "postedBy" : commenterId
+            }  }
+        }
+    )
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(500).json(err));
+});
 
 
 

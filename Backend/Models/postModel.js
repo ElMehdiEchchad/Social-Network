@@ -18,6 +18,18 @@ const { ObjectId } = mongoose.Schema;
     type: ObjectId,
     ref: 'User'
   },
+  PosterProfileImage : {
+    type : String,
+    default : null
+  },
+  
+  PosterFirstname : {
+    type : String 
+
+  },
+  PosterLastname :{
+    type : String
+  },
 
   created: {
     type: Date,
