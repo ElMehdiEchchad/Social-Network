@@ -1,7 +1,7 @@
 import {React , useRef , useState , Component } from 'react';
 //import Grid from '@material-ui/core/Grid';
 import { Card } from 'react-bootstrap';
-import Avatar from "../profil/ava1.png";
+import Avatar from "../profil/ava2.jpg";
 import Ava from '@material-ui/core/Avatar';
 import { BiMessageDots , BiTrash , BiUserPlus} from "react-icons/bi";
 import {Row} from 'react-bootstrap';

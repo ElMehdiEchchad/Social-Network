@@ -3,7 +3,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Avatar from "../profil/ava1.png";
+import Avatar from "../profil/ava2.jpg";
 import Ava from '@material-ui/core/Avatar';
 import { Button} from 'semantic-ui-react'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -42,7 +42,6 @@ export default function ScrollDialog(props) {
       <Dialog
         open={open}
         onClose={handleClose}
-        fullScreen={fullScreen}
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"

@@ -4,7 +4,7 @@ import Ava from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Avatar from "../profil/ava1.png";
+import Avatar from "../profil/ava2.jpg";
 import {  withStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux' ;
 import {getUsers } from '../../actions/itemActions';
@@ -24,20 +24,12 @@ export default class Profilcard extends React.Component{
 
    
   render(){
-  /* const {auth} = useContext(AuthContext) ;
-   const id = auth.userData.id ; 
-  
-   console.log("Hi"+id) ;*/
 
     const panes = [
     {
       menuItem: { key: 'users',  content: 'About' },
       render: () => <Tab.Pane><Aboutme id={this.props.id}></Aboutme></Tab.Pane>,
     },
-   /* {
-      menuItem: { key: 'friends', icon: 'users' , content :'friends' },
-      render: () => <Tab.Pane><Friends/></Tab.Pane>,
-    },*/
     {
       menuItem: { key: 'posts', content :'Posts' },
       render: () => <Tab.Pane><Posts/></Tab.Pane>,
