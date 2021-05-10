@@ -100,30 +100,57 @@ export default function OpenConversation({ id }) {
     )
   }
 
+  function isAllowed() {
+    if (selectedConversationId) {
+      return (
+        <>
+          <Form.Control
+            className="messageInput"
+            as="textarea"
+            required
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            style={{ height: "75px", resize: "none" }}
+            placeholder="write your message here ..." enabled
+          />
+          <InputGroup.Append>
+            <Button className="btn-send" type="submit"><IoSendSharp className="btn-send-icon" size="20"></IoSendSharp></Button>
+          </InputGroup.Append>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <Form.Control
+            className="messageInput"
+            as="textarea"
+            required
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            style={{ height: "75px", resize: "none" }}
+            placeholder="Select a friend" disabled
+          />
+          <InputGroup.Append>
+            <Button className="btn-send" type="" disabled><IoSendSharp className="btn-send-icon" size="20"></IoSendSharp></Button>
+          </InputGroup.Append>
+        </>
+      )
+    }
+
+  }
+
 
   return (
     <div className="d-flex flex-column flex-grow-1">
       <div className="flex-grow-1 overflow-auto">
         <div className=" d-flex flex-column  justify-content-end px-3">
           {conversationlist ? ConversationExist() : ConversationNotExist()}
-        
         </div>
       </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="m-2">
           <InputGroup>
-            <Form.Control
-              className="messageInput"
-              as="textarea"
-              required
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              style={{ height: "75px", resize: "none" }}
-            />
-            <InputGroup.Append>
-
-              <Button className="btn-send" type="submit"><IoSendSharp className="btn-send-icon" size="20"></IoSendSharp></Button>
-            </InputGroup.Append>
+            {isAllowed()}
           </InputGroup>
         </Form.Group>
       </Form>
