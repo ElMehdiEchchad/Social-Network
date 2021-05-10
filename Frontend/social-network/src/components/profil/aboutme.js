@@ -90,10 +90,6 @@ import { ImagePicker } from 'react-file-picker'
 
   onSubmit(e) {
     e.preventDefault();
-   
-    var month = this.state.Birthday.getUTCMonth() + 1; //months from 1-12
-    var day = this.state.Birthday.getUTCDate();
-    var year = this.state.Birthday.getUTCFullYear();
   
     const userupdated = {
       firstName: this.state.Firstname,

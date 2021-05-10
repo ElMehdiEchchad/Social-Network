@@ -1,26 +1,21 @@
 import React from 'react';
-import {Card , Container} from 'react-bootstrap';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Avatar from "../profil/ava1.png";
 import Ava from '@material-ui/core/Avatar';
-import { BiPlus } from "react-icons/bi";
-import {Row} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { List,Button} from 'semantic-ui-react'
+import { Button} from 'semantic-ui-react'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
-import Profilcard from "../profil/profil-card";
+import ProfilcardFriend from "../profil/profil-card-friend";
 
 export default function ScrollDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
@@ -54,7 +49,7 @@ export default function ScrollDialog(props) {
       >
         <DialogTitle id="scroll-dialog-title">Profil </DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
-          <Profilcard id={props.id}></Profilcard>
+          <ProfilcardFriend id={props.id}></ProfilcardFriend>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
