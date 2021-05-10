@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import './post.css';
-import { Avatar, Button} from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import imgPosted from './imgPosted.png';
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
