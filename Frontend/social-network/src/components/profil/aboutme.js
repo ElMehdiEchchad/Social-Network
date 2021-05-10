@@ -24,14 +24,24 @@ import { ImagePicker } from 'react-file-picker'
     this.props.getUser(this.props.id);
     const {user} = this.props.users;
 
+    var birth ;
+
+    if(typeof user[0].birthDay !== 'undefined') birth =new Date(user[0].birthDay) ;
+    else{
+      setTimeout( 250);
+  }
+    
+
     this.state = {
       Firstname: user[0].firstName ,
       Lastname: user[0].lastName,
-      Birthday: new Date(),
+      Birthday: birth,
       Email :user[0].email ,
       isToggle: true
 
   }
+
+
 
   console.log("birthday"+user[0].birthDay)
 
@@ -62,6 +72,7 @@ import { ImagePicker } from 'react-file-picker'
   }
 
   onChangeBirthday(date) {
+   
     this.setState({
       Birthday :date
     });
@@ -79,6 +90,10 @@ import { ImagePicker } from 'react-file-picker'
 
   onSubmit(e) {
     e.preventDefault();
+   
+    var month = this.state.Birthday.getUTCMonth() + 1; //months from 1-12
+    var day = this.state.Birthday.getUTCDate();
+    var year = this.state.Birthday.getUTCFullYear();
   
     const userupdated = {
       firstName: this.state.Firstname,
@@ -99,6 +114,23 @@ import { ImagePicker } from 'react-file-picker'
     const {user} = this.props.users;
     
     const {id} = this.props.id ;
+
+   var brirth , month , day , year ; 
+
+    if(typeof user[0].birthDay !== 'undefined') 
+    {brirth =new Date(user[0].birthDay) ;
+       month = brirth.getUTCMonth() + 1; //months from 1-12
+       day = brirth.getUTCDate();
+       year =brirth.getUTCFullYear();
+    }
+    else{
+      setTimeout( 250);
+    }
+
+  
+
+    var newdate =day+ "-" + month + "-" +year ;
+
 
       return (
  <div>
@@ -142,8 +174,9 @@ import { ImagePicker } from 'react-file-picker'
         control={Input}
         label='Birthday Date'
         placeholder='Birthday Date'
-        value={user[0].Birthday}
+        value={newdate}
       >
+        
       </Form.Field>
     
       </Form.Group>

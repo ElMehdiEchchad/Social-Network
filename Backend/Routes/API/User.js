@@ -191,6 +191,20 @@ router.delete(
                 }
             }
         );
+        userModel.findByIdAndUpdate(
+            { _id: req.params.idfriends },
+            { $pull: { friends: { id_friend: req.params.id } } },
+            { new: true },
+            async (err, data) => {
+                if (err) {
+                    await res.status(500).json({
+                        message: `Cannot find user with this ID : ${req.params.id}`,
+                    });
+                } else {
+                    res.status(200).send(data);
+                }
+            }
+        );
     }
 );
 
@@ -229,7 +243,8 @@ router.get("/api/user/:id/friends", async (req, res) => {
 
 
                         }
-                    });
+                    })
+                // }).sort(['firstName', 1]);
                 })
 
                 return Promise.all(itteration).then(() => {
