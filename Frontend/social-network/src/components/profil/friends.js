@@ -13,9 +13,7 @@ import { connect } from 'react-redux';
 import { Divider } from '@material-ui/core';
 
 //added by lkhadir
-import { useConversations } from "../../contexts/ConversationsProvider";
 import { Redirect } from 'react-router-dom';
-import { compose } from "redux";
 import Chat from "../chat/chat";
 
 
@@ -99,7 +97,7 @@ class Friends extends Component {
 
 
 
-      if (friends[0].friends && typeof users[0] !== 'undefined' && users[0].length > 0) {
+      if (friends[0].friends && typeof users[0] !== 'undefined' && users[0].length > 0 && typeof user[0].profileImage !== 'undefined') {
          return (
             <div>
                <h1 style={{ color: "#F05945", padding: "3%" }}> My Friends </h1>
@@ -107,12 +105,18 @@ class Friends extends Component {
                   {users[0].filter(item => item._id !== this.props.id && listfriends.includes(item._id)).map(({ firstName, lastName, email, birthDay, _id }) => (
                      <Grid.Column>
                         <Card style={{ alignItems: "center" }} >
-                           <ScrollDialog email={email} firstName={firstName} lastName={lastName} birthDay={birthDay} id={_id} />
+                           <ScrollDialog
+                              email={email}
+                              firstName={firstName}
+                              lastName={lastName}
+                              birthDay={birthDay}
+                              id={_id}
+                              profileImage={typeof user[0].profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar} />
                            <Card.Body >
                               <Card.Title style={{ marginLeft: "15%" }}><h4 > {firstName + " " + lastName} </h4></Card.Title>
                               <Card.Text> <h5>{email}</h5> </Card.Text>
                               <Row >
-                                 <Button size='mini' style={{ backgroundColor: "#5EAAA8", marginLeft: "15%" }}  onClick={() => { this.redirectTochat() }}><BiMessageDots /> </Button>
+                                 <Button size='mini' style={{ backgroundColor: "#5EAAA8", marginLeft: "15%" }} onClick={() => { this.redirectTochat() }}><BiMessageDots /> </Button>
                                  <Button size='mini' style={{ backgroundColor: "#F05945" }} onClick={() => { this.props.removefriend(this.props.id, _id); window.location.reload() }} ><BiTrash /> </Button>
                               </Row>
                            </Card.Body>

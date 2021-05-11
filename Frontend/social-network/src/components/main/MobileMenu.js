@@ -31,7 +31,7 @@ class MobileMenu extends Component {
     return (
         <div className={styles.sidebar}>
             <div className={styles.profileHeader}>
-                <div className={styles.avatar}></div>
+                <img className={styles.avatar} src={typeof user[0].profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:""}></img>
                 <div className={styles.info}>
                     <div className={styles.name}>{user[0].firstName+user[0].lastName}</div>
                     <div className={styles.email}>{user[0].email}</div>

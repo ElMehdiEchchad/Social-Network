@@ -9,6 +9,8 @@ import {connect} from 'react-redux' ;
 import {getUser , updateUser} from '../../actions/itemActions';
 
 import { ImagePicker } from 'react-file-picker'
+import axios from "axios";
+
 
  class Aboutme extends React.Component{
    
@@ -20,6 +22,8 @@ import { ImagePicker } from 'react-file-picker'
     this.onChangeEmail  = this.onChangeEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
+    this.uploadHandler = this.uploadHandler.bind(this);
  
     this.props.getUser(this.props.id);
     const {user} = this.props.users;
@@ -37,7 +41,9 @@ import { ImagePicker } from 'react-file-picker'
       Lastname: user[0].lastName,
       Birthday: birth,
       Email :user[0].email ,
-      isToggle: true
+      isToggle: true,
+      file: null
+
 
   }
 
@@ -100,9 +106,32 @@ import { ImagePicker } from 'react-file-picker'
     };
     this.props.updateUser(this.props.id ,userupdated);
     this.setState({isToggle: !this.state.isToggle});
-    window.location.reload()
-    
+    if(this.state.file !== null){
+      this.uploadHandler()
+    }else{
+      window.location.reload()
+    }
+   
   }
+
+  //added by lkhadir   
+  uploadHandler() {
+
+      const formData = new FormData();
+      formData.append('myImage',this.state.file);
+      axios.put(`http://localhost:5000/api/user/${this.props.id}/updateImage`,formData,{ withCredentials: true })
+            .then((response) => {
+                //alert("The file is successfully uploaded:");
+                window.location.reload()
+            }).catch((error) => {
+              alert(error);
+        });
+  }
+
+  onChangeImage(e) {
+    this.setState({file:e.target.files[0]});
+ }
+
 
   
   render(){
@@ -225,7 +254,7 @@ import { ImagePicker } from 'react-file-picker'
    <ImagePicker
     extensions={['jpg', 'jpeg', 'png']}
     dims={{minWidth: 100, maxWidth: 500, minHeight: 100, maxHeight: 500}} >
-    <Form.Input label='Profil image' type='file' />
+    <Form.Input label='Profil image' type='file' onChange={this.onChangeImage} />
     </ImagePicker>
   
     

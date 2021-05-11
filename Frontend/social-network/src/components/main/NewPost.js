@@ -70,7 +70,7 @@ class NewPost extends Component{
       <div className="grid-item NewPost">New Post</div>
 
       <div className="grid-item">
-          <a><Avatar src={user[0].profileImage} /></a>
+          <a><Avatar src={ typeof user[0].profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar } /></a>
       </div> 
       
       <Form onSubmit={this.handleOnSubmit}>

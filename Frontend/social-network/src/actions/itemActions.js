@@ -1,6 +1,24 @@
 import axios from 'axios';
-import {GET_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD_FRIEND , REMOVE_FRIEND} from '../actions/types'
+import {GET_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD_FRIEND , REMOVE_FRIEND , UPLOAD_PROFILE_IMAGE} from '../actions/types'
 
+
+
+export const getprofil = id => async dispatch => {
+	//dispatch(setItemsLoading());
+    try{
+        const res = await axios.get("http://localhost:5000/api/user/"+id, {withCredentials :true})
+        dispatch( {
+            type: GET_USER,
+            payload: res.data
+        })
+    }
+    catch(e){
+        dispatch( {
+            payload: console.log("salma" + e),
+        })
+    }
+
+}
 
 
 export const getUser = id => async dispatch => {

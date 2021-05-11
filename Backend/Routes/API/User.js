@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../../Models/userModel");
-const bcrypt = require("bcrypt");
 const checkAuth = require("../../Middleware/check-auth");
+const path = require("path");
+const multer = require("multer");
+const fs = require("fs");
 
 //@route GET api/users/
 //@desc get all users
@@ -23,7 +25,7 @@ router.get("/api/users", async (req, res) => {
 //@access Public
 router.put("/api/user/:id/isOnline", async (req, res) => {
     userModel.findByIdAndUpdate(
-        { _id : req.params.id },
+        { _id: req.params.id },
         {
             isOnline: req.body.isOnline
         }, { new: true },
@@ -33,7 +35,7 @@ router.put("/api/user/:id/isOnline", async (req, res) => {
                     .status(500)
                     .send(`Cannot find user with this ID : ${req.params.id}`);
             } else {
-              
+
                 res.status(200).json({
                     message: `isOnline is updated to ${data.isOnline}`
                 });
@@ -244,7 +246,7 @@ router.get("/api/user/:id/friends", async (req, res) => {
 
                         }
                     })
-                // }).sort(['firstName', 1]);
+                    // }).sort(['firstName', 1]) ;  
                 })
 
                 return Promise.all(itteration).then(() => {
@@ -262,6 +264,136 @@ router.get("/api/user/:id/friends", async (req, res) => {
     });
 });
 
+
+
+
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+});
+
+var upload = multer({ storage: storage });
+
+
+router.put('/api/user/:id/updateImage/', upload.single('myImage'), (req, res, next) => {
+
+    var obj = {
+        data: fs.readFileSync(path.join('public/' + req.file.filename)),
+        contentType: 'image/png'
+    }
+    //res.send(req.file.filename)
+    // console.log(obj.img)
+    userModel.findOne({ _id: req.params.id }, (err, item) => {
+        item.profileImage = obj
+        item.save((e, updatedTodo) => {
+            if (err) {
+                res.status(500).json({
+                    error: err,
+                });
+            } else {
+                res.status(200).json({
+                    message:"image Updated"
+                });
+            }
+        });
+    });
+});
+
+
+// userModel.findOne({ _id: req.params.id }, (err, foundObject) => {
+//     if (req.body.firstName !== undefined) {
+//         foundObject.firstName = req.body.firstName;
+//     }
+//     if (req.body.lastName !== undefined) {
+//         foundObject.lastName = req.body.lastName;
+//     }
+//     if (req.body.birthDay !== undefined) {
+//         foundObject.birthDay = req.body.birthDay;
+//     }
+//     if (req.body.profileImage !== undefined) {
+//         foundObject.profileImage = req.body.profileImage;
+//     }
+//     foundObject.save((e, updatedTodo) => {
+//         if (err) {
+//             res.status(500).json({
+//                 error: err,
+//             });
+//         } else {
+//             res.send(updatedTodo);
+//         }
+//     });
+// });
+
+
+//-----------------------------
+
+
+// const storage = multer.diskStorage({
+//    destination: "./public/uploads/",
+//    filename: function(req, file, cb){
+//       cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+//    }
+// });
+
+// const upload = multer({
+//    storage: storage,
+//    limits:{fileSize: 1000000},
+// }).single("myImage");
+
+// router.post("/upload", {
+//    upload(req, res, (err) => {
+//       console.log("Request ---", req.body);
+//       console.log("Request file ---", req.file);//Here you get file.
+//       /*Now do where ever you want to do*/
+//       if(!err)
+//          return res.send(200).end();
+//    });
+// };);
+
+
+
+
+// //@route GET api/search/?quey:"dsdsdsds"
+// //@desc searching for a user
+// //@access Public
+// router.get("/api/search/", async (req, res) => {
+//     userModel.find({$text:{$search:req.query.query}},async (err, data) => {
+//         //,{score:{$meta:"textScore"}}
+//         try {
+//             if(err){
+//                 //res.sendStatus(status) 
+//                 await res.send(500).json({
+//                     message:"error",
+//                     error:err
+//                 })
+//             }else{
+//                 await res.send(200).json({
+//                     message:"search successful",
+//                     data:data
+//                 })
+//                 //res.sendStatus(status) 
+//             }
+//         } catch (error) {
+//             // res.send(200).json({
+//             //     message:"error in catch",
+//             //     error:error
+//             // })
+//             //res.sendStatus(status)
+//             console.log(error)
+
+//         }
+
+
+//     });
+
+
+// }
+// )
 
 
 

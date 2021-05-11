@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { Component } from "react";
 import {getUser} from '../../actions/itemActions';
 import {connect} from 'react-redux';
+import Avatar from "../profil/ava2.jpg";
+
 
 class Sidebar extends Component {
 
@@ -30,7 +32,7 @@ class Sidebar extends Component {
         <div className={styles.sidebar}>
             
             <div className={styles.profileHeader}>
-                <div className={styles.avatar}></div>
+                <img className={styles.avatar} src={typeof user[0].profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar}></img>
                 <div className={styles.name}>{user[0].firstName+" "+user[0].lastName}</div>
                 <div className={styles.email}>{user[0].email}</div>
             </div>

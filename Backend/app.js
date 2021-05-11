@@ -12,6 +12,7 @@ const PostsRoute = require('./Routes/API/posts')
 // set up express app
 const app = express();
 app.use(cookieParser());
+app.use(express.static('public'));
 //use connection to mongodb server
 connectDB();
 app.use(express.json({ extended: false }));

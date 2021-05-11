@@ -5,7 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Avatar from "../profil/ava2.jpg";
 import Ava from '@material-ui/core/Avatar';
-import { Button} from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -36,9 +36,13 @@ export default function ScrollDialog(props) {
     }
   }, [open]);
 
+
+
   return (
     <div>
-      <Button onClick={handleClickOpen('paper')}  style={{ color: "white" , backgroundColor :"white"}}> <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/></Button>
+      <Button onClick={handleClickOpen('paper')} style={{ color: "white", backgroundColor: "white" }}>
+        <Ava src={typeof props.profileImage !== 'undefined' ? props.profileImage : Avatar } style={{ height: '80px', width: '80px' }} />
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}

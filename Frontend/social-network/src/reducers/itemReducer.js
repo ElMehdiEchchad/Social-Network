@@ -1,9 +1,10 @@
-import {GET_USER, ADD_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD_FRIEND , REMOVE_FRIEND} from '../actions/types'
+import {GET_USER, ADD_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD_FRIEND , REMOVE_FRIEND , GET_PROFILE_IMAGE } from '../actions/types'
 
 const initialState = {
     users : [{}] ,
     friends :[{}] ,
-    user :[{}]
+    user :[{}] ,
+    image :[""]
 }
 
 export default function(state=initialState ,action){
@@ -11,6 +12,10 @@ export default function(state=initialState ,action){
         case GET_USER : return {
             ...state,
             user : [action.payload, ...state.user]
+        }
+        case GET_PROFILE_IMAGE  : return {
+            ...state,
+            image : [action.payload, ...state.image]
         }
         case ADD_USER:
             return{

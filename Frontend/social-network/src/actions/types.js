@@ -6,6 +6,7 @@ export const GET_FREINDS  ='GET_FREINDS ';
 export const GET_ALLUSERS ='GET_ALLUSERS' ;
 export const ADD_FRIEND ='ADD_FRIEND' ;
 export const REMOVE_FRIEND ='REMOVE_FRIEND';
+export const GET_PROFILE_IMAGE = 'GET_PROFILE_IMAGE';
 
 // for posts
 export const GET_POSTS = 'GET_POSTS';

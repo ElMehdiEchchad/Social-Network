@@ -11,9 +11,10 @@ const user = new mongoose.Schema({
         type: Date,
         default:Date.now
     },
-    profileImage: {
-        type: String,
-        default:""
+    profileImage:  
+    {
+        data: Buffer,
+        contentType: String
     },
     email: {
         type: String,
@@ -34,4 +35,5 @@ const user = new mongoose.Schema({
         default:false
     }
 })
+user.index({firstName: 'text', lastName: 'text'})
 module.exports = User = mongoose.model('user', user);

@@ -44,7 +44,7 @@ export default function Conversations({ id }) {
                   style={{ width: "25px", height: "25px", objectFit: "cover" }}
                   src={
                     user.profileImage
-                      ? ""
+                      ? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user.profileImage.data.data)))}` 
                       : process.env.PUBLIC_URL + "/defaultProfilePage.png"
                   }
                   roundedCircle
