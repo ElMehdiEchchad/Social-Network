@@ -36,7 +36,8 @@ class Post extends Component{
         console.log(posts[0])
 
   
-  if(typeof posts[0] !== 'undefined'&& posts[0].filter(item => this.props.id===item.postedBy).length === 0) { 
+  if(typeof posts[0] !== 'undefined' ) { 
+    if(posts[0].filter(item => this.props.id===item.postedBy).length === 0){
     return (
     <div  style={{fontFamily: "Montserrat",
         fontStyle: "normal",
@@ -45,6 +46,7 @@ class Post extends Component{
         lineHeight: "29px",
         padding: "30px",
         color: "#F05945" , height:'250px' , width :"350px"}}>No Posts</div>);
+    }
 
   }
  

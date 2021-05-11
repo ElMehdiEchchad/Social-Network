@@ -52,12 +52,12 @@ class Post extends Component{
     return(
        
         <div>
-         { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterProfileImage, PosterFirstname, PosterLastname}) => (
+         { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-                <Link to={'/profil'}><Avatar src={PosterProfileImage} /></Link>
+                <Link to={'/profil/${user}'}><Avatar src="" /></Link>
                 <div class="usernamePost">
-                <Link to={'/profil'}>{PosterFirstname + " " + PosterLastname}</Link>
+                <Link to={'/profil/${user}'}>username</Link>
                 </div>
             <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
@@ -71,7 +71,7 @@ class Post extends Component{
         </div>
         <div className="grid-itemPost itemPost3">
             <div className="BtnPost">
-                <Button type="submit" value="Submit" onClick={(e) => addLike(_id, this.props.id)} size="sm" 
+                <Button type="submit" value="Submit" onClick={(e) =>{ const infoLike={id :_id, likedBy :this.props.id , likes :likes}; this.props.addLike(infoLike) ; window.location.reload()}} size="sm" 
                         style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
                             {likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
                 </Button>

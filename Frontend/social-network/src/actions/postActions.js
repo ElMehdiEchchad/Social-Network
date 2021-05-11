@@ -46,9 +46,9 @@ export const getPost = (id) => async (dispatch) => {
 };
 
 // Add likes
-export const addLike = (id, likedBy) => async (dispatch) => {
+export const addLike = (infolike) => async (dispatch) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/posts/like`, (id, likedBy), {withCredentials: true});
+    const res = await axios.put(`http://localhost:5000/api/posts/like`, infolike , {withCredentials: true});
 
     dispatch({
       type: UPDATE_LIKES,
