@@ -1,7 +1,7 @@
 import React  from 'react';
 import Ava from '@material-ui/core/Avatar';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Avatar from "../profil/ava1.png";
+import Avatar from "../profil/ava2.jpg";
 import {connect} from 'react-redux' ;
 import {getUsers } from '../../actions/itemActions';
 import AboutmeFriend from '../profil/aboutfriend';

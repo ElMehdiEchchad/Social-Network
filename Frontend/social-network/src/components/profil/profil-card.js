@@ -10,7 +10,7 @@ import {connect} from 'react-redux' ;
 import {getUsers } from '../../actions/itemActions';
 import Aboutme from '../profil/aboutme';
 import Friends from '../profil/friends';
-import Posts from '../profil/posts';
+import Post from '../profil/posts';
 import {Row } from 'react-bootstrap';
 import { Divider, Tab } from 'semantic-ui-react'
 
@@ -32,7 +32,7 @@ export default class Profilcard extends React.Component{
     },
     {
       menuItem: { key: 'posts', content :'Posts' },
-      render: () => <Tab.Pane><Posts/></Tab.Pane>,
+      render: () => <Tab.Pane><Post id={this.props.id}/></Tab.Pane>,
     },
   ]
   
