@@ -52,12 +52,12 @@ class Post extends Component{
     return(
        
         <div>
-         { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments}) => (
+         { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterFirstname, PosterLastname, PosterProfileImage}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-                <Link to={'/profil/${user}'}><Avatar src="" /></Link>
+                <Link to={'/profil/${user}'}><Avatar src={PosterProfileImage} /></Link>
                 <div class="usernamePost">
-                <Link to={'/profil/${user}'}>username</Link>
+                <Link to={'/profil/${user}'}>{PosterFirstname+' '+PosterLastname}</Link>
                 </div>
             <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
@@ -85,7 +85,7 @@ class Post extends Component{
         <div /*in={open}*/>
             <div class="grid-containerComment">
                 <div class="grid-itemComment itemComment1">
-                    <input onChange={this.handleOnChangeComment} value={"hii"} type="Post" placeholder="Type your comment.." className="CommentInput"/>
+                    <input onChange={this.handleOnChangeComment} value={""} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
                 <div class="grid-itemComment itemComment2">
                     <Button type="submit" value="Submit"  size="sm" 
