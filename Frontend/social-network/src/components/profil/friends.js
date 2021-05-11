@@ -102,7 +102,7 @@ class Friends extends Component {
             <div>
                <h1 style={{ color: "#F05945", padding: "3%" }}> My Friends </h1>
                <Grid stackable columns={2} style={{ marginTop: "4%", marginBottom: "5%" }} >
-                  {users[0].filter(item => item._id !== this.props.id && listfriends.includes(item._id)).map(({ firstName, lastName, email, birthDay, _id }) => (
+                  {users[0].filter(item => item._id !== this.props.id && listfriends.includes(item._id)).map(({ firstName, lastName, email, birthDay, _id, profileImage }) => (
                      <Grid.Column>
                         <Card style={{ alignItems: "center" }} >
                            <ScrollDialog
@@ -111,7 +111,7 @@ class Friends extends Component {
                               lastName={lastName}
                               birthDay={birthDay}
                               id={_id}
-                              profileImage={typeof user[0].profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar} />
+                              profileImage={typeof profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(profileImage.data.data)))}`:Avatar} />
                            <Card.Body >
                               <Card.Title style={{ marginLeft: "15%" }}><h4 > {firstName + " " + lastName} </h4></Card.Title>
                               <Card.Text> <h5>{email}</h5> </Card.Text>
