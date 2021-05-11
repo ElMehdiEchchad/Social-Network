@@ -75,15 +75,19 @@ class Post extends Component{
                         style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
                             {likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
                 </Button>
-                <Button size="sm" /*onClick={() => setOpen(!open)}
-                        aria-controls="commentSection"
-                        aria-expanded={open}*/
+                <Button size="sm" 
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
                         {comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
                 </Button>
             </div>
-        <div /*in={open}*/>
+        <div >
             <div class="grid-containerComment">
+                <div className="grid-itemComment itemComment3"><Avatar src="" /></div>
+                <div className="grid-itemComment itemComment4">
+                    <Link to={'/profil/${user}'} className="usernameComment">username</Link>
+                    <p className="Comment">Comment</p>
+                </div>
+               
                 <div class="grid-itemComment itemComment1">
                     <input onChange={this.handleOnChangeComment} value={""} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
