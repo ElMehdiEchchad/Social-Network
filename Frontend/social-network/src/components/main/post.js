@@ -23,21 +23,31 @@ class Post extends Component{
    
     constructor(props) {
         super(props);
+
+        this.handleOnChangeComment  = this.handleOnChangeComment.bind(this);
+
         this.props.getPosts();
         this.props.getfriends(this.props.id);
+
+        this.state ={
+            CommentText : '',
+        }
         
          
       }
 
     handleOnChangeComment = e => {
         this.setState({
-          [e.target.Comment]: e.target.value,
+            CommentText: e.target.value,
     
       })
     }
+
+    
+
     render(){
         const {posts} = this.props.posts;
-        console.log(posts[0])
+       // console.log(posts[0])
 
         const {friends} =this.props.users
         var listfriends =[]
@@ -67,6 +77,8 @@ class Post extends Component{
             </div>
             <div className="imgPosted">
                 <img src={Imagecontent} className="ImgResponsive" />
+
+              
             </div>
         </div>
         <div className="grid-itemPost itemPost3">
@@ -89,10 +101,11 @@ class Post extends Component{
                 </div>
                
                 <div class="grid-itemComment itemComment1">
-                    <input onChange={this.handleOnChangeComment} value={""} type="Post" placeholder="Type your comment.." className="CommentInput"/>
+                    <input onChange={this.handleOnChangeComment} value={this.state.CommentText} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
                 <div class="grid-itemComment itemComment2">
-                    <Button type="submit" value="Submit"  size="sm" 
+                    <Button type="submit" value="Submit"  size="sm" onClick={(e) =>{ const infoComment = { commentBy : this.props.id ,id :_id, commentText : this.state.CommentText };
+        this.props.addComment(infoComment); }}
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"30px", borderRadius:"5px"}}>
                         Submit<IoSend style={{paddingLeft: "2px", width:"20px"}}/>
                     </Button>
