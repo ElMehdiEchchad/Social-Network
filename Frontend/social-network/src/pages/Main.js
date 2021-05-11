@@ -17,6 +17,9 @@ import Friends from "../components/profil/friends";
 
 import Chat from "../components/chat/chat";
 
+import { ConversationsProvider } from '../contexts/ConversationsProvider';
+
+
 export function useMediaQuery(query) {
     const [matches, setMatches] = useState(false);
 
@@ -41,7 +44,7 @@ const Main = () => {
 
 
     useEffect(() => {
-        makeUserOnline(auth.userData.id,true)
+        makeUserOnline(auth.userData.id, true)
     }, []);
 
 
@@ -65,15 +68,15 @@ const Main = () => {
         Axios.get("http://localhost:5000/api/logout", {
             withCredentials: true,
         }).then(() => {
-            makeUserOnline(auth.userData.id,false)
-            setAuth({ loggedIn: false , userData: {}});
+            makeUserOnline(auth.userData.id, false)
+            setAuth({ loggedIn: false, userData: {} });
         });
     };
 
     //change user visbility if online
 
-    function makeUserOnline(id,isOnline) {
-        
+    function makeUserOnline(id, isOnline) {
+
         Axios.put(`http://localhost:5000/api/user/${id}/isOnline`,
             {
                 isOnline: isOnline,
@@ -85,7 +88,7 @@ const Main = () => {
             .catch((err) => {
                 console.log(err)
             })
-    
+
     }
 
     return (
@@ -124,7 +127,7 @@ const Main = () => {
                         className={styles.searchMobile}
                     />
                 </nav>
-                {isOpen ? <MobileMenu id={id}/> : null}
+                {isOpen ? <MobileMenu id={id} /> : null}
 
                 <div className={styles.grid}>
                     <div className={styles.profile}>
@@ -134,17 +137,16 @@ const Main = () => {
                         <div className={styles.content}>
                             <Switch>
                                 <Route path="/" exact>
-                                    <NewPost id={id}/>
-                                    <Post id={id}/>
+                                    <NewPost id={id} />
+                                    <Post id={id} />
                                 </Route>
                                 <Route path="/friends" exact>
                                     <Friends id={id} />
                                 </Route>
                                 <Route path="/myprofil" exact>
-                                    <Profilcard id={id}/>
+                                        <Profilcard id={id} />
                                 </Route>
                                 <Route path="/chat" exact>
-                                    {console.log("i'm in main")}
                                     <Chat />
                                 </Route>
                             </Switch>

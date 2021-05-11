@@ -3,17 +3,17 @@ import Dashboard from './Dashboard'
 import { ConversationsProvider } from '../../contexts/ConversationsProvider';
 import AuthContext from "../../contexts/AuthContext";
 import {SocketProvider} from "../../contexts/SocketProvider";
-function App() {
+function App(props) {
   const { auth, setAuth } = useContext(AuthContext);
-  var id = auth.userData.id
+  var idUser = auth.userData.id
 
   useEffect(() => {
-
+    console.log("the id from friends is : "+props.id)
   }, [])
   const dashboard = (
-    <SocketProvider id={id}>
-      <ConversationsProvider id={id}>
-        <Dashboard id={id} />
+    <SocketProvider id={idUser}>
+      <ConversationsProvider id={idUser}>
+        <Dashboard id={idUser} />
       </ConversationsProvider>
    </SocketProvider>
   )
