@@ -31,9 +31,6 @@ class NewPost extends Component{
     }
     }
 
-   
- 
-  
   handleOnChangeText = e => {
     this.setState({
         text: e.target.value

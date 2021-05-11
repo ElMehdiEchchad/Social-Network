@@ -1,22 +1,13 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import './post.css';
 import { Avatar, Button} from '@material-ui/core';
-import imgPosted from './imgPosted.png';
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
-import Collapse from 'react-bootstrap/Collapse';
 import {IoSend} from 'react-icons/io5';
-import { Link } from 'react-router-dom';
 import Moment from "react-moment";
-import PropTypes from "prop-types";
-
-
 import {connect} from 'react-redux';
 import {getPosts, addLike, addComment} from '../../actions/postActions';
 import {getUser , getfriends} from '../../actions/itemActions';
-
-
-
 
 
 class Post extends Component{
@@ -28,13 +19,12 @@ class Post extends Component{
 
         this.props.getPosts();
         this.props.getfriends(this.props.id);
-
-        this.state ={
-            CommentText : '',
+        this.props.getUser(this.props.id);
+        const {user} = this.props.users;
+        this.state={
+        CommentText : '',
         }
-        
-         
-      }
+    }
 
     handleOnChangeComment = e => {
         this.setState({
@@ -43,9 +33,8 @@ class Post extends Component{
       })
     }
 
-    
-
     render(){
+        const {user} = this.props.users;
         const {posts} = this.props.posts;
        // console.log(posts[0])
 
@@ -65,9 +54,9 @@ class Post extends Component{
          { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterFirstname, PosterLastname, PosterProfileImage}) => (
                 <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-                <Link to={'/profil/${user}'}><Avatar src={PosterProfileImage} /></Link>
+                <div><Avatar src={PosterProfileImage} /></div>
                 <div class="usernamePost">
-                <Link to={'/profil/${user}'}>{PosterFirstname+' '+PosterLastname}</Link>
+                {PosterFirstname+' '+PosterLastname}
                 </div>
             <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
@@ -94,17 +83,21 @@ class Post extends Component{
             </div>
         <div >
             <div class="grid-containerComment">
-                <div className="grid-itemComment itemComment3"><Avatar src="" /></div>
+            { comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
+                <div>
+                <div className="grid-itemComment itemComment3"><Avatar src={posterCommentProfileImage} /></div>
                 <div className="grid-itemComment itemComment4">
-                    <Link to={'/profil/${user}'} className="usernameComment">username</Link>
-                    <p className="Comment">Comment</p>
+                    <div className="usernameComment">{posterCommentfn + " "+posterCommentln}</div>
+                    <div className="Comment">{Comment}</div>
                 </div>
+                </div>
+            ))}
                
                 <div class="grid-itemComment itemComment1">
                     <input onChange={this.handleOnChangeComment} value={this.state.CommentText} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
                 <div class="grid-itemComment itemComment2">
-                    <Button type="submit" value="Submit"  size="sm" onClick={(e) =>{ const infoComment = { commentBy : this.props.id ,id :_id, commentText : this.state.CommentText };
+                    <Button type="submit" value="Submit"  size="sm" onClick={(e) =>{ const infoComment = { commentBy : this.props.id ,id :_id, commentText : this.state.CommentText, posterfn: user[0].firstName, posterln: user[0].lastName, posterProfileImage: user[0].profileImage };
         this.props.addComment(infoComment); }}
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"30px", borderRadius:"5px"}}>
                         Submit<IoSend style={{paddingLeft: "2px", width:"20px"}}/>
@@ -142,5 +135,3 @@ class Post extends Component{
  
 
 export default connect(mapStateToProps, {getPosts,getfriends , addComment, addLike, getUser}) (Post);
-
-/*const [open, setOpen] = useState(false);*/
