@@ -60,7 +60,9 @@ import {
       case ADD_COMMENT:
         return {
           ...state,
-          post: { ...state.post, comments: payload },
+          posts: state.posts.map((post) =>
+          post._id === payload.id ? { ...post, comments: payload.comments } : post
+        ),
           loading: false,
         };
       case REMOVE_COMMENT:

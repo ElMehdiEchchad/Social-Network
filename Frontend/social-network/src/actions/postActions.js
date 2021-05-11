@@ -119,10 +119,10 @@ export const addPost = (post) => async (dispatch) => {
 };
 
 // Add a comment
-export const addComment = (postId, userId, formData) => async (dispatch) => {
+export const addComment = (infoComment) => async (dispatch) => {
 
   try {
-    const res = await axios.post(`http://localhost:5000/api/posts/comment/${postId}`, (userId, formData), {withCredentials: true});
+    const res = await axios.put(`http://localhost:5000/api/posts/Comment`, infoComment, {withCredentials: true});
 
     dispatch({
       type: ADD_COMMENT,
