@@ -40,9 +40,12 @@ const { ObjectId } = mongoose.Schema;
 
   comments: [
       {
-        text: String,
-        created: { type: Date, default: Date.now() },
-        postedBy: { type: ObjectId, ref: 'User' }
+        Comment: String,
+        // created: { type: Date, default: Date.now() },
+        postedBy: { type: ObjectId, ref: 'User' },
+        posterCommentfn : String ,
+        posterCommentln : String , 
+        posterCommentProfileImage : String 
       }
     ]
 });
