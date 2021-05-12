@@ -71,7 +71,6 @@ router.get("/:id",(req,res)=>{
 //@route /api/posts/:user_id
 //@desc find the posts posted by a certain user for his porfile
 // @access public
-
 router.get('/user/:userID',(req,res)=>{
     Post.find({ postedBy : req.params.userID }, '_id TextContent ImageContent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname ')
     .sort({created : -1})
@@ -79,20 +78,68 @@ router.get('/user/:userID',(req,res)=>{
     .catch(err => res.status(500).json(err));
 });
 
+//@route /api/posts/:id
+//@desc delete a post by its id
+router.delete('/:id',(req,res)=>{
+
+    Post.findByIdAndDelete(req.params.id, async (result, err)=>{
+        if(err){
+            res.status(500).json(err)
+        }
+        else{
+            if(result == null){
+             res.status(404).json({message :"this post doesn't exist"})
+             }
+            else{
+                (res.json({message : `the post with the id ${req.params.id} is succcessfully deleted`}))
+            }
+        }
+    });
+  
+});
+
+// -------------------------------------------------------------- what's Above works fine ------------------------------------------------------
+
 
 
 //like a post 
 router.put("/like",(req,res)=>{
     const Liid = req.body.likedBy;
-    Post.findByIdAndUpdate(
-        { _id : req.body.id },
-        {
-            $push : {  likes : Liid  }
+    const arr = new Array(req.body.likes);
+    // console.log(arr);
+    const len = arr.length;
+    for(let i=0 ; i<len ; i++){
+        if(arr[i].indexOf(Liid)!==-1){
+            res.json({message : "you already liked this post"});
+            break;
         }
-    )
-    .then(result => res.status(200).json(result))
-    .catch(err => res.status(500).json(err));
+        else{
+            Post.findByIdAndUpdate(
+            { _id : req.body.id },
+                {
+                    $push : {  likes : Liid  }
+                }
+            )
+            .then(result => res.status(200).json(result))
+            .catch(err => res.status(500).json(err));
+        }
+    }
+    
+ 
+    // console.log(arr.indexOf(Liid));
 });
+
+
+
+//     Post.findByIdAndUpdate(
+//         { _id : req.body.id },
+//         {
+//             $push : {  likes : Liid  }
+//         }
+//     )
+//     .then(result => res.status(200).json(result))
+//     .catch(err => res.status(500).json(err));
+// });
 
 
 //comment a post
@@ -105,14 +152,13 @@ router.put("/Comment",(req,res)=>{
         {
             $push : {  comments : {
                 "text" : commentText ,
-                "postedBy" : commenterId
+                "postedBy" : CommenterId
             }  }
         }
     )
     .then(result => res.status(200).json(result))
     .catch(err => res.status(500).json(err));
 });
-
 
 
 
