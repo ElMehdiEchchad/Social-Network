@@ -53,56 +53,58 @@ class Post extends Component{
    if(typeof posts[0] !== 'undefined'&& posts[0].length > 0) {  
     return(
        
-        <div>
+        <div style={{width :"500px"}}>
          { posts[0].filter(item => this.props.id===item.postedBy).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterProfileImage, PosterFirstname, PosterLastname}) => (
-                <div class="grid-containerPost" key={_id}>
-        <div class="grid-itemPost itemProfileImg">
-                <Link to={'/profil'}><Avatar src={PosterProfileImage} /></Link>
-                <div class="usernamePost">
-                <Link to={'/profil'}>{PosterFirstname + " " + PosterLastname}</Link>
-                </div>
-            <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
-        </div>
-        <div class="grid-itemPost itemPost2">
-            <div className="textPosted">
-                    {TextContent}
-            </div>
-            <div className="imgPosted">
-                <img src={Imagecontent} className="ImgResponsive" />
-            </div>
-        </div>
-        <div className="grid-itemPost itemPost3">
-            <div className="BtnPost">
-                <Button type="submit" value="Submit" onClick={(e) => addLike(_id, this.props.id)} size="sm" 
-                        style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
-                            {likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
-                </Button>
-                <Button size="sm" /*onClick={() => setOpen(!open)}
-                        aria-controls="commentSection"
-                        aria-expanded={open}*/
-                        style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
-                        {comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
-                </Button>
-            </div>
-        <div /*in={open}*/>
-            <div class="grid-containerComment">
-                <div class="grid-itemComment itemComment1">
-                    <input onChange={this.handleOnChangeComment} value={"hii"} type="Post" placeholder="Type your comment.." className="CommentInput"/>
-                </div>
-                <div class="grid-itemComment itemComment2">
-                    <Button type="submit" value="Submit"  size="sm" 
-                        style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"30px", borderRadius:"5px"}}>
-                        Submit<IoSend style={{paddingLeft: "2px", width:"20px"}}/>
-                    </Button>
-                </div>
-            
-            </div>
-       
-        </div>
-                
-         
-        </div>
-        </div>
+                  <div class="grid-containerPost" key={_id}>
+                  <div class="grid-itemPost itemProfileImg">
+                          <div><Avatar src={PosterProfileImage} /></div>
+                          <div class="usernamePost">
+                          {PosterFirstname+' '+PosterLastname}
+                          </div>
+                      <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
+                  </div>
+                  <div class="grid-itemPost itemPost2">
+                      <div className="textPosted">
+                              {TextContent}
+                      </div>
+                      <div className="imgPosted">
+                          <img src={Imagecontent} className="ImgResponsive" />
+          
+                        
+                      </div>
+                  </div>
+                  <div className="grid-itemPost itemPost3">
+                      <div className="BtnPost">
+                          <Button type="submit" value="Submit" onClick={(e) =>{ const infoLike={id :_id, likedBy :this.props.id , likes :likes}; this.props.addLike(infoLike) ; window.location.reload()}} size="sm" 
+                                  style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
+                                      {likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
+                          </Button>
+                          <Button size="sm" 
+                                  style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
+                                  {comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
+                          </Button>
+                      </div>
+                  <div >
+                      <div class="grid-containerComment">
+                      { comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
+                          <div>
+                          <div className="grid-itemComment itemComment3"><Avatar src={posterCommentProfileImage} /></div>
+                          <div className="grid-itemComment itemComment4">
+                              <div className="usernameComment">{posterCommentfn + " "+posterCommentln}</div>
+                              <div className="Comment">{Comment}</div>
+                          </div>
+                          </div>
+                      ))}
+                         
+                         
+                      
+                      </div>
+                 
+                  </div>
+                          
+                   
+                  </div>
+                  </div>
          )
          )}
         </div>
