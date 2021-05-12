@@ -38,7 +38,9 @@ export default function ScrollDialog2(props) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen('paper')}  style={{ color: "white" , backgroundColor :"white"}}> <Ava  src={Avatar} style={{ height: '80px', width: '80px' }}/></Button>
+      <Button onClick={handleClickOpen('paper')}  style={{ color: "white" , backgroundColor :"white"}}>
+      <Ava src={typeof props.profileImage !== 'undefined' ? props.profileImage : Avatar } style={{ height: '80px', width: '80px' }} />
+         </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -48,7 +50,7 @@ export default function ScrollDialog2(props) {
       >
         <DialogTitle id="scroll-dialog-title">Profil </DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
-          <ProfilcardNonFriend id={props.id} email={props.email} firstName={props.firstName} lastName={props.lastName} birthDay={props.birthDay}></ProfilcardNonFriend>
+          <ProfilcardNonFriend id={props.id} email={props.email} firstName={props.firstName} lastName={props.lastName} birthDay={props.birthDay} profileImage={typeof props.profileImage !== 'undefined' ? props.profileImage : Avatar }></ProfilcardNonFriend>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

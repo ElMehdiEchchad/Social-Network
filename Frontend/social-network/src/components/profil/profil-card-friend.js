@@ -32,7 +32,7 @@ export default class ProfilcardFriend extends React.Component{
       return (
         <div  >
    
-           <Ava  src={Avatar} style={{ height: '140px', width: '140px'  , left: '37%',
+           <Ava  src={this.props.profileImage} style={{ height: '140px', width: '140px'  , left: '37%',
          alignItems:"center" , marginBottom :"10%"}}/>
       
            <Tab panes={panes} style={{marginTop :"5%"}} />
