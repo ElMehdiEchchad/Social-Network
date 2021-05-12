@@ -111,7 +111,7 @@ class Friends extends Component {
                               lastName={lastName}
                               birthDay={birthDay}
                               id={_id}
-                              profileImage={typeof profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(profileImage.data.data)))}`:Avatar} />
+                              profileImage={typeof profileImage !== 'undefined' &&  user[0].profileImage!== ''?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(profileImage.data.data)))}`:Avatar} />
                            <Card.Body >
                               <Card.Title style={{ marginLeft: "15%" }}><h4 > {firstName + " " + lastName} </h4></Card.Title>
                               <Card.Text> <h5>{email}</h5> </Card.Text>

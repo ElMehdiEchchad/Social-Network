@@ -19,7 +19,7 @@ export default class ProfilcardNonFriend extends React.Component{
     const panes = [
     {
       menuItem: { key: 'users',  content: 'About' },
-      render: () => <Tab.Pane><AboutmeFriend id={this.props.id}></AboutmeFriend></Tab.Pane>,
+      render: () => <Tab.Pane><AboutmeFriend id={this.props.id} email={this.props.email} firstName={this.props.firstName} lastName={this.props.lastName} birthDay={this.props.birthDay}></AboutmeFriend></Tab.Pane>,
     },
  
   ]

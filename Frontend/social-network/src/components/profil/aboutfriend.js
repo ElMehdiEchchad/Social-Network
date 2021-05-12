@@ -14,22 +14,16 @@ import { ImagePicker } from 'react-file-picker'
    
   constructor(props) {
     super(props);
-    this.props.getUser(this.props.id);
-    const {user} = this.props.users;
+   
 
     var birth ;
-
-    if(typeof user[0].birthDay !== 'undefined') birth =new Date(user[0].birthDay) ;
-    else{
-      setTimeout( 250);
-  }
     
 
     this.state = {
-      Firstname: user[0].firstName ,
-      Lastname: user[0].lastName,
-      Birthday: birth,
-      Email :user[0].email ,
+      Firstname: this.props.firstName ,
+      Lastname:this.props.lastName,
+      Birthday:this.props.birthDay,
+      Email :this.props.email ,
     
 
   }
@@ -37,15 +31,7 @@ import { ImagePicker } from 'react-file-picker'
 
 }
 
- componentDidMount() {
-    const {user} = this.props.users;
-      this.setState({
-       Firstname: user[0].firstName ,
-       Lastname: user[0].lastName ,
-       Email : user[0].email ,
-     });
-  }
-
+ 
 
  
 
@@ -53,22 +39,18 @@ import { ImagePicker } from 'react-file-picker'
   
   render(){
    
-    const {user} = this.props.users;
+  
     
    
 
    var brirth , month , day , year ; 
 
-    if(typeof user[0].birthDay !== 'undefined') 
-    {brirth =new Date(user[0].birthDay) ;
+    
+       brirth =new Date(this.props.birthDay) ;
        month = brirth.getUTCMonth() + 1; //months from 1-12
        day = brirth.getUTCDate();
        year =brirth.getUTCFullYear();
-    }
-    else{
-      setTimeout( 250);
-    }
-
+   
   
 
     var newdate =day+ "-" + month + "-" +year ;
@@ -85,7 +67,7 @@ import { ImagePicker } from 'react-file-picker'
         control={Input}
         label='First name'
         placeholder='First name'
-        value={user[0].firstName}
+        value={this.props.firstName }
         
       />
       <Form.Field
@@ -93,7 +75,7 @@ import { ImagePicker } from 'react-file-picker'
         control={Input}
         label='Last name'
         placeholder='Last name'
-        value={user[0].lastName }
+        value={this.props.lastName }
      
       />
       
@@ -107,7 +89,7 @@ import { ImagePicker } from 'react-file-picker'
       control={Input}
       label='Email'
       placeholder='joe@gmail.com'
-      value={user[0].email}
+      value={this.props.email}
     
     />
 

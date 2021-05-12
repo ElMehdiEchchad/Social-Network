@@ -41,7 +41,7 @@ class Profilcard extends React.Component {
     // this is for get the image from user.profileImage
     const { user } = this.props.users;
     var base64String;
-    if ( typeof user[0].profileImage !== 'undefined') {
+    if ( typeof user[0].profileImage !== 'undefined'&& user[0].profileImage!== '') {
       const arrayBuffer = user[0].profileImage.data.data
       base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
     }

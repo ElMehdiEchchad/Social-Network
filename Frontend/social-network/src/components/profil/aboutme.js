@@ -55,14 +55,14 @@ import axios from "axios";
 
 
 
- componentDidMount() {
+ /*componentDidMount() {
     const {user} = this.props.users;
       this.setState({
        Firstname: user[0].firstName ,
        Lastname: user[0].lastName ,
        Email : user[0].email ,
      });
-  }
+  }*/
 
 
   onChangeFirstname(e) {

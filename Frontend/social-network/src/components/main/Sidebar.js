@@ -16,12 +16,11 @@ class Sidebar extends Component {
 
     constructor(props) {
     super(props);
-    this.props.getUser(this.props.id);
     }
 
-    componentDidMount() {
+   /* componentDidMount() {
         const {user} = this.props.users;
-      }
+      }*/
     
         
     render(){
@@ -32,7 +31,7 @@ class Sidebar extends Component {
         <div className={styles.sidebar}>
             
             <div className={styles.profileHeader}>
-                <img className={styles.avatar} src={typeof user[0].profileImage !== 'undefined' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar}></img>
+                <img className={styles.avatar} src={typeof user[0].profileImage !== 'undefined'&& user[0].profileImage!== '' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar}></img>
                 <div className={styles.name}>{user[0].firstName+" "+user[0].lastName}</div>
                 <div className={styles.email}>{user[0].email}</div>
             </div>

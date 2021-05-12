@@ -52,7 +52,7 @@ export default function ScrollDialog(props) {
       >
         <DialogTitle id="scroll-dialog-title">Profil </DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
-          <ProfilcardFriend id={props.id}></ProfilcardFriend>
+          <ProfilcardFriend id={props.id} email={props.email} firstName={props.firstName} lastName={props.lastName} birthDay={props.birthDay}></ProfilcardFriend>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
