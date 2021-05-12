@@ -98,20 +98,42 @@ router.delete('/:id',(req,res)=>{
   
 });
 
-// -------------------------------------------------------------- what's Above works fine ------------------------------------------------------
+//@route /api/posts/comment
+//@desc comment a post
+router.put("/Comment",(req,res)=>{
+    const CommenterId = req.body.commentBy;
+    const commentText = req.body.commentText;
+    const postId = req.body.id;
+    const lastn = req.body.posterln;
+    const firstn = req.body.posterfn;
+    const CommenterImage = req.body.posterprofileImage;
+    Post.findByIdAndUpdate(
+        { _id : postId },
+        {
+            $push : {  comments : {
+                "Comment" : commentText ,
+                "postedBy" : CommenterId,
+                "posterCommentln" : lastn,
+                "posterCommentfn": firstn,
+                "posterCommentProfileImage" : CommenterImage
+
+            }  }
+        }
+    )
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(500).json(err));
+});
 
 
-
-//like a post 
+//@route /api/posts/like
+//@desc Like a post
 router.put("/like",(req,res)=>{
     const Liid = req.body.likedBy;
     const arr = new Array(req.body.likes);
     // console.log(arr);
-    const len = arr.length;
-    for(let i=0 ; i<len ; i++){
-        if(arr[i].indexOf(Liid)!==-1){
+    
+        if(arr[0].indexOf(Liid)!==-1){
             res.json({message : "you already liked this post"});
-            break;
         }
         else{
             Post.findByIdAndUpdate(
@@ -122,49 +144,9 @@ router.put("/like",(req,res)=>{
             )
             .then(result => res.status(200).json(result))
             .catch(err => res.status(500).json(err));
-        }
-    }
-    
- 
-    // console.log(arr.indexOf(Liid));
-});
-
-
-
-//     Post.findByIdAndUpdate(
-//         { _id : req.body.id },
-//         {
-//             $push : {  likes : Liid  }
-//         }
-//     )
-//     .then(result => res.status(200).json(result))
-//     .catch(err => res.status(500).json(err));
-// });
-
-
-//comment a post
-router.put("/Comment",(req,res)=>{
-    const CommenterId = req.body.commentBy;
-    const commentText = req.body.commentText;
-    const postId = req.body.id;
-    Post.findByIdAndUpdate(
-        { _id : postId },
-        {
-            $push : {  comments : {
-                "text" : commentText ,
-                "postedBy" : CommenterId
-            }  }
-        }
-    )
-    .then(result => res.status(200).json(result))
-    .catch(err => res.status(500).json(err));
+        }        
 });
 
 
 
 module.exports = router;
-
-
-//to show posts according to the friends,
-// consider this
-//  https://stackoverflow.com/questions/51693818/how-to-filter-mongoose-collection-by-id-node-js

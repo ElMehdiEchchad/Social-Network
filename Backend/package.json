@@ -14,13 +14,13 @@
     "body": "^5.1.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.7",
+    "mongoose": "^5.12.8",
     "multer": "^1.4.2",
     "parser": "^0.1.4",
-    "socket.io": "^4.0.2"
+    "socket.io": "^4.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
