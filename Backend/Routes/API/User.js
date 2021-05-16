@@ -268,6 +268,10 @@ router.get("/api/user/:id/friends", async (req, res) => {
 
 
 
+//@route GET api/user/:id/updateImage
+//@desc upload image of a user
+//@access Public
+
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public')
@@ -296,64 +300,20 @@ router.put('/api/user/:id/updateImage/', upload.single('myImage'), (req, res, ne
                     error: err,
                 });
             } else {
+                fs.unlink(path.join('public/' + req.file.filename), (err) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                })
                 res.status(200).json({
-                    message:"image Updated"
+                    message: "image Updated"
                 });
             }
         });
     });
 });
 
-
-// userModel.findOne({ _id: req.params.id }, (err, foundObject) => {
-//     if (req.body.firstName !== undefined) {
-//         foundObject.firstName = req.body.firstName;
-//     }
-//     if (req.body.lastName !== undefined) {
-//         foundObject.lastName = req.body.lastName;
-//     }
-//     if (req.body.birthDay !== undefined) {
-//         foundObject.birthDay = req.body.birthDay;
-//     }
-//     if (req.body.profileImage !== undefined) {
-//         foundObject.profileImage = req.body.profileImage;
-//     }
-//     foundObject.save((e, updatedTodo) => {
-//         if (err) {
-//             res.status(500).json({
-//                 error: err,
-//             });
-//         } else {
-//             res.send(updatedTodo);
-//         }
-//     });
-// });
-
-
-//-----------------------------
-
-
-// const storage = multer.diskStorage({
-//    destination: "./public/uploads/",
-//    filename: function(req, file, cb){
-//       cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
-//    }
-// });
-
-// const upload = multer({
-//    storage: storage,
-//    limits:{fileSize: 1000000},
-// }).single("myImage");
-
-// router.post("/upload", {
-//    upload(req, res, (err) => {
-//       console.log("Request ---", req.body);
-//       console.log("Request file ---", req.file);//Here you get file.
-//       /*Now do where ever you want to do*/
-//       if(!err)
-//          return res.send(200).end();
-//    });
-// };);
 
 
 

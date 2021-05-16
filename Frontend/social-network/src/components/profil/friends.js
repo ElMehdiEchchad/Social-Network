@@ -62,7 +62,7 @@ class Friends extends Component {
 
       if (this.state.toChat === true) {
          return (
-            <Redirect to="/chat" />
+            <Redirect to={`/chat`} />
          )
          //to={{pathname: '/chat', state: { id: this.state.id }}}
       }
@@ -122,7 +122,7 @@ class Friends extends Component {
                               <Card.Title style={{ marginLeft: "15%" }}><h4 > {firstName + " " + lastName} </h4></Card.Title>
                               <Card.Text> <h5>{email}</h5> </Card.Text>
                               <Row >
-                                 <Button size='mini' style={{ backgroundColor: "#5EAAA8", marginLeft: "15%" }} onClick={() => { this.redirectTochat() }}><BiMessageDots /> </Button>
+                                 <Button size='mini' style={{ backgroundColor: "#5EAAA8", marginLeft: "15%" }} onClick={() => { this.redirectTochat(_id) }}><BiMessageDots /> </Button>
                                  <Button size='mini' style={{ backgroundColor: "#F05945" }} onClick={() => { this.props.removefriend(this.props.id, _id); window.location.reload() }} ><BiTrash /> </Button>
                               </Row>
                            </Card.Body>
