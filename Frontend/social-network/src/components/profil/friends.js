@@ -25,9 +25,6 @@ class Friends extends Component {
 
    constructor(props) {
       super(props);
-      this.props.getfriends(this.props.id);
-      this.props.getAllUsers();
-      this.props.getUser(this.props.id);
       //this.redirectTochat = this.redirectTochat.bind(this);
       this.state = {
          toChat: false,
@@ -45,20 +42,24 @@ class Friends extends Component {
       }))
    }
 
-
+   componentDidMount() {
+      this.props.getfriends(this.props.id);
+      this.props.getAllUsers();
+      this.props.getUser(this.props.id);
+    }
 
    render() {
       const { users } = this.props.users
       const { friends } = this.props.users
-      const { user } = this.props.users
+      const {user}= this.props.users
       var listfriends = []
-      if (friends[0].friends) {
-         friends[0].friends.map(({ _id }) => (
-            listfriends.push(_id)
+      if (user[0].friends) {
+         user[0].friends.map(({ id_friend }) => (
+            listfriends.push(id_friend)
          ));
       }
       console.log(listfriends)
-      console.log(user[0])
+      
 
       if (this.state.toChat === true) {
          return (
