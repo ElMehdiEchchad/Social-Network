@@ -251,11 +251,9 @@ import axios from "axios";
        <DatePicker selected={this.state.Birthday} onChange={this.onChangeBirthday} />
       </Form.Field>
     
-   <ImagePicker
-    extensions={['jpg', 'jpeg', 'png']}
-    dims={{minWidth: 100, maxWidth: 500, minHeight: 100, maxHeight: 500}} >
+
     <Form.Input label='Profil image' type='file' onChange={this.onChangeImage} />
-    </ImagePicker>
+    
   
     
       </Form.Group>
