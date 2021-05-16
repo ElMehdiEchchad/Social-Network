@@ -111,7 +111,7 @@ export default function OpenConversation({ id }) {
             value={text}
             onChange={(e) => setText(e.target.value)}
             style={{ height: "75px", resize: "none" }}
-            placeholder="write your message here ..." enabled
+            placeholder="write your message here ..." enabled="true"
           />
           <InputGroup.Append>
             <Button className="btn-send" type="submit"><IoSendSharp className="btn-send-icon" size="20"></IoSendSharp></Button>

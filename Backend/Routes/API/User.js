@@ -245,11 +245,27 @@ router.get("/api/user/:id/friends", async (req, res) => {
 
 
                         }
-                    })
-                    // }).sort(['firstName', 1]) ;  
+                    });
                 })
 
                 return Promise.all(itteration).then(() => {
+                    listOfFriends.sort((a, b) => {
+                        var nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
+                        var nameB= b.lastName.toUpperCase(); // ignore upper and lowercase
+                        if (nameA < nameB) {
+                          return -1;
+                        }
+                        if (nameA > nameB) {
+                          return 1;
+                        }
+                      
+                        // names must be equal
+                        return 0;
+                    });
+                    console.log("thelist5")
+                    console.log(listOfFriends)
+                    // console.log(listOfFriends.sort((a, b) => (a.firstName < b.lastName) ? 1 : -1))
+                    // console.log(listOfFriends.sort((a, b) => (a.firstName > b.lastName) ? 1 : -1))
                     console.log(res.status(200).json({
                         message: "list of friends finded",
                         friends: listOfFriends
