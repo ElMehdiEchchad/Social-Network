@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './post.css';
-import { Avatar, Button} from '@material-ui/core';
+import { Avatar, Button, Divider, List, ListItem, ListItemAvatar, ListItemText} from '@material-ui/core';
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
 import {IoSend} from 'react-icons/io5';
@@ -80,31 +80,43 @@ class Post extends Component{
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
                         {comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
                 </Button>
+                <br></br>
             </div>
         <div >
             <div class="grid-containerComment">
+            <List>
             { comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
-                <div>
-                <div className="grid-itemComment itemComment3"><Avatar src={posterCommentProfileImage} /></div>
-                <div className="grid-itemComment itemComment4">
-                    <div className="usernameComment">{posterCommentfn + " "+posterCommentln}</div>
-                    <div className="Comment">{Comment}</div>
-                </div>
+               <div>
+                   <ListItem>
+                       <ListItemAvatar>
+                         <Avatar src={posterCommentProfileImage} />
+                        </ListItemAvatar>
+                        <ListItemText primary={posterCommentfn + " "+posterCommentln} secondary={Comment} />
+                   </ListItem>
+                   <Divider variant="inset" component="li" />
+              
+               
+               
                 </div>
             ))}
+             </List>
+           
                
                 <div class="grid-itemComment itemComment1">
                     <input onChange={this.handleOnChangeComment} value={this.state.CommentText} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
                 <div class="grid-itemComment itemComment2">
                     <Button type="submit" value="Submit"  size="sm" onClick={(e) =>{ const infoComment = { commentBy : this.props.id ,id :_id, commentText : this.state.CommentText, posterfn: user[0].firstName, posterln: user[0].lastName, posterProfileImage: user[0].profileImage };
-        this.props.addComment(infoComment); }}
+        this.props.addComment(infoComment); window.location.reload() }}
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"30px", borderRadius:"5px"}}>
                         Submit<IoSend style={{paddingLeft: "2px", width:"20px"}}/>
                     </Button>
                 </div>
             
             </div>
+            <br></br>
+            <Divider />
+            
        
         </div>
                 
@@ -135,3 +147,10 @@ class Post extends Component{
  
 
 export default connect(mapStateToProps, {getPosts,getfriends , addComment, addLike, getUser}) (Post);
+
+/*div class="grid-containerCommentGet">
+                <div className="grid-itemComment itemComment3"><Avatar src={posterCommentProfileImage} /></div>
+                <div className="grid-itemComment itemComment4">
+                    <div className="usernameComment">{posterCommentfn + " "+posterCommentln}</div>
+                    <div className="Comment">{Comment}</div>
+                </div*/

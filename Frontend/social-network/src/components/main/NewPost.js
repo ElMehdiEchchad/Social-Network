@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { AiOutlineGif, AiOutlineSmile } from 'react-icons/ai';
-import { Avatar, FormGroup } from '@material-ui/core';
+import { Avatar, Divider, FormGroup } from '@material-ui/core';
 import './NewPost.css';
 import {Button} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
@@ -84,7 +84,7 @@ class NewPost extends Component{
       <FormGroup>
       <div className="icons">
                 <IconButton><AiOutlineSmile style={{color:"#5EAAA8", fontSize:"1.5rem"}}/></IconButton>
-                <input onChange={this.handleOnChangeImage} value={this.state.Image} name="Imagecontent" accept="image/*" id="icon-button-file" type="file" style={{ display: 'none' }} />
+                <input onChange={this.handleOnChangeImage} value={this.state.Image} name="Imagecontent" id="icon-button-file" type="file" style={{ display: 'none' }} />
                 <label htmlFor="icon-button-file">
                   <IconButton style={{color:"#5EAAA8", fontSize:"1.5rem"}} aria-label="upload picture" component="span">
                       <PhotoCamera />
@@ -101,6 +101,8 @@ class NewPost extends Component{
         
         </Form>
       </div>
+      <br></br>
+      <Divider />
      
       </Container>
     );}
