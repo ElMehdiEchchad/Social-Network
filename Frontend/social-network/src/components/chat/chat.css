@@ -99,12 +99,12 @@
 } 
 
 .onlineDotGreen{
-    background-color: green;
+    background-color: rgb(0, 255, 0);;
     width: 10px !important;
     height: 10px !important;
     position: absolute;
     border-radius: 50px !important;
-    left: 55%;
+    left: 60%;
     bottom: 0px;
 }
 .onlineDotRed{
@@ -113,7 +113,7 @@
     height: 10px !important;
     position: absolute;
     border-radius: 50px !important;
-    left: 55%;
+    left: 60%;
     bottom: 0px;
 }
 
