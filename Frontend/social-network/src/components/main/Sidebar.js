@@ -18,11 +18,6 @@ class Sidebar extends Component {
         super(props);
     }
 
-    /* componentDidMount() {
-         const {user} = this.props.users;
-       }*/
-
-
     render() {
         const { user } = this.props.users;
 

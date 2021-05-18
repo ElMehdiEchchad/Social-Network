@@ -148,9 +148,3 @@ class Post extends Component{
 
 export default connect(mapStateToProps, {getPosts,getfriends , addComment, addLike, getUser}) (Post);
 
-/*div class="grid-containerCommentGet">
-                <div className="grid-itemComment itemComment3"><Avatar src={posterCommentProfileImage} /></div>
-                <div className="grid-itemComment itemComment4">
-                    <div className="usernameComment">{posterCommentfn + " "+posterCommentln}</div>
-                    <div className="Comment">{Comment}</div>
-                </div*/

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD_FRIEND , REMOVE_FRIEND , UPLOAD_PROFILE_IMAGE} from '../actions/types'
+import {GET_USER, UPDATE_USER , GET_FREINDS , GET_ALLUSERS , ITEMS_LOADING , ADD_FRIEND , REMOVE_FRIEND} from '../actions/types'
 
 
 
