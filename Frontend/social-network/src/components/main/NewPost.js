@@ -77,14 +77,14 @@ class NewPost extends Component{
         
       <div className="grid-item item2">
       <FormGroup>
-        <input  onChange={this.handleOnChangeText} value={this.state.text} type="text" name="TextContent" placeholder="What's on your mind.." className="PostInput"/>
+        <input  onChange={this.handleOnChangeText} value={this.state.text} type="text" name="text" placeholder="What's on your mind.." className="PostInput"/>
         </FormGroup>
       </div>
       <div class="grid-item item5">
       <FormGroup>
       <div className="icons">
                 <IconButton><AiOutlineSmile style={{color:"#5EAAA8", fontSize:"1.5rem"}}/></IconButton>
-                <input onChange={this.handleOnChangeImage} value={this.state.Image} name="Imagecontent" id="icon-button-file" type="file" style={{ display: 'none' }} />
+                <input onChange={this.handleOnChangeImage} accept=".png, .jpg, .jpeg" name="Image" id="icon-button-file" type="file" style={{ display: 'none' }} />
                 <label htmlFor="icon-button-file">
                   <IconButton style={{color:"#5EAAA8", fontSize:"1.5rem"}} aria-label="upload picture" component="span">
                       <PhotoCamera />
