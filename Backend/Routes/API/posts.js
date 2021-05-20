@@ -61,8 +61,28 @@ const upload = multer({
 router.post("/" ,upload.single('Image'),(req,res)=>{
     id = new mongoose.Types.ObjectId;
     console.log(req.file);
-   console.log(fs.readFileSync(path.join('posts/' + req.file.filename)));
+  // console.log(fs.readFileSync(path.join('posts/' + req.file.filename)));
     // console.log(req);
+    if(req.file == null) {
+        const newPost = new Post({ 
+            _id: id ,
+            postedBy : req.body.userId, //this makes a ref to 
+            //user _id which is an object id and would return 
+            //an error if the id parsed is not an object id
+            TextContent: req.body.text,
+            //Imagecontent : {data:fs.readFileSync(path.join('posts/' + req.file.filename)),contentType: 'image/png'},
+            likes: [] ,
+            Comments: [],
+            PosterProfileImage : req.body.profileImage,
+            PosterFirstname : req.body.posterfn,
+            PosterLastname : req.body.posterln });
+            
+            newPost.save()
+            .then(posts => res.json(posts))
+            .catch(err => res.json(err))
+
+    }
+    else{
     const newPost = new Post({ 
         _id: id ,
         postedBy : req.body.userId, //this makes a ref to 
@@ -75,9 +95,10 @@ router.post("/" ,upload.single('Image'),(req,res)=>{
         PosterProfileImage : req.body.profileImage,
         PosterFirstname : req.body.posterfn,
         PosterLastname : req.body.posterln });
-    newPost.save()
-    .then(posts => res.json(posts))
-    .catch(err => res.json(err))
+        newPost.save()
+        .then(posts => res.json(posts))
+        .catch(err => res.json(err))}
+  
     
     
 });  
