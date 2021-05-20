@@ -58,7 +58,7 @@ class Friends extends Component {
             listfriends.push(id_friend)
          ));
       }
-      console.log(listfriends)
+     
       
 
       if (this.state.toChat === true) {

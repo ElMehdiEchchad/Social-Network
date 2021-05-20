@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import '../main/post.css';
-import { Avatar, Button} from '@material-ui/core';
+import { Avatar, Button , Divider, List, ListItem, ListItemAvatar, ListItemText} from '@material-ui/core';
 import {AiFillHeart} from 'react-icons/ai'
 import {FaComment} from 'react-icons/fa';
 import Collapse from 'react-bootstrap/Collapse';
@@ -33,7 +33,7 @@ class Post extends Component{
     }
     render(){
         const {posts} = this.props.posts;
-        console.log(posts[0])
+       
 
   
   if(typeof posts[0] !== 'undefined' &&  posts[0].length > 0 ) { 
@@ -88,11 +88,13 @@ class Post extends Component{
                       <div class="grid-containerComment">
                       { comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
                           <div>
-                          <div className="grid-itemComment itemComment3"><Avatar src={posterCommentProfileImage} /></div>
-                          <div className="grid-itemComment itemComment4">
-                              <div className="usernameComment">{posterCommentfn + " "+posterCommentln}</div>
-                              <div className="Comment">{Comment}</div>
-                          </div>
+                          <ListItem>
+                         <ListItemAvatar>
+                             <Avatar src={posterCommentProfileImage} />
+                          </ListItemAvatar>
+                         <ListItemText primary={posterCommentfn + " "+posterCommentln} secondary={Comment} />
+                             </ListItem>
+                            
                           </div>
                       ))}
                          
