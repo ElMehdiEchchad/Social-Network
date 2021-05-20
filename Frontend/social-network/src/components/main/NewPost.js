@@ -46,20 +46,22 @@ class NewPost extends Component{
   handleOnSubmit = e => {
     const {user} = this.props.users;
     e.preventDefault();
-    const newPost= {
-      text: this.state.text,
-      userId: this.state.userId,
-      Image: this.state.Image,
-      posterfn:user[0].firstName,
-      posterln : user[0].lastName,
-      profileImage:user[0].profileImage
-    }
-    this.props.addPost(newPost);
+    const formData = new FormData();
+    formData.append('userId', this.state.userId);
+    formData.append('text', this.state.text);
+    formData.append('Image', this.state.Image);
+    formData.append('posterfn', user[0].firstName);
+    formData.append('posterln', user[0].lastName);
+    formData.append('profileImage', user[0].profileImage);
+
+     console.log(formData);
+
+    this.props.addPost(formData);
+
     this.setState({
         text: '',
         Image: null,
     });
-    window.location.reload();
 }
 
     render(){
@@ -73,7 +75,7 @@ class NewPost extends Component{
           <a><Avatar src={ typeof user[0].profileImage!== 'undefined' && user[0].profileImage!== '' ?`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(user[0].profileImage.data.data)))}`:Avatar } /></a>
       </div> 
       
-      <Form onSubmit={this.handleOnSubmit}>
+      <Form onSubmit={this.handleOnSubmit} encType='multipart/form-data'>
         
       <div className="grid-item item2">
       <FormGroup>

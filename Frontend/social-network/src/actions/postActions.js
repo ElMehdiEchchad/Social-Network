@@ -60,14 +60,14 @@ export const addLike = (infolike) => async (dispatch) => {
 };
 
 // Add a post
-export const addPost = (post) => async (dispatch) => {
+export const addPost = (formData) => async (dispatch) => {
   try {
-    const res = await axios.post(`http://localhost:5000/api/posts/`, post, {withCredentials: true});
-
+    const res = await axios.post(`http://localhost:5000/api/posts/`, formData, {withCredentials: true});
     dispatch({
       type: ADD_POST,
       payload: res.data,
     });
+    window.location.reload();
   } catch (err) {
     dispatch({
       type: POST_ERROR,

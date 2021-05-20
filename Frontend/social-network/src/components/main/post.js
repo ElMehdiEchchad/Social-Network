@@ -48,13 +48,15 @@ class Post extends Component{
         listfriends.push(this.props.id)
  
    if(typeof friends[0].friends !== 'undefined ' && typeof posts[0] !== 'undefined'&& posts[0].length > 0) {  
+    
     return(
        
         <div>
          { posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterFirstname, PosterLastname, PosterProfileImage}) => (
-                <div class="grid-containerPost" key={_id}>
+        <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-                <div><Avatar src={PosterProfileImage} /></div>
+                <div><Avatar src={PosterProfileImage ? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(PosterProfileImage.data)))}`: null} /></div>
+            
                 <div class="usernamePost">
                 {PosterFirstname+' '+PosterLastname}
                 </div>
@@ -65,7 +67,8 @@ class Post extends Component{
                     {TextContent}
             </div>
             <div className="imgPosted">
-                <img src={Imagecontent} className="ImgResponsive" />
+             
+                <img src={Imagecontent? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(Imagecontent.data.data)))}`: null} className="ImgResponsive" />
 
               
             </div>

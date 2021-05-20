@@ -11,7 +11,7 @@ const { ObjectId } = mongoose.Schema;
 
   Imagecontent: {
     data : Buffer,
-    contentType : String
+    contentType : String,
   },
 
   postedBy: {
