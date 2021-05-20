@@ -3,11 +3,18 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const Post = require('../../Models/PostModel');
 const { route } = require('./User');
+const multer = require('multer');
+// const {v4 : uuid4} = require('uuid');
+let path = require('path');
+const fs = require('fs');
+
+
+
 
 
 //@route Get api/posts/
 //@desc get all posts
-//@access public
+//@access private
 router.get("/", (req,res)=>{
     Post.find({})
     .sort({created : -1})
@@ -16,18 +23,53 @@ router.get("/", (req,res)=>{
     
 }); //returns all the posts sorted by date=> most recent first
 
+//Configuration of posts to be made 
+
+const storage = multer.diskStorage({
+    destination : function(req , file , cb){
+        cb(null , './posts/');
+    },
+    filename : function(req, file , cb){
+        cb(null , Date.now().toString() + file.originalname);
+    }
+
+});
+
+//a filter for the accepted formats 
+const fileFilt = (req , file , cb)=>{
+   
+    if(file.mimetype == 'image/png' || file.mimetype == 'image/jpeg' || file.mimetype == 'image/jpg'){
+        cb(null , true);
+    }
+    else{
+        cb(new Error('this format cannot be accepted'), false);
+    }
+  
+}
+const upload = multer({
+    storage : storage ,
+     limits :{
+    fileSize : 1024*1024*5 //5MB as max for images
+    },
+    fileFilter : fileFilt
+});
+
 //@route Post api/posts/ with a user id in body
 //@desc post a new post
-//@access public
-router.post("/",(req,res)=>{
+//@access private
+
+router.post("/" ,upload.single('Image'),(req,res)=>{
     id = new mongoose.Types.ObjectId;
+    console.log(req.file);
+   console.log(fs.readFileSync(path.join('posts/' + req.file.filename)));
+    // console.log(req);
     const newPost = new Post({ 
         _id: id ,
         postedBy : req.body.userId, //this makes a ref to 
         //user _id which is an object id and would return 
         //an error if the id parsed is not an object id
         TextContent: req.body.text,
-        ImageContent : req.body.Image,
+        Imagecontent : {data:fs.readFileSync(path.join('posts/' + req.file.filename)),contentType: 'image/png'},
         likes: [] ,
         Comments: [],
         PosterProfileImage : req.body.profileImage,
@@ -42,7 +84,7 @@ router.post("/",(req,res)=>{
 
 //@route delete api/posts
 //@desc delete all posts 
-//@access public (to be reviewed)
+//@access private
 router.delete("/",(req,res)=>{
     Post.remove()
     .then(result =>res.json({message:"all deleted successfully"}))
@@ -53,8 +95,7 @@ router.delete("/",(req,res)=>{
 
 //@route /api/posts/
 //@desc find posts by their id
-//@access public
-
+//@access private
 router.get("/:id",(req,res)=>{
     Post.findById({ _id: req.params.id },
         '_id TextContent ImageContent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname   '
@@ -70,7 +111,7 @@ router.get("/:id",(req,res)=>{
 
 //@route /api/posts/:user_id
 //@desc find the posts posted by a certain user for his porfile
-// @access public
+// @access private
 router.get('/user/:userID',(req,res)=>{
     Post.find({ postedBy : req.params.userID }, '_id TextContent ImageContent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname ')
     .sort({created : -1})
@@ -80,6 +121,7 @@ router.get('/user/:userID',(req,res)=>{
 
 //@route /api/posts/:id
 //@desc delete a post by its id
+//@access private
 router.delete('/:id',(req,res)=>{
 
     Post.findByIdAndDelete(req.params.id, async (result, err)=>{
@@ -100,6 +142,7 @@ router.delete('/:id',(req,res)=>{
 
 //@route /api/posts/comment
 //@desc comment a post
+//@access private
 router.put("/Comment",(req,res)=>{
     const CommenterId = req.body.commentBy;
     const commentText = req.body.commentText;
@@ -127,6 +170,7 @@ router.put("/Comment",(req,res)=>{
 
 //@route /api/posts/like
 //@desc Like a post
+//@access private
 router.put("/like",(req,res)=>{
     const Liid = req.body.likedBy;
     const arr = new Array(req.body.likes);

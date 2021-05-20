@@ -10,8 +10,8 @@ const { ObjectId } = mongoose.Schema;
   },
 
   Imagecontent: {
-    type: String,
-    default:null
+    data : Buffer,
+    contentType : String
   },
 
   postedBy: {
@@ -19,8 +19,7 @@ const { ObjectId } = mongoose.Schema;
     ref: 'User'
   },
   PosterProfileImage : {
-    type : String,
-    default : null
+    type : String
   },
   
   PosterFirstname : {
@@ -45,7 +44,7 @@ const { ObjectId } = mongoose.Schema;
         postedBy: { type: ObjectId, ref: 'User' },
         posterCommentfn : String ,
         posterCommentln : String , 
-        posterCommentProfileImage : String 
+        posterCommentProfileImage : String
       }
     ]
 });
