@@ -236,7 +236,7 @@ router.get("/user/:id/allPosts",(req,res)=>{
                 const itteration = data.friends.map(async (idFriendObject) => {
                     const idFriend = idFriendObject.id_friend;
                        return Post.find({ postedBy: idFriend },
-                        '_id TextContent Imagecontent  postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname',
+                        '_id TextContent  postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname',
                          async (err, data) => { 
                         if (err) {
                             await res
@@ -247,7 +247,10 @@ router.get("/user/:id/allPosts",(req,res)=>{
                                 })
                         } else {
                             if(data.length !== 0){
-                                await listOfPosts.push(data);
+                                data.map((post)=>{
+                                    //await listOfPosts.push(post);
+                                    return listOfPosts.push(post);
+                                })
                             }
                             
 
