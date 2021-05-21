@@ -41,7 +41,7 @@ export function ConversationsProvider({ id, children }) {
       addaddMessageToConversationLocaly(messsageData)
     })
 
-    return () => socket.off("receive-message");
+     return () => socket.off("receive-message");
   }, [socket]);
 
 

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Post = require('../../Models/PostModel');
+const userModel = require("../../Models/userModel");
 const { route } = require('./User');
 const multer = require('multer');
 // const {v4 : uuid4} = require('uuid');
@@ -211,6 +212,79 @@ router.put("/like",(req,res)=>{
             .catch(err => res.status(500).json(err));
         }        
 });
+
+
+
+//added by lkhadir 
+router.get("/user/:id/allPosts",(req,res)=>{
+    userModel.findById({ _id: req.params.id }, async (err, data) => {
+
+        if (err) {
+            await res
+                .status(500)
+                .json({
+                    message: "error",
+                    err: err
+                })
+        } else {
+            if (data.friends.length == 0) {
+                res.status(200).json({
+                    message: "there is no friend"
+                });
+            } else {
+                var listOfPosts = [];
+                const itteration = data.friends.map(async (idFriendObject) => {
+                    const idFriend = idFriendObject.id_friend;
+                       return Post.find({ postedBy: idFriend },
+                        '_id TextContent Imagecontent  postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname',
+                         async (err, data) => { 
+                        if (err) {
+                            await res
+                                .status(500)
+                                .json({
+                                    message: "error",
+                                    err: err
+                                })
+                        } else {
+                            if(data.length !== 0){
+                                await listOfPosts.push(data);
+                            }
+                            
+
+
+                        }
+                    });
+                })
+                return Promise.all(itteration).then(() => {
+                    // listOfPosts.sort((a, b) => {
+                    //     var nameA = a.created.toUpperCase(); // ignore upper and lowercase
+                    //     var nameB= b.created.toUpperCase(); // ignore upper and lowercase
+                    //     if (nameA < nameB) {
+                    //       return -1;
+                    //     }
+                    //     if (nameA > nameB) {
+                    //       return 1;
+                    //     }
+                      
+                    //     // names must be equal
+                    //     return 0;
+                    // });
+                    listOfPosts.sort((a)=>a.created)
+                    res.status(200).json({
+                        message: "list of posts finded",
+                        Posts: listOfPosts
+                    })
+                }
+                )
+
+
+            }
+
+        }
+    });
+
+
+})
 
 
 

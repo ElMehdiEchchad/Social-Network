@@ -6,6 +6,8 @@ const userModel = require("../../Models/userModel");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 const { response } = require("express");
+
+
 //@route POST api/users/login
 //@desc login user
 //@access Public
@@ -40,7 +42,7 @@ router.post("/login", async (req, res) => {
                             },
                             process.env.JWT_KEY,
                             {
-                                expiresIn: "1h",
+                                expiresIn: '1h',
                             }
                         );
 

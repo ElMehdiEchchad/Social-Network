@@ -6,6 +6,10 @@ import OpenConversation from "./OpenConversation";
 
 export default function Dashboard({ id }) {
 
+
+
+
+
   return (
     <div className="d-flex" style={{ height: "85vh" }}>
       <Sidebar id={id} />
@@ -13,3 +17,4 @@ export default function Dashboard({ id }) {
     </div>
   );
 }
+

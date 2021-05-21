@@ -32,7 +32,7 @@ const user = new mongoose.Schema({
     },
     isOnline:{
         type:Boolean,
-        default:false
+        default:false,
     }
 })
 user.index({firstName: 'text', lastName: 'text'})

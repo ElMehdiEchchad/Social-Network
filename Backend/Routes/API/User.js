@@ -262,10 +262,10 @@ router.get("/api/user/:id/friends", async (req, res) => {
                         // names must be equal
                         return 0;
                     });
-                    console.log(res.status(200).json({
+                    res.status(200).json({
                         message: "list of friends finded",
                         friends: listOfFriends
-                    }))
+                    })
                 }
                 )
 

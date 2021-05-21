@@ -19,7 +19,8 @@ const { ObjectId } = mongoose.Schema;
     ref: 'User'
   },
   PosterProfileImage : {
-    type : String
+    data : Buffer,
+    contentType : String,
   },
   
   PosterFirstname : {

@@ -19,7 +19,7 @@ export default function Conversations({ id }) {
     //this will run every 5 seconds
     const interval = setInterval(() => {
       GetAllMyFriend(id);
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
 
 
