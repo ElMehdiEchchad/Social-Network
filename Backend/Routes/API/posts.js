@@ -120,7 +120,7 @@ router.delete("/",(req,res)=>{
 //@access private
 router.get("/:id",(req,res)=>{
     Post.findById({ _id: req.params.id },
-        '_id TextContent ImageContent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname   '
+        '_id TextContent Imagecontent postedBy created likes comments PosterProfileImage PosterFirstname PosterLastname   '
         ,(result , err)=>{
             if(err){ 
                 res.status(500).json(err)
