@@ -9,13 +9,14 @@ import {
 } from "./types";
 
 // get posts
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (id) => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:5000/api/posts", {withCredentials :true});
+    const res = await axios.get(`http://localhost:5000/api/posts/user/${id}/allPosts`, {withCredentials :true});
+    //console.log(res)
 
     dispatch({
       type: GET_POSTS,
-      payload: res.data,
+      payload: res.data.Posts,
     });
   } catch (err) {
     dispatch({
