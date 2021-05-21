@@ -68,7 +68,7 @@ class Post extends Component{
                               {TextContent}
                       </div>
                       <div className="imgPosted">
-                          <img src={Imagecontent} className="ImgResponsive" />
+                          <img src={Imagecontent? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(Imagecontent.data.data)))}`: null} className="ImgResponsive" />
           
                         
                       </div>

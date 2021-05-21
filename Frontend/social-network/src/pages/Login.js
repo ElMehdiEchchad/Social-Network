@@ -117,7 +117,7 @@ const Login = () => {
     const RegisterForm = () => {
         return (
             <form ref={registerform} className={styles.form} id="login-form">
-                <h1 className={styles.label}>Login to PeopleBook now!</h1>
+                <h1 className={styles.label}>Register to PeopleBook now!</h1>
                 <label className={styles.label}>Email</label>
                 <input
                     className={styles.input}

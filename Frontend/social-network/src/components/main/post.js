@@ -18,12 +18,11 @@ class Post extends Component{
         this.handleOnChangeComment  = this.handleOnChangeComment.bind(this);
 
         this.props.getPosts(this.props.id);
-        /*this.props.getfriends(this.props.id);*/
+        this.props.getfriends(this.props.id);
         this.props.getUser(this.props.id);
         const {user} = this.props.users;
         this.state={
         CommentText : '',
-        AllPosts:{}
         }
     }
 
@@ -39,10 +38,10 @@ class Post extends Component{
         const {user} = this.props.users;
         const {posts} = this.props.posts;
         
-        console.log("myposts");
-        console.log(posts[0].length);
+        console.log(posts);
+        //console.log(posts[0].length);
 
-        /*const {friends} =this.props.users
+        const {friends} =this.props.users
         var listfriends =[]
         if(friends[0].friends) {
            friends[0].friends.map( ({ _id}) => (
@@ -51,47 +50,46 @@ class Post extends Component{
         }
         listfriends.push(this.props.id)
  
-   if(typeof friends[0].friends !== 'undefined ' && typeof posts[0] !== 'undefined'&& posts[0].length > 0) { */ 
+   if(typeof friends[0].friends !== 'undefined ' && typeof posts[0] !== 'undefined'&& posts[0].length > 0) { 
     
     return(
 
         <div>
-         {posts[0]./*filter(item => listfriends.includes(item.postedBy))*/map( (post/*{TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterFirstname, PosterLastname, PosterProfileImage}*/) => (
-        <div class="grid-containerPost" key={post._id}>
+         {posts[0].filter(item => listfriends.includes(item.postedBy)).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterFirstname, PosterLastname, PosterProfileImage}) => (
+        <div class="grid-containerPost" key={_id}>
         <div class="grid-itemPost itemProfileImg">
-                <div><Avatar src={post.PosterProfileImage ? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(post.PosterProfileImage.data)))}`: null} /></div>
+                <div><Avatar src=""/*{PosterProfileImage ? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(PosterProfileImage.data)))}`: null}*/ /></div>
                 <div class="usernamePost">
-                {post.PosterFirstname+' '+post.PosterLastname}
+                {PosterFirstname+' '+PosterLastname}
                 </div>
-            <div class="postDate"><Moment format="YYYY/MM/DD">{post.created}</Moment></div>
+            <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
         </div>
         <div class="grid-itemPost itemPost2">
             <div className="textPosted">
-                    {post.TextContent}
+                    {TextContent}
             </div>
             <div className="imgPosted">
-             
-                <img src={post.Imagecontent? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(post.Imagecontent.data.data)))}`: null} className="ImgResponsive" />
+                <img src={Imagecontent? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(Imagecontent.data.data)))}`: null} className="ImgResponsive" />
 
               
             </div>
         </div>
         <div className="grid-itemPost itemPost3">
             <div className="BtnPost">
-                <Button type="submit" value="Submit" onClick={(e) =>{ const infoLike={id :post._id, likedBy :this.props.id , likes :post.likes}; this.props.addLike(infoLike) ; window.location.reload()}} size="sm" 
+                <Button type="submit" value="Submit" onClick={(e) =>{ const infoLike={id :_id, likedBy :this.props.id , likes :likes}; this.props.addLike(infoLike) ; window.location.reload()}} size="sm" 
                         style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
-                            {post.likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
+                            {likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
                 </Button>
                 <Button size="sm" 
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
-                        {post.comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
+                        {comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
                 </Button>
                 <br></br>
             </div>
         <div >
             <div class="grid-containerComment">
             <List>
-            { post.comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
+            { comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
                <div>
                    <ListItem>
                        <ListItemAvatar>
@@ -100,9 +98,6 @@ class Post extends Component{
                         <ListItemText primary={posterCommentfn + " "+posterCommentln} secondary={Comment} />
                    </ListItem>
                    <Divider variant="inset" component="li" />
-              
-               
-               
                 </div>
             ))}
              </List>
@@ -110,7 +105,7 @@ class Post extends Component{
                     <input onChange={this.handleOnChangeComment} value={this.state.CommentText} type="Post" placeholder="Type your comment.." className="CommentInput"/>
                 </div>
                 <div class="grid-itemComment itemComment2">
-                    <Button type="submit" value="Submit"  size="sm" onClick={(e) =>{ const infoComment = { commentBy : this.props.id ,id :post._id, commentText : this.state.CommentText, posterfn: user[0].firstName, posterln: user[0].lastName, posterProfileImage: user[0].profileImage };
+                    <Button type="submit" value="Submit"  size="sm" onClick={(e) =>{ const infoComment = { commentBy : this.props.id ,id :_id, commentText : this.state.CommentText, posterfn: user[0].firstName, posterln: user[0].lastName, posterProfileImage: user[0].profileImage };
         this.props.addComment(infoComment); window.location.reload() }}
                         style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"30px", borderRadius:"5px"}}>
                         Submit<IoSend style={{paddingLeft: "2px", width:"20px"}}/>
@@ -120,18 +115,14 @@ class Post extends Component{
             </div>
             <br></br>
             <Divider />
-            
-       
         </div>
-                
+        </div>
+        </div>
+         ))}
          
         </div>
-        </div>
-         )
-         ) }
-        </div>
         
-    );/*}else{
+    );}else{
         return (<div style={{fontFamily: "Montserrat",
         fontStyle: "normal",
         fontWeight: "bold",
@@ -139,9 +130,9 @@ class Post extends Component{
         lineHeight: "29px",
         padding: "30px",
         color: "#F05945"}}>No Posts</div>);
-    } }*/
+    } }
 
-}}
+}
 
 
  const mapStateToProps = (state) => ({
@@ -150,5 +141,5 @@ class Post extends Component{
  });
  
 
-export default connect(mapStateToProps, {getPosts,/*getfriends */ addComment, addLike, getUser}) (Post);
+export default connect(mapStateToProps, {getPosts, getfriends, addComment, addLike, getUser}) (Post);
 
