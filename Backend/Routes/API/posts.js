@@ -97,7 +97,16 @@ router.post("/" ,upload.single('Image'),(req,res)=>{
         PosterFirstname : req.body.posterfn,
         PosterLastname : req.body.posterln });
         newPost.save()
-        .then(posts => res.json(posts))
+        .then(posts => {
+            fs.unlink(path.join('posts/' + req.file.filename), (err) => {
+                if (err) {
+                    console.error(err)
+                    return 
+                }
+                res.json(posts)
+            })
+            
+        })
         .catch(err => res.json(err))}
   
     
@@ -259,19 +268,6 @@ router.get("/user/:id/allPosts",(req,res)=>{
                     });
                 })
                 return Promise.all(itteration).then(() => {
-                    // listOfPosts.sort((a, b) => {
-                    //     var nameA = a.created.toUpperCase(); // ignore upper and lowercase
-                    //     var nameB= b.created.toUpperCase(); // ignore upper and lowercase
-                    //     if (nameA < nameB) {
-                    //       return -1;
-                    //     }
-                    //     if (nameA > nameB) {
-                    //       return 1;
-                    //     }
-                      
-                    //     // names must be equal
-                    //     return 0;
-                    // });
                     listOfPosts.sort((a)=>a.created)
                     res.status(200).json({
                         message: "list of posts finded",
