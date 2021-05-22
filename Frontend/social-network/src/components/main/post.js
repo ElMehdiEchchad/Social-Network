@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import "./post.css";
 import {
-  Avatar,
-  //Button,
   Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
 } from "@material-ui/core";
 import {
-  Container,
   Card,
   Row,
   Col,
@@ -276,161 +269,7 @@ class Post extends Component {
                     </Row>
                   </Card.Body>
                 </Card>
-                // <div class="grid-containerPost" key={_id}>
-                //   <div class="grid-itemPost itemProfileImg">
-
-                //     <div>
-                //       <Avatar
-                //         src="" /*{PosterProfileImage ? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(PosterProfileImage.data)))}`: null}*/
-                //       />
-                //     </div>
-
-                //     <div class="usernamePost">
-                //       {PosterFirstname + " " + PosterLastname}
-                //     </div>
-                //     <div class="postDate">
-                //       <Moment format="YYYY/MM/DD">{created}</Moment>
-                //     </div>
-                //   </div>
-
-                //   <div class="grid-itemPost itemPost2">
-                //     <div className="textPosted">{TextContent}</div>
-                //     <div className="imgPosted">
-                //       <img
-                //         src={
-                //           Imagecontent
-                //             ? `data:image/png;base64,${btoa(
-                //                 String.fromCharCode(
-                //                   ...new Uint8Array(Imagecontent.data.data)
-                //                 )
-                //               )}`
-                //             : null
-                //         }
-                //         className="ImgResponsive"
-                //       />
-                //     </div>
-                //   </div>
-                //   <div className="grid-itemPost itemPost3">
-                //     <div className="BtnPost">
-                //       <Button
-                //         type="submit"
-                //         value="Submit"
-                //         onClick={(e) => {
-                //           const infoLike = {
-                //             id: _id,
-                //             likedBy: this.props.id,
-                //             likes: likes,
-                //           };
-                //           this.props.addLike(infoLike);
-                //           window.location.reload();
-                //         }}
-                //         size="sm"
-                //         style={{
-                //           backgroundColor: "#F05945",
-                //           fontFamily: "Montserrat",
-                //           fontWeight: "bold",
-                //           height: "20px",
-                //           borderRadius: "5px",
-                //           marginRight: "2%",
-                //         }}
-                //       >
-                //         {likes.length}
-                //         <AiFillHeart
-                //           style={{ paddingRight: "2px", width: "20px" }}
-                //         />
-                //         Like
-                //       </Button>
-                //       <Button
-                //         size="sm"
-                //         style={{
-                //           backgroundColor: "#5EAAA8",
-                //           fontFamily: "Montserrat",
-                //           fontWeight: "bold",
-                //           height: "20px",
-                //           borderRadius: "5px",
-                //         }}
-                //       >
-                //         {comments.length}
-                //         <FaComment
-                //           style={{ paddingRight: "3px", width: "20px" }}
-                //         />
-                //         Comment
-                //       </Button>
-                //       <br></br>
-                //     </div>
-                //     <div>
-                //       <div class="grid-containerComment">
-                //         <List>
-                //           {comments.map(
-                //             ({
-                //               posterCommentfn,
-                //               posterCommentln,
-                //               posterCommentProfileImage,
-                //               Comment,
-                //             }) => (
-                //               <div>
-                //                 <ListItem>
-                //                   <ListItemAvatar>
-                //                     <Avatar src={posterCommentProfileImage} />
-                //                   </ListItemAvatar>
-                //                   <ListItemText
-                //                     primary={
-                //                       posterCommentfn + " " + posterCommentln
-                //                     }
-                //                     secondary={Comment}
-                //                   />
-                //                 </ListItem>
-                //                 <Divider variant="inset" component="li" />
-                //               </div>
-                //             )
-                //           )}
-                //         </List>
-                //         <div class="grid-itemComment itemComment1">
-                //           <input
-                //             onChange={this.handleOnChangeComment}
-                //             value={this.state.CommentText}
-                //             type="Post"
-                //             placeholder="Type your comment.."
-                //             className="CommentInput"
-                //           />
-                //         </div>
-                //         <div class="grid-itemComment itemComment2">
-                //           <Button
-                //             type="submit"
-                //             value="Submit"
-                //             size="sm"
-                //             onClick={(e) => {
-                //               const infoComment = {
-                //                 commentBy: this.props.id,
-                //                 id: _id,
-                //                 commentText: this.state.CommentText,
-                //                 posterfn: user[0].firstName,
-                //                 posterln: user[0].lastName,
-                //                 posterProfileImage: user[0].profileImage,
-                //               };
-                //               this.props.addComment(infoComment);
-                //               window.location.reload();
-                //             }}
-                //             style={{
-                //               backgroundColor: "#5EAAA8",
-                //               fontFamily: "Montserrat",
-                //               fontWeight: "bold",
-                //               height: "30px",
-                //               borderRadius: "5px",
-                //             }}
-                //           >
-                //             Submit
-                //             <IoSend
-                //               style={{ paddingLeft: "2px", width: "20px" }}
-                //             />
-                //           </Button>
-                //         </div>
-                //       </div>
-                //       <br></br>
-                //       <Divider />
-                //     </div>
-                //   </div>
-                // </div>
+                
               )
             )}
         </div>
