@@ -1,137 +1,250 @@
-import React, {Component, useState} from 'react';
-import '../main/post.css';
-import { Avatar, Button , Divider, List, ListItem, ListItemAvatar, ListItemText} from '@material-ui/core';
-import {AiFillHeart} from 'react-icons/ai'
-import {FaComment} from 'react-icons/fa';
-import Collapse from 'react-bootstrap/Collapse';
-import {IoSend} from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import "../main/post.css";
+import {
+  Divider,
+} from "@material-ui/core";
+import { AiFillHeart } from "react-icons/ai";
+import { FaComment } from "react-icons/fa";
 import Moment from "react-moment";
+import {
+  Card,
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Button,
+} from "react-bootstrap";
 
 
+import { connect } from "react-redux";
+import { getPosts, addLike, addComment } from "../../actions/postActions";
+import { getUser, getfriends } from "../../actions/itemActions";
 
-import {connect} from 'react-redux';
-import {getPosts, addLike, addComment} from '../../actions/postActions';
-import {getUser , getfriends} from '../../actions/itemActions';
-
-
-
-
-
-class Post extends Component{
-   
-    constructor(props) {
-        super(props);
-        this.props.getPosts();            
-      }
-
-    handleOnChangeComment = e => {
-        this.setState({
-          [e.target.Comment]: e.target.value,
-    
-      })
-    }
-    render(){
-        const {posts} = this.props.posts;
-       
-
-  
-  if(typeof posts[0] !== 'undefined' &&  posts[0].length > 0 ) { 
-    if(posts[0].filter(item => this.props.id===item.postedBy).length === 0){
-    return (
-    <div  style={{fontFamily: "Montserrat",
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: "20px",
-        lineHeight: "29px",
-        padding: "30px",
-        color: "#F05945" , height:'250px' , width :"350px"}}>No Posts</div>);
-    }
-
+class Post extends Component {
+  constructor(props) {
+    super(props);
+    this.props.getPosts();
   }
- 
-   if(typeof posts[0] !== 'undefined'&& posts[0].length > 0) {  
-    return(
-       
-        <div style={{width :"500px"}}>
-         { posts[0].filter(item => this.props.id===item.postedBy).map( ({TextContent , Imagecontent , likes , postedBy , created,_id, comments, PosterProfileImage, PosterFirstname, PosterLastname}) => (
-                  <div class="grid-containerPost" key={_id}>
-                  <div class="grid-itemPost itemProfileImg">
-                          <div><Avatar src={PosterProfileImage} /></div>
-                          <div class="usernamePost">
-                          {PosterFirstname+' '+PosterLastname}
-                          </div>
-                      <div class="postDate"><Moment format="YYYY/MM/DD">{created}</Moment></div>
-                  </div>
-                  <div class="grid-itemPost itemPost2">
-                      <div className="textPosted">
-                              {TextContent}
-                      </div>
-                      <div className="imgPosted">
-                          <img src={Imagecontent? `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(Imagecontent.data.data)))}`: null} className="ImgResponsive" />
-          
-                        
-                      </div>
-                  </div>
-                  <div className="grid-itemPost itemPost3">
-                      <div className="BtnPost">
-                          <Button type="submit" value="Submit" onClick={(e) =>{ const infoLike={id :_id, likedBy :this.props.id , likes :likes}; this.props.addLike(infoLike) ; window.location.reload()}} size="sm" 
-                                  style={{backgroundColor:"#F05945", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px", marginRight:"2%"}}>
-                                      {likes.length}<AiFillHeart style={{paddingRight:"2px", width:"20px"}}/>Like
-                          </Button>
-                          <Button size="sm" 
-                                  style={{backgroundColor:"#5EAAA8", fontFamily: "Montserrat", fontWeight:"bold", height:"20px", borderRadius:"5px"}}>
-                                  {comments.length}<FaComment style={{paddingRight:"3px", width:"20px"}}/>Comment
-                          </Button>
-                      </div>
-                  <div >
-                      <div class="grid-containerComment">
-                      { comments.map( ({posterCommentfn , posterCommentln, posterCommentProfileImage, Comment}) => (
-                          <div>
-                          <ListItem>
-                         <ListItemAvatar>
-                             <Avatar src={posterCommentProfileImage} />
-                          </ListItemAvatar>
-                         <ListItemText primary={posterCommentfn + " "+posterCommentln} secondary={Comment} />
-                             </ListItem>
-                            
-                          </div>
-                      ))}
-                         
-                         
-                      
-                      </div>
-                 
-                  </div>
-                          
-                   
-                  </div>
-                  </div>
-         )
-         )}
-        </div>
-        
-    );}else{
-        return (
-      
-      <div  style={{fontFamily: "Montserrat",
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: "20px",
-        lineHeight: "29px",
-        padding: "30px",
-        color: "#F05945" , height:'250px' , width :"350px"}}>No Posts</div>);
-    } }
 
+  handleOnChangeComment = (e) => {
+    this.setState({
+      [e.target.Comment]: e.target.value,
+    });
+  };
+  render() {
+    const { posts } = this.props.posts;
+    const {user} = this.props.users;
+    // if (typeof user[0].profileImage !== 'undefined' && user[0].profileImage !== '') {
+    //     const arrayBuffer = user[0].profileImage.data.data
+    //     base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    //   }
+
+
+    if (typeof posts[0] !== "undefined" && posts[0].length > 0) {
+      if (
+        posts[0].filter((item) => this.props.id === item.postedBy).length === 0
+      ) {
+        return (
+          <div
+            style={{
+              fontFamily: "Montserrat",
+              fontStyle: "normal",
+              fontWeight: "bold",
+              fontSize: "20px",
+              lineHeight: "29px",
+              padding: "30px",
+              color: "#F05945",
+              height: "250px",
+              width: "350px",
+            }}
+          >
+            No Posts
+          </div>
+        );
+      }
+    }
+
+    if (typeof posts[0] !== "undefined" && posts[0].length > 0) {
+      return (
+        <div style={{ width: "500px" }}>
+          {posts[0]
+            .filter((item) => this.props.id === item.postedBy)
+            .map(
+              ({
+                TextContent,
+                Imagecontent,
+                likes,
+                postedBy,
+                created,
+                _id,
+                comments,
+                PosterProfileImage,
+                PosterFirstname,
+                PosterLastname,
+              }) => (
+                <Card key={_id}>
+                  <Card.Body>
+                    <Row className="align-items-start m-2">
+                      <Col xs={2} className="justify-content-center d-flex">
+                        <Image
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                            objectFit: "cover",
+                          }}
+                          src={
+                            user[0].profileImage.data
+                              ? `data:image/png;base64,${btoa(
+                                  String.fromCharCode(
+                                    ...new Uint8Array(user[0].profileImage.data.data)
+                                  )
+                                )}`
+                              : process.env.PUBLIC_URL +
+                                "/defaultProfilePage.png"
+                          }
+                          roundedCircle
+                        />{" "}
+                      </Col>
+                      <Col className="justify-content-start">
+                        <div className="nameOfuser">
+                          {PosterFirstname + " " + PosterLastname}
+                        </div>
+                        <Moment format="YYYY/MM/DD">{created}</Moment>
+                      </Col>
+                    </Row>
+                    <Col className="">
+                      <Row className="justify-content-start m-2 ">
+                        <div>{TextContent}</div>
+                      </Row>
+                      <Row className="justify-content-center">
+                        <Image
+                          style={{
+                            width: "auto",
+                            height: "auto",
+                            objectFit: "cover",
+                          }}
+                          src={
+                            Imagecontent
+                              ? `data:image/png;base64,${btoa(
+                                  String.fromCharCode(
+                                    ...new Uint8Array(Imagecontent.data.data)
+                                  )
+                                )}`
+                              : null
+                          }
+                          fluid
+                        />
+                      </Row>
+                    </Col>
+
+                    <Row className="m-2">
+                      <Button
+                        className="btn btn-like"
+                      >
+                        <Row className="justify-content-around m-1 ">
+                          {likes.length}
+                          <AiFillHeart style={{ width: "20px" }} />
+                          Like
+                        </Row>
+                      </Button>
+                      <Button
+                        className="btn btn-comment"
+                      >
+                        <Row className="justify-content-around m-1 ">
+                          {comments.length}
+                          <FaComment style={{ width: "20px" }} />
+                          Comment
+                        </Row>
+                      </Button>
+                    </Row>
+                    <hr style={{ marginLeft: "15%", marginRight: "15%" }}></hr>
+
+                    {/* comments */}
+                    <Row>
+                      {<div className="ml-4">Comments:</div>}
+                      <ListGroup variant="flush" className="w-100 ml-4 mr-4">
+                        {comments.map(
+                          ({
+                            posterCommentfn,
+                            posterCommentln,
+                            posterCommentProfileImage,
+                            Comment,
+                          }) => (
+                            <>
+                              <ListGroup.Item key={Comment} className="">
+                                <Row className="align-items-start">
+                                  <Col xs={1}>
+                                    <Image
+                                      style={{
+                                        width: "25px",
+                                        height: "25px",
+                                        objectFit: "cover",
+                                      }}
+                                      src={
+                                        posterCommentProfileImage
+                                          ? posterCommentProfileImage
+                                          : process.env.PUBLIC_URL +
+                                            "/defaultProfilePage.png"
+                                      }
+                                      roundedCircle
+                                    />
+                                  </Col>
+                                  <Col className=" justify-content-start">
+                                    <div className="nameOfuser">
+                                      {posterCommentfn + " " + posterCommentln}
+                                    </div>
+                                    <div className="">{Comment}</div>
+                                  </Col>
+                                </Row>
+                              </ListGroup.Item>
+                              <Divider variant="inset" component="li" />
+                            </>
+                          )
+                        )}
+                      </ListGroup>
+                    </Row>
+        
+                  </Card.Body>
+                </Card>
+
+              
+              )
+            )}
+        </div>
+      );
+    } else {
+      return (
+        <div
+          style={{
+            fontFamily: "Montserrat",
+            fontStyle: "normal",
+            fontWeight: "bold",
+            fontSize: "20px",
+            lineHeight: "29px",
+            padding: "30px",
+            color: "#F05945",
+            height: "250px",
+            width: "350px",
+          }}
+        >
+          No Posts
+        </div>
+      );
+    }
+  }
 }
 
+const mapStateToProps = (state) => ({
+  posts: state.posts,
+  users: state.users,
+});
 
- const mapStateToProps = (state) => ({
-    posts : state.posts ,
-    users :state.users
- });
- 
-
-export default connect(mapStateToProps, {getPosts,getfriends , addComment, addLike, getUser}) (Post);
+export default connect(mapStateToProps, {
+  getPosts,
+  getfriends,
+  addComment,
+  addLike,
+  getUser,
+})(Post);
 
 /*const [open, setOpen] = useState(false);*/

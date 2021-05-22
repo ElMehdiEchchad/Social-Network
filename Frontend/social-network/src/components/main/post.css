@@ -22,7 +22,6 @@
   font-family: "Montserrat";
   font-weight: bold;
   border-radius: 5px;
-  
   color: var(--orange);
 }
 .btn-comment{
@@ -37,7 +36,6 @@
   background-color: var(--orange-light)!important;
   font-weight: bold;
   border-radius: 5px;
-  
   color: var(--orange)
 }
 .btn-comment:hover{

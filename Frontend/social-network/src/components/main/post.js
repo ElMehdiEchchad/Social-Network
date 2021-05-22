@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./post.css";
-import {
-  Divider,
-} from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 import {
   Card,
   Row,
@@ -33,7 +31,7 @@ class Post extends Component {
     const { user } = this.props.users;
     this.state = {
       CommentText: "",
-      isOpenComment:false
+      isOpenComment: false,
     };
   }
 
@@ -46,9 +44,6 @@ class Post extends Component {
   render() {
     const { user } = this.props.users;
     const { posts } = this.props.posts;
-
-    console.log(posts);
-    //console.log(posts[0].length);
 
     const { friends } = this.props.users;
     var listfriends = [];
@@ -82,11 +77,7 @@ class Post extends Component {
                 <Card key={_id}>
                   <Card.Body>
                     <Row className="align-items-start m-2">
-                      <Col
-                        xs={2}
-
-                        className="justify-content-center d-flex"
-                      >
+                      <Col xs={2} className="justify-content-center d-flex">
                         <Image
                           style={{
                             width: "40px",
@@ -96,17 +87,20 @@ class Post extends Component {
                           src={
                             PosterProfileImage
                               ? `data:image/png;base64,${btoa(
-                                String.fromCharCode(
-                                  ...new Uint8Array(PosterProfileImage.data)
-                                )
-                              )}`
-                              : process.env.PUBLIC_URL + "/defaultProfilePage.png"
+                                  String.fromCharCode(
+                                    ...new Uint8Array(PosterProfileImage.data)
+                                  )
+                                )}`
+                              : process.env.PUBLIC_URL +
+                                "/defaultProfilePage.png"
                           }
                           roundedCircle
                         />{" "}
                       </Col>
                       <Col className="justify-content-start">
-                        <div className="nameOfuser">{PosterFirstname + " " + PosterLastname}</div>
+                        <div className="nameOfuser">
+                          {PosterFirstname + " " + PosterLastname}
+                        </div>
                         <Moment format="YYYY/MM/DD">{created}</Moment>
                       </Col>
                     </Row>
@@ -124,10 +118,10 @@ class Post extends Component {
                           src={
                             Imagecontent
                               ? `data:image/png;base64,${btoa(
-                                String.fromCharCode(
-                                  ...new Uint8Array(Imagecontent.data.data)
-                                )
-                              )}`
+                                  String.fromCharCode(
+                                    ...new Uint8Array(Imagecontent.data.data)
+                                  )
+                                )}`
                               : null
                           }
                           fluid
@@ -149,8 +143,6 @@ class Post extends Component {
                           this.props.addLike(infoLike);
                           window.location.reload();
                         }}
-
-
                       >
                         <Row className="justify-content-around m-1 ">
                           {likes.length}
@@ -161,9 +153,9 @@ class Post extends Component {
                       <Button
                         className="btn btn-comment"
                         onClick={(e) => {
-                          this.state = { 
-                            isOpenComment: !this.state.isOpenComment
-                          }
+                          this.state = {
+                            isOpenComment: !this.state.isOpenComment,
+                          };
                         }}
                       >
                         <Row className="justify-content-around m-1 ">
@@ -172,10 +164,8 @@ class Post extends Component {
                           Comment
                         </Row>
                       </Button>
-
                     </Row>
-                    <hr style={{marginLeft:"15%",marginRight:"15%"}}></hr>
-
+                    <hr style={{ marginLeft: "15%", marginRight: "15%" }}></hr>
 
                     {/* comments */}
                     <Row>
@@ -201,7 +191,8 @@ class Post extends Component {
                                       src={
                                         posterCommentProfileImage
                                           ? posterCommentProfileImage
-                                          : process.env.PUBLIC_URL + "/defaultProfilePage.png"
+                                          : process.env.PUBLIC_URL +
+                                            "/defaultProfilePage.png"
                                       }
                                       roundedCircle
                                     />
@@ -269,7 +260,6 @@ class Post extends Component {
                     </Row>
                   </Card.Body>
                 </Card>
-                
               )
             )}
         </div>
