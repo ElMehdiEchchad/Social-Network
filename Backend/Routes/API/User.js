@@ -251,14 +251,14 @@ router.get("/api/user/:id/friends", async (req, res) => {
                 return Promise.all(itteration).then(() => {
                     listOfFriends.sort((a, b) => {
                         var nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
-                        var nameB= b.lastName.toUpperCase(); // ignore upper and lowercase
+                        var nameB = b.lastName.toUpperCase(); // ignore upper and lowercase
                         if (nameA < nameB) {
-                          return -1;
+                            return -1;
                         }
                         if (nameA > nameB) {
-                          return 1;
+                            return 1;
                         }
-                      
+
                         // names must be equal
                         return 0;
                     });
@@ -328,44 +328,30 @@ router.put('/api/user/:id/updateImage/', upload.single('myImage'), (req, res, ne
 
 
 
+//@route GET api/search/?quey:"dsdsdsds"
+//@desc searching for a user
+//@access Public
+router.get('/api/search/', async (req, res) => {
+    userModel.find(
+        { $text: { $search: req.query.query ,$regex: req.query.query} },
+        '_id firstName lastName email profileImage friends isOnline birthDay score')
+        .select({ "score": { "$meta": "textScore" } })
+        .sort({ "score": { "$meta": "textScore" } })
+        .exec(function (err, data) {
+            if (err) {
+                res.status(500).json({
+                    message: "error",
+                    error: err
+                })
+            } else {
+                res.status(200).json({
+                    message: "search successful",
+                    data: data
+                })
+            }
+        });
+})
 
-
-// //@route GET api/search/?quey:"dsdsdsds"
-// //@desc searching for a user
-// //@access Public
-// router.get("/api/search/", async (req, res) => {
-//     userModel.find({$text:{$search:req.query.query}},async (err, data) => {
-//         //,{score:{$meta:"textScore"}}
-//         try {
-//             if(err){
-//                 //res.sendStatus(status) 
-//                 await res.send(500).json({
-//                     message:"error",
-//                     error:err
-//                 })
-//             }else{
-//                 await res.send(200).json({
-//                     message:"search successful",
-//                     data:data
-//                 })
-//                 //res.sendStatus(status) 
-//             }
-//         } catch (error) {
-//             // res.send(200).json({
-//             //     message:"error in catch",
-//             //     error:error
-//             // })
-//             //res.sendStatus(status)
-//             console.log(error)
-
-//         }
-
-
-//     });
-
-
-// }
-// )
 
 
 
