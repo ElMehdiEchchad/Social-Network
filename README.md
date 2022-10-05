@@ -1,6 +1,3 @@
-# Social-Network
+A social Network clone, made as a school project, with React and Express.js
 
-
-
-# Note: 
-The endpoints are specified in the word document besides the adopted documentation in swagger. 
+Link: https://peoplebooknetwork.herokuapp.com/
